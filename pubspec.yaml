@@ -1,0 +1,199 @@
+name: instagram_clone
+description: A new Flutter project.
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# Read more about versioning at semver.org.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.5.0-dev.68.0 <3.0.0"
+
+module:
+  androidX: true
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: 0.1.2
+  storage_path: 0.2.0
+  transparent_image: 1.0.0
+  scrollable_positioned_list: 0.1.8
+  google_sign_in:
+  firebase_auth: 
+  cloud_firestore: 
+  firebase_core: 
+  rxdart: 
+  image_picker: 0.6.0
+  file_picker: 
+  firebase_storage: 4.0.1
+  font_awesome_flutter:
+  shared_preferences:
+  google_api_headers:
+  flutter_google_places: 0.2.8
+  google_maps_webservice:
+  cached_network_image: 2.5.1
+  provider: 4.0.1
+  image:
+  animator: 2.0.0
+  flutter_svg: 0.19.3
+  preload_page_view: 0.1.4
+  permission_handler: 5.0.1+1
+  path_provider: 1.6.24
+  image_gallery: 1.2.0
+  image_crop: 0.3.4
+  media_gallery: 0.1.5
+  auto_size_text_field: 0.1.7
+  video_player: 1.0.1
+  camera: 0.5.8+17
+  fluttertoast: 7.1.5
+  cached_video_player: 1.0.0
+  flutter_video_info: 1.1.0
+  flutter_video_compress: 0.3.7+8
+  video_compress: 2.1.0
+  flutter_image_compress: ^0.7.0
+  flushbar: 1.10.4
+  http: 0.12.2
+  flutter_cache_manager: 2.1.0
+  progressive_image: 1.0.1
+  inview_notifier_list: 1.0.0
+  video_trimmer: 0.3.5
+  stacked: 1.7.6
+  photo_manager: 0.5.8
+  image_size_getter: 0.2.1
+  confirm_dialog: 0.1.1
+  progress_indicators: ^1.0.0
+  carousel_slider: 2.3.0
+  infinite_scroll_pagination: 3.0.0
+  timeago: 
+  dotted_border: 
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+# For information on the generic Dart part of this file, see the
+# following page: https://www.dartlang.org/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+#    - assets/insta_logo.png
+#    - assets/insta_logo.png
+    - assets/google_icon.jpg
+    - assets/no_image.jpg
+    - assets/homes_text.png
+    - assets/homes_text_black.png
+    - assets/homes_black.png
+    - assets/homes_icon.png
+    - assets/blankimage.png
+    - assets/happy.jpg
+    - assets/Black.png
+    - assets/icon-01.svg
+    - assets/icon-03.svg
+    - assets/send.svg
+    - assets/heart.svg
+    - assets/key.svg
+    - assets/key_fill.svg
+    - assets/email.svg
+    - assets/email_fill.svg
+    - assets/comment.svg
+    - assets/comment_empty.svg
+    - assets/heart_fill.svg
+    - assets/icon-06.svg
+    - assets/u-turn.svg
+    - assets/screw.svg
+    - assets/add.svg
+    - assets/add_fill.svg
+    - assets/home.svg
+    - assets/search.svg
+    - assets/copy.svg
+    - assets/profile.svg
+    - assets/trend_follow.svg
+    - assets/download.svg
+    - assets/follow_trend1.svg
+    - assets/follow_trend2.svg
+    - assets/trendfollow.svg
+    - assets/trendfollow2.svg
+    - assets/bolt_fill.svg
+    - assets/bolt.svg
+    - assets/home_fill.svg
+    - assets/copy_fill.svg
+    - assets/profile_fill.svg
+    - assets/search_thick.svg
+    - assets/details.svg
+    - assets/grey.png
+    - assets/image.svg
+    - assets/image_fill.svg
+    - assets/video.svg
+    - assets/video_fill.svg
+    - assets/text_hollow.svg
+    - assets/text_fill.svg
+    - assets/all.svg
+    - assets/close.svg
+    - assets/all_fill.svg
+    - assets/download_fill.svg
+    - assets/listing_1.jpg
+    - assets/listing_2.jpg
+    - assets/listing_3.jpg
+    - assets/listing_4.jpg
+    - assets/listing_5.jpg
+
+
+  fonts:
+    - family: MyFlutterApp
+      fonts:
+      - asset: lib/fonts/MyFlutterApp.ttf
+      - asset: lib/fonts/Helvetica.ttf
+
+    - family: MaturaFont
+      fonts:
+       - asset: assets/MATURASC.TTF
+
+    - family: Muli
+      fonts:
+       - asset: assets/Muli-Regular.TTF
+       - asset: assets/Muli-SemiBold.TTF
+
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.io/assets-and-images/#resolution-aware.
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.io/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.io/custom-fonts/#from-packages

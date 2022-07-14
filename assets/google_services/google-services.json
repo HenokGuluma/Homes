@@ -1,0 +1,162 @@
+{
+  "project_info": {
+    "project_number": "268944987061",
+    "firebase_url": "https://trendin-68158.firebaseio.com",
+    "project_id": "trendin-68158",
+    "storage_bucket": "trendin-68158.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268944987061:android:c3468b8b3c778149cabffc",
+        "android_client_info": {
+          "package_name": "com.henok.trendin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268944987061-8b9u7buq26e8bh7asr8qotindrfebh07.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.henok.trendin",
+            "certificate_hash": "f55335a18f9fdfc817c6f578de228f277e08270e"
+          }
+        },
+        {
+          "client_id": "268944987061-osl0jootgu9qj7kp7ne6t5r197u4ak4f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.henok.trendin",
+            "certificate_hash": "9de1cd10e467f6e8edb3b254fce8d7ad5959e428"
+          }
+        },
+        {
+          "client_id": "268944987061-ji8v5e2m8nhe5pdjsf3u60co2g4bkc3b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAs8mLX_t5PgYqLXqwTXRWmKG_EAd5UwFs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268944987061-ji8v5e2m8nhe5pdjsf3u60co2g4bkc3b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268944987061:android:159993a2135e566bcabffc",
+        "android_client_info": {
+          "package_name": "com.homes.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268944987061-1qvnoivt4hu6chaua8bp7f1oi2v08cug.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.homes.app",
+            "certificate_hash": "7e1cdabf92bf79f65b149cbb31300eb7e31a3ad8"
+          }
+        },
+        {
+          "client_id": "268944987061-ji8v5e2m8nhe5pdjsf3u60co2g4bkc3b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAs8mLX_t5PgYqLXqwTXRWmKG_EAd5UwFs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268944987061-ji8v5e2m8nhe5pdjsf3u60co2g4bkc3b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268944987061:android:358fceff05dec239cabffc",
+        "android_client_info": {
+          "package_name": "com.mohak.instagram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268944987061-7vlpduq89lvravgu4e7jqnrc6h9uvbl9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mohak.instagram",
+            "certificate_hash": "9de1cd10e467f6e8edb3b254fce8d7ad5959e428"
+          }
+        },
+        {
+          "client_id": "268944987061-950v928ft1nbqhv676tfhj56ui72e2d4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mohak.instagram",
+            "certificate_hash": "76b7a9cf05ec0a381020958628d972debf07f802"
+          }
+        },
+        {
+          "client_id": "268944987061-j6nhqmdgk4k5tao8p2hii3v0m9hs2gqt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mohak.instagram",
+            "certificate_hash": "59998cccadff46dbcd90acd0b98997651f66c3e8"
+          }
+        },
+        {
+          "client_id": "268944987061-q8gm29r703fo5kojvfmdn528lkkr9jas.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mohak.instagram",
+            "certificate_hash": "2ee22b69053c5506178858523bdd93bb985f9b17"
+          }
+        },
+        {
+          "client_id": "268944987061-qe4pbf4a8qmncvpfq9ourhl61lk8nott.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mohak.instagram",
+            "certificate_hash": "7e1cdabf92bf79f65b149cbb31300eb7e31a3ad8"
+          }
+        },
+        {
+          "client_id": "268944987061-ji8v5e2m8nhe5pdjsf3u60co2g4bkc3b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAs8mLX_t5PgYqLXqwTXRWmKG_EAd5UwFs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268944987061-ji8v5e2m8nhe5pdjsf3u60co2g4bkc3b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
