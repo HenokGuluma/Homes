@@ -14,11 +14,11 @@ class _InstaActivityScreenState extends State<InstaActivityScreen> {
         backgroundColor: Color(0xff333333),
         toolbarHeight: 40.0,
         centerTitle: false,
-        title: SelectableText('Notification',
+        title: Text('Notification',
             style: TextStyle(fontFamily: 'Muli', color: Colors.white)),
       ),
       body: Center(
-        child: SelectableText('NOT IMPLEMENTED YET',
+        child: Text('NOT IMPLEMENTED YET',
             style: TextStyle(fontFamily: 'Muli', color: Colors.white)),
       ),
     );

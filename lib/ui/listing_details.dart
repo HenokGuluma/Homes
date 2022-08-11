@@ -84,7 +84,7 @@ class ListingDetailsState extends State<ListingDetails> {
           ),
           toolbarHeight: 50,
           backgroundColor: Colors.black,
-          title: SelectableText(
+          title: Text(
             'Listing Detail',
             style: TextStyle(
                 fontFamily: 'Muli',
@@ -249,7 +249,7 @@ class ListingDetailsState extends State<ListingDetails> {
                       size: 12,
                       color: Colors.pink,
                     ),
-                    SelectableText(
+                    Text(
                       ' Available',
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -261,7 +261,7 @@ class ListingDetailsState extends State<ListingDetails> {
                 SizedBox(
                   height: 5,
                 ),
-                SelectableText(
+                Text(
                   item.data()['listingType'] +
                       ' - ' +
                       item.data()['area'] +
@@ -302,7 +302,7 @@ class ListingDetailsState extends State<ListingDetails> {
                   height: 5,
                 ),
                 item.data()['additionalNotes'].toString().isNotEmpty
-                    ? SelectableText(
+                    ? Text(
                         item.data()['additionalNotes'],
                         style: TextStyle(
                             fontFamily: 'Muli',
@@ -326,7 +326,7 @@ class ListingDetailsState extends State<ListingDetails> {
                     child: Center(
                       child: item.data()['forRent'] == 'For Sale'
                           ? Column(children: [
-                              SelectableText(
+                              Text(
                                 item.data()['cost'] + ' ETB/',
                                 style: TextStyle(
                                     fontFamily: 'Muli',
@@ -337,7 +337,7 @@ class ListingDetailsState extends State<ListingDetails> {
                               SizedBox(
                                 height: height * 0.02,
                               ),
-                              SelectableText(
+                              Text(
                                 'For Sale',
                                 style: TextStyle(
                                     fontFamily: 'Muli',
@@ -349,7 +349,7 @@ class ListingDetailsState extends State<ListingDetails> {
                           : Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SelectableText(
+                                Text(
                                   item.data()['cost'] + ' ETB/',
                                   style: TextStyle(
                                       fontFamily: 'Muli',
@@ -386,7 +386,7 @@ class ListingDetailsState extends State<ListingDetails> {
                               SizedBox(
                                 width: 5,
                               ),
-                              SelectableText('Unlock Details',
+                              Text('Unlock Details',
                                   style: TextStyle(
                                       fontFamily: 'Muli',
                                       color: Color(0xff00ffff),
@@ -427,7 +427,7 @@ class ListingDetailsState extends State<ListingDetails> {
     } else if (text == 'Yearly') {
       convertedText = 'year';
     }
-    return SelectableText(
+    return Text(
       convertedText,
       style: TextStyle(
           fontFamily: 'Muli',
@@ -458,7 +458,7 @@ class ListingDetailsState extends State<ListingDetails> {
                           size: 12,
                           color: Colors.pink,
                         ),
-                        SelectableText(
+                        Text(
                           ' Available',
                           style: TextStyle(
                               fontFamily: 'Muli',
@@ -470,7 +470,7 @@ class ListingDetailsState extends State<ListingDetails> {
                     SizedBox(
                       height: 5,
                     ),
-                    SelectableText(
+                    Text(
                       'Private room - Journal Square',
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -481,7 +481,7 @@ class ListingDetailsState extends State<ListingDetails> {
                     SizedBox(
                       height: 5,
                     ),
-                    SelectableText(
+                    Text(
                       'CONTACT HOST FIRST B4 BOOKING!',
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -503,7 +503,7 @@ class ListingDetailsState extends State<ListingDetails> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SelectableText(
+                              Text(
                                 new String.fromCharCodes(new Runes('\u0024')) +
                                     "9500/",
                                 style: TextStyle(
@@ -512,7 +512,7 @@ class ListingDetailsState extends State<ListingDetails> {
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold),
                               ),
-                              SelectableText(
+                              Text(
                                 "month",
                                 style: TextStyle(
                                     fontFamily: 'Muli',
@@ -543,7 +543,7 @@ class ListingDetailsState extends State<ListingDetails> {
                         SizedBox(
                           width: 5,
                         ),
-                        SelectableText('Unlock Details',
+                        Text('Unlock Details',
                             style: TextStyle(
                                 fontFamily: 'Muli',
                                 color: Color(0xff00ffff),
@@ -571,7 +571,7 @@ class ListingDetailsState extends State<ListingDetails> {
                         SizedBox(
                           width: 5,
                         ),
-                        SelectableText('Book now',
+                        Text('Book now',
                             style: TextStyle( fontFamily: 'Muli', 
                                 color: Color(0xff00ffff), fontSize: 16)),
                       ])),

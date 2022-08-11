@@ -123,7 +123,7 @@ class _CameraScreenState extends State<CameraScreen> {
   /// Display Camera preview.
   Widget _cameraPreviewWidget(context) {
     if (controller == null || !controller.value.isInitialized) {
-      return const SelectableText(
+      return const Text(
         'Loading',
         style: TextStyle(
           fontFamily: 'Muli',
@@ -255,7 +255,7 @@ class _CameraScreenState extends State<CameraScreen> {
                                 reference: widget.reference,
                               ))));
                 },
-                label: SelectableText(
+                label: Text(
                   "Storage",
                   style: TextStyle(
                       fontFamily: 'Muli', color: Colors.white, fontSize: 14.0),
@@ -285,7 +285,7 @@ class _CameraScreenState extends State<CameraScreen> {
             color: Colors.white,
             size: 24,
           ),
-          label: SelectableText(
+          label: Text(
             '${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1).toUpperCase()}',
             style: TextStyle(
                 fontFamily: 'Muli',

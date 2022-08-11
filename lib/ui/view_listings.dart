@@ -88,7 +88,7 @@ class ViewListingsState extends State<ViewListings> {
           backgroundColor: Colors.black,
           toolbarHeight: height * 0.08,
           elevation: 1,
-          title: SelectableText(
+          title: Text(
             'View Listings',
             style: TextStyle(fontFamily: 'Muli', color: Colors.white),
           ),
@@ -116,7 +116,7 @@ class ViewListingsState extends State<ViewListings> {
                               SizedBox(
                                 height: 20,
                               ),
-                              SelectableText(
+                              Text(
                                 'No listings yet.',
                                 style: TextStyle(
                                     fontFamily: 'Muli',
@@ -127,7 +127,7 @@ class ViewListingsState extends State<ViewListings> {
                               SizedBox(
                                 height: 20,
                               ),
-                              SelectableText(
+                              Text(
                                 'Add your listings by going back and clicking the + button.',
                                 style: TextStyle(
                                     fontFamily: 'Muli',
@@ -227,7 +227,7 @@ class ViewListingsState extends State<ViewListings> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SelectableText(
+                  Text(
                     item.data()['listingType'] +
                         ' - ' +
                         item.data()['area'].toString() +

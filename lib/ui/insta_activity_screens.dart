@@ -81,7 +81,7 @@ class _ActivityScreenState extends State<ActivityScreen>
       dismissDirection: FlushbarDismissDirection.HORIZONTAL,
       forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
       messageText: Center(
-          child: SelectableText(
+          child: Text(
         'This item does not exist any more.',
         style: TextStyle(fontFamily: 'Muli', color: Color(0xff00ffff)),
       )),
@@ -105,7 +105,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                 child: Padding(
                     padding: EdgeInsets.only(top: height * 0.05),
                     child: Center(
-                      child: SelectableText(
+                      child: Text(
                         "Messages",
                         style: TextStyle(
                             fontFamily: 'Muli',
@@ -124,7 +124,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                               padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                               child: Tab(
                                 //iconMargin: EdgeInsets.fromLTRB(200, 0, 0, 0),
-                                child: SelectableText(
+                                child: Text(
                                   "Notifications",
                                   style: TextStyle( fontFamily: 'Muli', 
                                       fontSize: 18,
@@ -136,7 +136,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                               padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                               child: Tab(
                                 //iconMargin: EdgeInsets.fromLTRB(200, 0, 0, 0),
-                                child: SelectableText(
+                                child: Text(
                                   "Messages",
                                   style: TextStyle( fontFamily: 'Muli', 
                                       fontSize: 18,
@@ -274,7 +274,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                           SizedBox(
                             height: 10,
                           ),
-                          SelectableText(
+                          Text(
                             'No ' + text + ' yet.',
                             style: TextStyle(
                                 fontFamily: 'Muli',
@@ -285,7 +285,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                           SizedBox(
                             height: 10,
                           ),
-                          SelectableText(
+                          Text(
                             'We will let you know when you have one.',
                             style: TextStyle(
                                 fontFamily: 'Muli',
@@ -312,7 +312,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Center(
-                                child: SelectableText(
+                                child: Text(
                                   'Refresh',
                                   style: TextStyle(
                                       fontFamily: 'Muli',

@@ -78,7 +78,7 @@ class UnlockedListingsState extends State<UnlockedListings> {
           backgroundColor: Colors.black,
           toolbarHeight: height * 0.08,
           elevation: 1,
-          title: SelectableText(
+          title: Text(
             'Unlocked Listings',
             style: TextStyle(fontFamily: 'Muli', color: Colors.white),
           ),
@@ -112,7 +112,7 @@ class UnlockedListingsState extends State<UnlockedListings> {
                               SizedBox(
                                 height: 20,
                               ),
-                              SelectableText(
+                              Text(
                                 'No unlocked listings yet.',
                                 style: TextStyle(
                                     fontFamily: 'Muli',
@@ -123,7 +123,7 @@ class UnlockedListingsState extends State<UnlockedListings> {
                               SizedBox(
                                 height: 20,
                               ),
-                              SelectableText(
+                              Text(
                                 'Unlock listings in your feed to see them in your list.',
                                 style: TextStyle(
                                     fontFamily: 'Muli',
@@ -217,7 +217,7 @@ class UnlockedListingsState extends State<UnlockedListings> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SelectableText(
+                  Text(
                     item.data()['listingType'] +
                         ' - ' +
                         item.data()['area'].toString() +

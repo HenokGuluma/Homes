@@ -51,7 +51,7 @@ class _CameraHomeScreenState extends State<CameraHomeScreen> {
       return Container(
         alignment: Alignment.center,
         padding: EdgeInsets.all(16.0),
-        child: SelectableText(
+        child: Text(
           'No Camera Found!',
           style: TextStyle(
             fontFamily: 'Muli',

@@ -131,7 +131,7 @@ class _InstaUploadPhotoScreenState extends State<InstaUploadPhotoScreen> {
             Navigator.pop(context);
           },
         ),
-        title: SelectableText(
+        title: Text(
           'New Post',
           style:
               TextStyle(fontFamily: 'Muli', color: Colors.white, fontSize: 16),
@@ -151,7 +151,7 @@ class _InstaUploadPhotoScreenState extends State<InstaUploadPhotoScreen> {
                         borderRadius: BorderRadius.circular(8.0),
                         border: Border.all(color: Color(0xff009999))),
                     child: Center(
-                      child: SelectableText('Share',
+                      child: Text('Share',
                           style: TextStyle(
                               fontFamily: 'Muli',
                               color: Colors.black,
@@ -167,7 +167,7 @@ class _InstaUploadPhotoScreenState extends State<InstaUploadPhotoScreen> {
                           borderRadius: BorderRadius.circular(8.0),
                           border: Border.all(color: Color(0xff00ffff))),
                       child: Center(
-                        child: SelectableText('Share',
+                        child: Text('Share',
                             style: TextStyle(
                                 fontFamily: 'Muli',
                                 color: Colors.black,
@@ -307,7 +307,7 @@ class _InstaUploadPhotoScreenState extends State<InstaUploadPhotoScreen> {
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.only(top: 100),
-                      child: SelectableText(
+                      child: Text(
                         'Uploading ${(_progress * 100).toStringAsFixed(2)} %',
                         style: TextStyle(
                             fontFamily: 'Muli',

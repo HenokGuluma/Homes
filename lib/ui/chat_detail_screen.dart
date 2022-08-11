@@ -138,7 +138,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: SelectableText(
+                  child: Text(
                     widget.name,
                     style: TextStyle(
                         fontFamily: 'Muli', color: Colors.white, fontSize: 15),
@@ -386,7 +386,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                         width: 10,
                         height: 5,
                       ),
-                      SelectableText(
+                      Text(
                         snap['postOwnerName'],
                         style: TextStyle(
                             fontFamily: 'Muli',
@@ -402,7 +402,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     child: Center()),
                 Padding(
                   padding: EdgeInsets.only(left: 5, right: 5),
-                  child: SelectableText(snap['caption'],
+                  child: Text(snap['caption'],
                       style: TextStyle(
                           fontFamily: 'Muli',
                           fontWeight: FontWeight.normal,
@@ -465,7 +465,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                         width: 10,
                         height: 5,
                       ),
-                      SelectableText(
+                      Text(
                         snap['postOwnerName'],
                         style: TextStyle(
                             fontFamily: 'Muli',
@@ -481,7 +481,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     child: Center()),
                 Padding(
                   padding: EdgeInsets.only(left: 5, right: 5),
-                  child: SelectableText(snap['caption'],
+                  child: Text(snap['caption'],
                       style: TextStyle(
                           fontFamily: 'Muli',
                           fontWeight: FontWeight.normal,

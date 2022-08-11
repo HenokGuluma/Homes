@@ -117,7 +117,7 @@ class _PanZoomImageState extends State<PanZoomImage> {
                   controller.value =
                       _getZoomInfo(widget._width, widget._height, size, 1.0);
                 },
-                child: SelectableText("Reset", style: TextStyle( fontFamily: 'Muli', color: Colors.white),),
+                child: Text("Reset", style: TextStyle( fontFamily: 'Muli', color: Colors.white),),
               ),
               MaterialButton(
                 onPressed: () {
@@ -128,21 +128,21 @@ class _PanZoomImageState extends State<PanZoomImage> {
                   controller.value =
                       _getZoomInfo(widget._width, widget._height, size, zoom);
                 },
-                child: SelectableText("Zoom fill", style: TextStyle( fontFamily: 'Muli', color: Colors.white),),
+                child: Text("Zoom fill", style: TextStyle( fontFamily: 'Muli', color: Colors.white),),
               ),
               MaterialButton(
                 onPressed: () {
                   controller.value =
                       _getZoomInfo(widget._width, widget._height, size, 2.0);
                 },
-                child: SelectableText("Zoom 2x", style: TextStyle( fontFamily: 'Muli', color: Colors.white),),
+                child: Text("Zoom 2x", style: TextStyle( fontFamily: 'Muli', color: Colors.white),),
               ),
               MaterialButton(
                 onPressed: () {
                   controller.value =
                       _getZoomInfo(widget._width, widget._height, size, 4.0);
                 },
-                child: SelectableText("Zoom 4x", style: TextStyle( fontFamily: 'Muli', color: Colors.white),),
+                child: Text("Zoom 4x", style: TextStyle( fontFamily: 'Muli', color: Colors.white),),
               ),
             ],
           ),
@@ -205,10 +205,10 @@ class _PanZoomImageState extends State<PanZoomImage> {
               });
 
             },
-            child: SelectableText("Crop"),
+            child: Text("Crop"),
           ),
           finalImage == null
-              ? SelectableText("Crop image to see result") : Center(
+              ? Text("Crop image to see result") : Center(
             child: Container( width: 200, height:200,
                 child: Image.memory(finalImage)),
           )*/

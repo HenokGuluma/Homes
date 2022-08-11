@@ -57,7 +57,7 @@ class _BuildGridState extends State<BuildGrid> {
                   height: 96.0,
                   fit: BoxFit.contain,
                 ),
-                SelectableText(allNameList[index])
+                Text(allNameList[index])
               ],
             )));
   }

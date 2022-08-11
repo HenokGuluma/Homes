@@ -70,14 +70,14 @@ class ProfileState extends State<Profile> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              SelectableText(
+              Text(
                 "Image Preview",
                 style: TextStyle(fontFamily: 'Muli', color: Colors.black),
               ),
               Padding(
                   padding: EdgeInsets.only(top: 0),
                   child: updating
-                      ? SelectableText(
+                      ? Text(
                           "Updating",
                           style: TextStyle(
                               fontFamily: 'Muli',
@@ -87,7 +87,7 @@ class ProfileState extends State<Profile> {
                       : widget.profileSetup
                           ? MaterialButton(
                               onPressed: () {},
-                              child: SelectableText(
+                              child: Text(
                                 'Next',
                                 style: TextStyle(
                                     fontFamily: 'Muli',
@@ -96,7 +96,7 @@ class ProfileState extends State<Profile> {
                               ),
                             )
                           : MaterialButton(
-                              child: SelectableText(
+                              child: Text(
                                 "Update",
                                 style: TextStyle(
                                     fontFamily: 'Muli',

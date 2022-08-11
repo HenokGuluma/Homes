@@ -52,14 +52,14 @@ class ImageZoomerState extends State<ImageZoomer> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              SelectableText(
+              Text(
                 "Image Preview",
                 style: TextStyle(fontFamily: 'Muli', color: Colors.black),
               ),
               Padding(
                   padding: EdgeInsets.only(top: 0),
                   child: MaterialButton(
-                      child: SelectableText(
+                      child: Text(
                         "Next",
                         style: TextStyle(
                             fontFamily: 'Muli',

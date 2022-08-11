@@ -137,7 +137,7 @@ class _InstaAddScreenState extends State<InstaAddScreen>
                     SizedBox(
                       height: 20,
                     ),
-                    SelectableText(
+                    Text(
                       'No listings yet.',
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -148,7 +148,7 @@ class _InstaAddScreenState extends State<InstaAddScreen>
                     SizedBox(
                       height: 20,
                     ),
-                    SelectableText(
+                    Text(
                       'Add your listings by clicking the Add Listing tab.',
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -164,7 +164,7 @@ class _InstaAddScreenState extends State<InstaAddScreen>
                   ),
                   Container(
                     child: Center(
-                      child: SelectableText(
+                      child: Text(
                         'Pick the listing you want to modify',
                         style: TextStyle(
                             fontFamily: 'Muli',
@@ -264,7 +264,7 @@ class _InstaAddScreenState extends State<InstaAddScreen>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SelectableText(
+                  Text(
                     item.data()['listingType'] +
                         ' - ' +
                         item.data()['area'].toString() +

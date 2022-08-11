@@ -64,7 +64,7 @@ class _GalleryState extends State<Gallery> {
             Navigator.pop(context);
           },
         ),
-        title: SelectableText(
+        title: Text(
           'Photo Gallery',
           style: TextStyle(fontFamily: 'Muli', color: Colors.white),
         ),
@@ -275,14 +275,14 @@ class ImageZoomers extends StatelessWidget {
           backgroundColor: Color(0xff00ffff),
           title: Row(
             children: <Widget>[
-              SelectableText(
+              Text(
                 "Image Cropper",
                 style: TextStyle(fontFamily: 'Muli', color: Colors.black),
               ),
               Padding(
                   padding: EdgeInsets.only(left: 100),
                   child: MaterialButton(
-                      child: SelectableText(
+                      child: Text(
                         "Next",
                         style: TextStyle(
                             fontFamily: 'Muli',

@@ -98,7 +98,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
         toolbarHeight: 50,
         // elevation: 1,
         centerTitle: true,
-        title: SelectableText('Profile',
+        title: Text('Profile',
             style: TextStyle(
                 fontFamily: 'Muli',
                 color: Color(0xff00ffff),
@@ -145,7 +145,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                     ),
                   )),
               Center(
-                child: SelectableText(
+                child: Text(
                     _user != null ? _user.displayName : 'Your Name',
                     style: TextStyle(
                         fontFamily: 'Muli',
@@ -161,7 +161,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SelectableText(
+                    Text(
                       'Bio: ',
                       style: TextStyle(
                         fontFamily: 'Muli',
@@ -173,7 +173,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                     _user == null
                         ? Container(
                             width: width * 0.8,
-                            child: SelectableText(
+                            child: Text(
                                 'Your bio will be displayed here.',
                                 style: TextStyle(
                                   fontFamily: 'Muli',
@@ -184,7 +184,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                                 textAlign: TextAlign.center))
                         : Container(
                             width: width * 0.8,
-                            child: SelectableText(
+                            child: Text(
                                 _user.bio.isNotEmpty
                                     ? _user.bio
                                     : 'Add your bio by clicking on Edit Profile.',
@@ -268,7 +268,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                         context: context,
                         builder: ((context) {
                           return new AlertDialog(
-                            title: new SelectableText(
+                            title: new Text(
                               'Logging out',
                               style: TextStyle(
                                   color: Colors.black,
@@ -276,7 +276,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold),
                             ),
-                            content: new SelectableText(
+                            content: new Text(
                               'Are you sure you want to log out?',
                               style: TextStyle(
                                   color: Colors.black,
@@ -289,7 +289,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                                 onPressed: () {
                                   Navigator.pop(context);
                                 }, // Closes the dialog
-                                child: new SelectableText(
+                                child: new Text(
                                   'No',
                                   style: TextStyle(
                                       color: Colors.black,
@@ -310,7 +310,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                                   return print('pressedOK');
                                   // Closes the dialog
                                 },
-                                child: new SelectableText(
+                                child: new Text(
                                   'Yes',
                                   style: TextStyle(
                                       color: Colors.black,
@@ -325,26 +325,26 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
 
                     /* if (await confirm(
                       context,
-                      title: SelectableText(
+                      title: Text(
                         'Logging Out',
                         style:
                             TextStyle(fontFamily: 'Muli', color: Colors.black),
                       ),
-                      content: SelectableText(
+                      content: Text(
                         'Are you sure you want to log out?',
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
                             fontSize: 16),
                       ),
-                      textOK: SelectableText(
+                      textOK: Text(
                         'Yes',
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
                             fontSize: 16),
                       ),
-                      textCancel: SelectableText(
+                      textCancel: Text(
                         'No',
                         style: TextStyle(
                             fontFamily: 'Muli',

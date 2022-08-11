@@ -65,7 +65,7 @@ dependencies:
   inview_notifier_list: 1.0.0
   video_trimmer: 0.3.5
   stacked: 1.7.6
-  photo_manager: 0.5.8
+  photo_manager: 1.0.0
   image_size_getter: 0.2.1
   confirm_dialog: 0.1.1
   progress_indicators: ^1.0.0

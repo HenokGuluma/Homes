@@ -518,7 +518,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            SelectableText(
+                                            Text(
                                               'There are no listings available at the time.',
                                               style: TextStyle(
                                                   fontFamily: 'Muli',
@@ -544,7 +544,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                                                       BorderRadius.circular(20),
                                                 ),
                                                 child: Center(
-                                                  child: SelectableText(
+                                                  child: Text(
                                                     'Refresh',
                                                     style: TextStyle(
                                                         fontFamily: 'Muli',
@@ -1354,7 +1354,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
               ),
               Container(
                   width: width * 0.75,
-                  child: SelectableText(
+                  child: Text(
                     item.data()['commonLocation'],
                     style: TextStyle(
                         fontFamily: 'Muli',
@@ -1454,7 +1454,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
     } else if (text == 'Yearly') {
       convertedText = 'year';
     }
-    return SelectableText(
+    return Text(
       convertedText,
       style: TextStyle(
           fontFamily: 'Muli',

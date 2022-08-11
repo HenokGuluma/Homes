@@ -63,7 +63,7 @@ class BuyKeysState extends State<BuyKeys> {
           ),
           toolbarHeight: 50,
           backgroundColor: Colors.black,
-          title: SelectableText(
+          title: Text(
             'Buy Keys',
             style: TextStyle(
                 fontFamily: 'Muli',
@@ -76,7 +76,7 @@ class BuyKeysState extends State<BuyKeys> {
         body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           SizedBox(height: height * 0.05),
           Center(
-              child: SelectableText(
+              child: Text(
             'Number of keys in your wallet: ' +
                 widget.variables.keys.toString(),
             style: TextStyle(
@@ -108,7 +108,7 @@ class BuyKeysState extends State<BuyKeys> {
               )),
           SizedBox(height: height * 0.01),
           Center(
-              child: SelectableText(
+              child: Text(
             'Select the option you want to proceed with.',
             style: TextStyle(
                 fontFamily: 'Muli',
@@ -143,7 +143,7 @@ class BuyKeysState extends State<BuyKeys> {
                   SizedBox(
                     width: 5,
                   ),
-                  SelectableText(
+                  Text(
                     amount != 1
                         ? amount.toString() + ' keys'
                         : amount.toString() + ' key',
@@ -156,7 +156,7 @@ class BuyKeysState extends State<BuyKeys> {
                 SizedBox(
                   height: 10,
                 ),
-                SelectableText(
+                Text(
                   'for ' + price.toString() + ' birr',
                   style: TextStyle(
                       fontFamily: 'Muli', color: Colors.white, fontSize: 18),

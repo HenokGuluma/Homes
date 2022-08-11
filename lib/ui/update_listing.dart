@@ -105,7 +105,7 @@ class UpdateListingState extends State<UpdateListing> {
           ),
           toolbarHeight: 50,
           backgroundColor: Colors.black,
-          title: SelectableText(
+          title: Text(
             'Update Listing',
             style: TextStyle(
                 fontFamily: 'Muli',
@@ -232,7 +232,7 @@ class UpdateListingState extends State<UpdateListing> {
                   Container(
                       width: width * 0.75,
                       child: widget.listingType == 'Other'
-                          ? SelectableText(
+                          ? Text(
                               widget.listingDescription +
                                   ' - ' +
                                   widget.area +
@@ -244,7 +244,7 @@ class UpdateListingState extends State<UpdateListing> {
                                   fontWeight: FontWeight.w400),
                             )
                           : widget.floor != null && widget.floor != 'N/A'
-                              ? SelectableText(
+                              ? Text(
                                   widget.listingType +
                                       ' - ' +
                                       widget.area +
@@ -257,7 +257,7 @@ class UpdateListingState extends State<UpdateListing> {
                                       fontSize: 17,
                                       fontWeight: FontWeight.w400),
                                 )
-                              : SelectableText(
+                              : Text(
                                   widget.listingType +
                                       ' - ' +
                                       widget.area +
@@ -285,7 +285,7 @@ class UpdateListingState extends State<UpdateListing> {
                   ),
                   Container(
                     width: width * 0.75,
-                    child: SelectableText(
+                    child: Text(
                       widget.commonLocation,
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -304,7 +304,7 @@ class UpdateListingState extends State<UpdateListing> {
                       children: [
                         Container(
                             width: width * 0.75,
-                            child: SelectableText(
+                            child: Text(
                               widget.additionalNotes,
                               style: TextStyle(
                                   fontFamily: 'Muli',
@@ -332,7 +332,7 @@ class UpdateListingState extends State<UpdateListing> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SelectableText(
+                              Text(
                                 widget.cost.toString() + ' ETB/',
                                 style: TextStyle(
                                     fontFamily: 'Muli',
@@ -354,7 +354,7 @@ class UpdateListingState extends State<UpdateListing> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Center(
-                                child: SelectableText(
+                                child: Text(
                               'For Sale',
                               style: TextStyle(
                                   fontFamily: 'Muli',
@@ -365,7 +365,7 @@ class UpdateListingState extends State<UpdateListing> {
                         SizedBox(
                           height: height * 0.02,
                         ),
-                        SelectableText(
+                        Text(
                           'Price: ' + widget.cost,
                           style: TextStyle(
                               fontFamily: 'Muli',
@@ -387,7 +387,7 @@ class UpdateListingState extends State<UpdateListing> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SelectableText(
+                          Text(
                             'Is Active: ',
                             style: TextStyle(
                                 fontFamily: 'Muli',
@@ -395,7 +395,7 @@ class UpdateListingState extends State<UpdateListing> {
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold),
                           ),
-                          SelectableText(
+                          Text(
                             widget.isActive ? 'Yes' : 'No',
                             style: TextStyle(
                                 fontFamily: 'Muli',
@@ -514,7 +514,7 @@ class UpdateListingState extends State<UpdateListing> {
                                 SizedBox(
                                   width: 5,
                                 ),
-                                SelectableText('Updating...',
+                                Text('Updating...',
                                     style: TextStyle(
                                         fontFamily: 'Muli',
                                         color: Colors.white,
@@ -569,7 +569,7 @@ class UpdateListingState extends State<UpdateListing> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SelectableText('Extra Details',
+          Text('Extra Details',
               style: TextStyle(
                   fontFamily: 'Muli',
                   color: Colors.black,
@@ -582,7 +582,7 @@ class UpdateListingState extends State<UpdateListing> {
               ? Center()
               : Row(
                   children: [
-                    SelectableText('Owner Name:',
+                    Text('Owner Name:',
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
@@ -591,7 +591,7 @@ class UpdateListingState extends State<UpdateListing> {
                     SizedBox(
                       width: 5,
                     ),
-                    SelectableText(widget.listingOwnerName,
+                    Text(widget.listingOwnerName,
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
@@ -606,7 +606,7 @@ class UpdateListingState extends State<UpdateListing> {
               ? Center()
               : Row(
                   children: [
-                    SelectableText('Address:',
+                    Text('Address:',
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
@@ -615,7 +615,7 @@ class UpdateListingState extends State<UpdateListing> {
                     SizedBox(
                       width: 5,
                     ),
-                    SelectableText(widget.preciseLocation,
+                    Text(widget.preciseLocation,
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
@@ -639,7 +639,7 @@ class UpdateListingState extends State<UpdateListing> {
                 width: 5,
               ),
               widget.forRent == 'For Sale'
-                  ? SelectableText(
+                  ? Text(
                       '0923577987',
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -647,7 +647,7 @@ class UpdateListingState extends State<UpdateListing> {
                           fontSize: 16,
                           fontWeight: FontWeight.w400),
                     )
-                  : SelectableText(
+                  : Text(
                       widget.phoneNumber,
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -672,7 +672,7 @@ class UpdateListingState extends State<UpdateListing> {
                     SizedBox(
                       width: 5,
                     ),
-                    SelectableText(widget.emailAddress,
+                    Text(widget.emailAddress,
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
@@ -699,7 +699,7 @@ class UpdateListingState extends State<UpdateListing> {
     } else if (text == 'Yearly') {
       convertedText = 'year';
     }
-    return SelectableText(
+    return Text(
       convertedText,
       style: TextStyle(
           fontFamily: 'Muli',

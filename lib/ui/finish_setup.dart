@@ -98,7 +98,7 @@ class _FinishSetupState extends State<FinishSetup>
         toolbarHeight: 50,
         // elevation: 1,
         centerTitle: true,
-        title: SelectableText('Profile',
+        title: Text('Profile',
             style: TextStyle(
                 fontFamily: 'Muli',
                 color: Color(0xff00ffff),
@@ -145,7 +145,7 @@ class _FinishSetupState extends State<FinishSetup>
                     ),
                   )),
               Center(
-                child: SelectableText(
+                child: Text(
                     _user != null ? _user.displayName : 'Your Name',
                     style: TextStyle(
                         fontFamily: 'Muli',
@@ -161,7 +161,7 @@ class _FinishSetupState extends State<FinishSetup>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SelectableText(
+                    Text(
                       'Bio: ',
                       style: TextStyle(
                         fontFamily: 'Muli',
@@ -173,7 +173,7 @@ class _FinishSetupState extends State<FinishSetup>
                     _user == null
                         ? Container(
                             width: width * 0.8,
-                            child: SelectableText(
+                            child: Text(
                                 'Your bio will be displayed here.',
                                 style: TextStyle(
                                   fontFamily: 'Muli',
@@ -184,7 +184,7 @@ class _FinishSetupState extends State<FinishSetup>
                                 textAlign: TextAlign.center))
                         : Container(
                             width: width * 0.8,
-                            child: SelectableText(
+                            child: Text(
                                 _user.bio.isNotEmpty
                                     ? _user.bio
                                     : 'Add your bio by clicking on Edit Profile.',
@@ -266,26 +266,26 @@ class _FinishSetupState extends State<FinishSetup>
                   onTap: () async {
                     if (await confirm(
                       context,
-                      title: SelectableText(
+                      title: Text(
                         'Logging Out',
                         style:
                             TextStyle(fontFamily: 'Muli', color: Colors.black),
                       ),
-                      content: SelectableText(
+                      content: Text(
                         'Are you sure you want to log out?',
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
                             fontSize: 16),
                       ),
-                      textOK: SelectableText(
+                      textOK: Text(
                         'Yes',
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
                             fontSize: 16),
                       ),
-                      textCancel: SelectableText(
+                      textCancel: Text(
                         'No',
                         style: TextStyle(
                             fontFamily: 'Muli',
@@ -333,7 +333,7 @@ class _FinishSetupState extends State<FinishSetup>
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: 20),
-                    child: SelectableText(text,
+                    child: Text(text,
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,

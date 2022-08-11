@@ -108,7 +108,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
           ),
           toolbarHeight: 50,
           backgroundColor: Colors.black,
-          title: SelectableText(
+          title: Text(
             'Listing Detail',
             style: TextStyle(
                 fontFamily: 'Muli',
@@ -283,7 +283,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(
-                              child: SelectableText(
+                              child: Text(
                                 'Approved',
                                 style: TextStyle(
                                     fontFamily: 'Muli',
@@ -307,7 +307,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: Center(
-                                    child: SelectableText(
+                                    child: Text(
                                       'Declined',
                                       style: TextStyle(
                                           fontFamily: 'Muli',
@@ -325,7 +325,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(left: 20, top: 20),
-                                child: SelectableText(
+                                child: Text(
                                   'Reason for Declining',
                                   style: TextStyle(
                                       fontFamily: 'Muli',
@@ -409,7 +409,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: Center(
-                                    child: SelectableText(
+                                    child: Text(
                                       'Approve Listing',
                                       style: TextStyle(
                                           fontFamily: 'Muli',
@@ -437,7 +437,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: Center(
-                                    child: SelectableText(
+                                    child: Text(
                                       'Decline Listing',
                                       style: TextStyle(
                                           fontFamily: 'Muli',
@@ -468,7 +468,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
       dismissDirection: FlushbarDismissDirection.HORIZONTAL,
       forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
       messageText: Center(
-          child: SelectableText(
+          child: Text(
         'Enter text before sending notification.',
         style: TextStyle(fontFamily: 'Muli', color: Colors.black),
       )),
@@ -483,7 +483,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SelectableText('Extra Details',
+          Text('Extra Details',
               style: TextStyle(
                   fontFamily: 'Muli',
                   color: Colors.black,
@@ -494,7 +494,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
           ),
           Row(
             children: [
-              SelectableText('Address:',
+              Text('Address:',
                   style: TextStyle(
                       fontFamily: 'Muli',
                       color: Colors.black,
@@ -503,7 +503,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
               SizedBox(
                 width: 5,
               ),
-              SelectableText(item.data()['preciseLocation'],
+              Text(item.data()['preciseLocation'],
                   style: TextStyle(
                       fontFamily: 'Muli',
                       color: Colors.black,
@@ -524,7 +524,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
               SizedBox(
                 width: 5,
               ),
-              SelectableText(
+              Text(
                 item.data()['phoneNumber'],
                 style: TextStyle(
                     fontFamily: 'Muli',
@@ -547,7 +547,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
               SizedBox(
                 width: 5,
               ),
-              SelectableText(item.data()['emailAddress'],
+              Text(item.data()['emailAddress'],
                   style: TextStyle(
                       fontFamily: 'Muli',
                       color: Colors.black,
@@ -582,7 +582,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                       size: 12,
                       color: Colors.pink,
                     ),
-                    SelectableText(
+                    Text(
                       ' Available',
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -597,7 +597,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                 Container(
                     width: width * 0.75,
                     child: item.data()['listingType'] == 'Other'
-                        ? SelectableText(
+                        ? Text(
                             item.data()['listingDescription'] +
                                 ' - ' +
                                 item.data()['area'] +
@@ -610,7 +610,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                           )
                         : item.data()['floor'] != null &&
                                 item.data()['floor'] != 'N/A'
-                            ? SelectableText(
+                            ? Text(
                                 item.data()['listingType'] +
                                     ' - ' +
                                     item.data()['area'] +
@@ -623,7 +623,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                                     fontSize: 17,
                                     fontWeight: FontWeight.w400),
                               )
-                            : SelectableText(
+                            : Text(
                                 item.data()['listingType'] +
                                     ' - ' +
                                     item.data()['area'] +
@@ -666,7 +666,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                   height: 5,
                 ),
                 item.data()['additionalNotes'].toString().isNotEmpty
-                    ? SelectableText(
+                    ? Text(
                         item.data()['additionalNotes'],
                         style: TextStyle(
                             fontFamily: 'Muli',
@@ -690,7 +690,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border.all(color: Colors.black)),
                             child: Center(
-                                child: SelectableText(
+                                child: Text(
                               'For Sale',
                               style: TextStyle(
                                   fontFamily: 'Muli',
@@ -701,7 +701,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                         SizedBox(
                           height: height * 0.02,
                         ),
-                        SelectableText(
+                        Text(
                           'Price: ' + item.data()['cost'] + ' ETB',
                           style: TextStyle(
                               fontFamily: 'Muli',
@@ -721,7 +721,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SelectableText(
+                              Text(
                                 item.data()['cost'] + ' ETB/',
                                 style: TextStyle(
                                     fontFamily: 'Muli',
@@ -750,7 +750,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
     } else if (text == 'Yearly') {
       convertedText = 'year';
     }
-    return SelectableText(
+    return Text(
       convertedText,
       style: TextStyle(
           fontFamily: 'Muli',
@@ -781,7 +781,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                           size: 12,
                           color: Colors.pink,
                         ),
-                        SelectableText(
+                        Text(
                           ' Available',
                           style: TextStyle(
                               fontFamily: 'Muli',
@@ -793,7 +793,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                     SizedBox(
                       height: 5,
                     ),
-                    SelectableText(
+                    Text(
                       'Private room - Journal Square',
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -804,7 +804,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                     SizedBox(
                       height: 5,
                     ),
-                    SelectableText(
+                    Text(
                       'CONTACT HOST FIRST B4 BOOKING!',
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -826,7 +826,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SelectableText(
+                              Text(
                                 new String.fromCharCodes(new Runes('\u0024')) +
                                     "9500/",
                                 style: TextStyle(
@@ -835,7 +835,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold),
                               ),
-                              SelectableText(
+                              Text(
                                 "month",
                                 style: TextStyle(
                                     fontFamily: 'Muli',
@@ -866,7 +866,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                         SizedBox(
                           width: 5,
                         ),
-                        SelectableText('Unlock Details',
+                        Text('Unlock Details',
                             style: TextStyle(
                                 fontFamily: 'Muli',
                                 color: Color(0xff00ffff),
@@ -894,7 +894,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                         SizedBox(
                           width: 5,
                         ),
-                        SelectableText('Book now',
+                        Text('Book now',
                             style: TextStyle( fontFamily: 'Muli', 
                                 color: Color(0xff00ffff), fontSize: 16)),
                       ])),

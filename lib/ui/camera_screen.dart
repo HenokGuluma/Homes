@@ -61,7 +61,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-          title: SelectableText(
+          title: Text(
         'Take a picture',
         style: TextStyle(fontFamily: 'Muli', color: Colors.white),
       )),
@@ -128,7 +128,7 @@ class DisplayPictureScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: SelectableText('Display the Picture')),
+      appBar: AppBar(title: Text('Display the Picture')),
       // The image is stored as a file on the device. Use the `Image.file`
       // constructor with the given path to display the image.
       body: Image.file(File(imagePath)),

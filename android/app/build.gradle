@@ -42,6 +42,7 @@ android {
         applicationId "com.homes.eth"
         minSdkVersion 21
         targetSdkVersion 30
+        compileSdkVersion 30
         versionCode 23
         versionName "1.2.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -77,6 +78,13 @@ android {
             proguardFiles getDefaultProguardFile(
                     'proguard-android-optimize.txt'),
                     'proguard-rules.pro'
+        }
+    }
+     buildTypes {
+        debug {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.debug
         }
     }
 }

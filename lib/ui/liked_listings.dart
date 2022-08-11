@@ -90,7 +90,7 @@ class LikedListingsState extends State<LikedListings> {
           backgroundColor: Colors.black,
           toolbarHeight: 40.0,
           elevation: 1,
-          title: SelectableText(
+          title: Text(
             'Liked Listings',
             style: TextStyle(fontFamily: 'Muli', color: Colors.white),
           ),
@@ -122,7 +122,7 @@ class LikedListingsState extends State<LikedListings> {
                               SizedBox(
                                 height: 20,
                               ),
-                              SelectableText(
+                              Text(
                                 'No liked listings yet.',
                                 style: TextStyle(
                                     fontFamily: 'Muli',
@@ -135,7 +135,7 @@ class LikedListingsState extends State<LikedListings> {
                               ),
                               Container(
                                 width: size.width * 0.8,
-                                child: SelectableText(
+                                child: Text(
                                   'Double tap or press the heart icon on a listing to add it to your liked listings list',
                                   style: TextStyle(
                                       fontFamily: 'Muli',
@@ -232,7 +232,7 @@ class LikedListingsState extends State<LikedListings> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SelectableText(
+                  Text(
                     item.data()['listingType'] +
                         ' - ' +
                         item.data()['area'].toString() +

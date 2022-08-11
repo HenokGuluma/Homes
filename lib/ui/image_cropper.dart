@@ -52,11 +52,11 @@ class ImageCroppingState extends State<ImageCropping> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: SelectableText("Click | Pick | Crop | Compress"),
+        title: Text("Click | Pick | Crop | Compress"),
       ),
       body: Center(
         child: _image == null
-            ? SelectableText("Image")
+            ? Text("Image")
             : Image.file(
           _image,
           height: 200,
@@ -67,7 +67,7 @@ class ImageCroppingState extends State<ImageCropping> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           FloatingActionButton.extended(
-            label: SelectableText("Camera"),
+            label: Text("Camera"),
             onPressed: () => getImageFile(ImageSource.camera),
             heroTag: UniqueKey(),
             icon: Icon(Icons.camera),
@@ -76,7 +76,7 @@ class ImageCroppingState extends State<ImageCropping> {
             width: 20,
           ),
           FloatingActionButton.extended(
-            label: SelectableText("Gallery"),
+            label: Text("Gallery"),
             onPressed: () => getImageFile(ImageSource.gallery),
             heroTag: UniqueKey(),
             icon: Icon(Icons.photo_library),

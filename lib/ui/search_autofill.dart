@@ -23,7 +23,7 @@ class SearchAutofillState extends State<SearchAutofill> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: SelectableText("Search autofill"),
+        title: Text("Search autofill"),
       ),
       body: Center(
           child: Column(
@@ -32,10 +32,10 @@ class SearchAutofillState extends State<SearchAutofill> {
           _buildDropdownMenu(),
           ElevatedButton(
             onPressed: _handlePressButton,
-            child: SelectableText("Search places"),
+            child: Text("Search places"),
           ),
           ElevatedButton(
-            child: SelectableText("Custom"),
+            child: Text("Custom"),
             onPressed: () {
               Navigator.of(context).pushNamed("/search");
             },
@@ -49,11 +49,11 @@ class SearchAutofillState extends State<SearchAutofill> {
         value: _mode,
         items: <DropdownMenuItem<Mode>>[
           DropdownMenuItem<Mode>(
-            child: SelectableText("Overlay"),
+            child: Text("Overlay"),
             value: Mode.overlay,
           ),
           DropdownMenuItem<Mode>(
-            child: SelectableText("Fullscreen"),
+            child: Text("Fullscreen"),
             value: Mode.fullscreen,
           ),
         ],
@@ -66,7 +66,7 @@ class SearchAutofillState extends State<SearchAutofill> {
 
   void onError(PlacesAutocompleteResponse response) {
     homeScaffoldKey.currentState.showSnackBar(
-      SnackBar(content: SelectableText(response.errorMessage)),
+      SnackBar(content: Text(response.errorMessage)),
     );
   }
 
@@ -107,7 +107,7 @@ Future<Null> displayPrediction(Prediction p, ScaffoldState scaffold) async {
     final lng = detail.result.geometry.location.lng;
 
     scaffold.showSnackBar(
-      SnackBar(content: SelectableText("${p.description} - $lat/$lng")),
+      SnackBar(content: Text("${p.description} - $lat/$lng")),
     );
   }
 }
@@ -148,7 +148,7 @@ class _CustomSearchScaffoldState extends PlacesAutocompleteState {
   void onResponseError(PlacesAutocompleteResponse response) {
     super.onResponseError(response);
     searchScaffoldKey.currentState.showSnackBar(
-      SnackBar(content: SelectableText(response.errorMessage)),
+      SnackBar(content: Text(response.errorMessage)),
     );
   }
 
@@ -157,7 +157,7 @@ class _CustomSearchScaffoldState extends PlacesAutocompleteState {
     super.onResponse(response);
     if (response != null && response.predictions.isNotEmpty) {
       searchScaffoldKey.currentState.showSnackBar(
-        SnackBar(content: SelectableText("Got answer")),
+        SnackBar(content: Text("Got answer")),
       );
     }
   }

@@ -61,7 +61,7 @@ class _SampleCropperState extends State<SampleCropper> {
             brightness: Brightness.dark,
             toolbarHeight: 40,
             centerTitle: true,
-            title: SelectableText(
+            title: Text(
               'Crop your picture',
               style: TextStyle(
                   fontFamily: 'Muli', color: Colors.white, fontSize: 16),
@@ -107,7 +107,7 @@ class _SampleCropperState extends State<SampleCropper> {
                         borderRadius: BorderRadius.circular(4.0),
                         border: Border.all(color: Color(0xff00ffff))),
                     child: Center(
-                      child: SelectableText('Back',
+                      child: Text('Back',
                           style: TextStyle(
                               fontFamily: 'Muli', color: Colors.black)),
                     ),
@@ -123,7 +123,7 @@ class _SampleCropperState extends State<SampleCropper> {
                             borderRadius: BorderRadius.circular(4.0),
                             border: Border.all(color: Color(0xff009999))),
                         child: Center(
-                          child: SelectableText('Next',
+                          child: Text('Next',
                               style: TextStyle(
                                   fontFamily: 'Muli', color: Colors.black)),
                         ),
@@ -137,7 +137,7 @@ class _SampleCropperState extends State<SampleCropper> {
                             borderRadius: BorderRadius.circular(4.0),
                             border: Border.all(color: Color(0xff00ffff))),
                         child: Center(
-                          child: SelectableText('Next',
+                          child: Text('Next',
                               style: TextStyle(
                                   fontFamily: 'Muli', color: Colors.black)),
                         ),
@@ -189,7 +189,7 @@ class _SampleCropperState extends State<SampleCropper> {
 
   Widget _buildOpenImage() {
     return FlatButton(
-      child: SelectableText(
+      child: Text(
         'Open Image',
         style: Theme.of(context).textTheme.button.copyWith(color: Colors.white),
       ),

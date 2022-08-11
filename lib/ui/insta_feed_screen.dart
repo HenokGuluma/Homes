@@ -78,7 +78,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
       dismissDirection: FlushbarDismissDirection.HORIZONTAL,
       forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
       messageText: Center(
-          child: SelectableText(
+          child: Text(
         'You have already used your daily bolt',
         style: TextStyle(fontFamily: 'Muli', color: Colors.black),
       )),
@@ -234,7 +234,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
             ),
             SizedBox(height: 2),
             Center(
-                child: SelectableText('Find your dream place easily',
+                child: Text('Find your dream place easily',
                     style: TextStyle(
                         fontFamily: 'Muli',
                         color: Color(0xff00ffff),
@@ -252,7 +252,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: Tab(
                         //iconMargin: EdgeInsets.fromLTRB(200, 0, 0, 0),
-                        child: SelectableText(
+                        child: Text(
                           "Popular Listings",
                           style: TextStyle( fontFamily: 'Muli', 
                               fontSize: 16, fontWeight: FontWeight.w400),
@@ -263,7 +263,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: Tab(
                         //iconMargin: EdgeInsets.fromLTRB(200, 0, 0, 0),
-                        child: SelectableText(
+                        child: Text(
                           "Latest Listings",
                           style: TextStyle( fontFamily: 'Muli', 
                               fontSize: 16, fontWeight: FontWeight.w400),
@@ -300,7 +300,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SelectableText(
+                    Text(
                       'There are no listings available at the time.',
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -324,7 +324,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Center(
-                          child: SelectableText(
+                          child: Text(
                             'Refresh',
                             style: TextStyle(
                                 fontFamily: 'Muli',
@@ -359,7 +359,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
       height: height * 0.05,
       width: 100,
       child: Center(
-          child: SelectableText(
+          child: Text(
         text,
         style: TextStyle(fontFamily: 'Muli', color: color),
       )),
@@ -763,7 +763,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
             item.data()['userID'] == currentUser.uid
                 ? Padding(
                     padding: EdgeInsets.only(right: 0),
-                    child: SelectableText(
+                    child: Text(
                       'Your Listing',
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -830,7 +830,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
               ),
               Container(
                 width: width * 0.75,
-                child: SelectableText(
+                child: Text(
                   item.data()['commonLocation'],
                   style: TextStyle(
                       fontFamily: 'Muli',
@@ -903,7 +903,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SelectableText(
+                        Text(
                           item.data()['cost'] + ' ETB/',
                           style: TextStyle(
                               fontFamily: 'Muli',
@@ -936,7 +936,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                 size: 12,
                 color: Colors.pink,
               ),
-              SelectableText(
+              Text(
                 ' 2 reviews',
                 style: TextStyle(
                     fontFamily: 'Muli', color: Color(0xff444444), fontSize: 12),
@@ -946,7 +946,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
           SizedBox(
             height: 5,
           ),
-          SelectableText(
+          Text(
             'Private room - Journal Square',
             style: TextStyle(
                 fontFamily: 'Muli',
@@ -957,7 +957,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
           SizedBox(
             height: 5,
           ),
-          SelectableText(
+          Text(
             'CONTACT HOST FIRST B4 BOOKING!',
             style: TextStyle(
                 fontFamily: 'Muli',
@@ -979,7 +979,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SelectableText(
+                    Text(
                       new String.fromCharCodes(new Runes('\u0024')) + "9500/",
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -987,7 +987,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                           fontSize: 15,
                           fontWeight: FontWeight.bold),
                     ),
-                    SelectableText(
+                    Text(
                       "month",
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -1014,7 +1014,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
     } else if (text == 'Yearly') {
       convertedText = 'year';
     }
-    return SelectableText(
+    return Text(
       convertedText,
       style: TextStyle(
           fontFamily: 'Muli',

@@ -72,7 +72,7 @@ class AddTextState extends State<AddText> with AutomaticKeepAliveClientMixin {
       dismissDirection: FlushbarDismissDirection.HORIZONTAL,
       forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
       messageText: Center(
-          child: SelectableText(
+          child: Text(
         'Enter text before posting',
         style: TextStyle(fontFamily: 'Muli', color: Colors.black),
       )),
@@ -107,7 +107,7 @@ class AddTextState extends State<AddText> with AutomaticKeepAliveClientMixin {
                                       border:
                                           Border.all(color: Color(0xff009999))),
                                   child: Center(
-                                    child: SelectableText('Post',
+                                    child: Text('Post',
                                         style: TextStyle(
                                             fontFamily: 'Muli',
                                             color: Colors.black,
@@ -125,7 +125,7 @@ class AddTextState extends State<AddText> with AutomaticKeepAliveClientMixin {
                                         border: Border.all(
                                             color: Color(0xff00ffff))),
                                     child: Center(
-                                      child: SelectableText('Post',
+                                      child: Text('Post',
                                           style: TextStyle(
                                               fontFamily: 'Muli',
                                               color: Colors.black,
@@ -260,7 +260,7 @@ class AddTextState extends State<AddText> with AutomaticKeepAliveClientMixin {
                       left: 20,
                       right: 20),
                   child: Center(
-                    child: SelectableText(
+                    child: Text(
                         "Ideas keep flowing each day. What are your thoughts today?",
                         style: TextStyle(
                             fontFamily: 'Muli',
@@ -292,7 +292,7 @@ class AddTextState extends State<AddText> with AutomaticKeepAliveClientMixin {
                               child: Center(
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 2, right: 2),
-                                  child: SelectableText(tweets[index],
+                                  child: Text(tweets[index],
                                       style: TextStyle(
                                           fontFamily: 'Muli',
                                           color: Colors.white,
@@ -302,7 +302,7 @@ class AddTextState extends State<AddText> with AutomaticKeepAliveClientMixin {
                             ),
                             /*Padding(
                               padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/2 -100.0, top: MediaQuery.of(context).size.width/2 -125, bottom: 5.0, right: 5),
-                              child:SelectableText("Trending 1200", style: TextStyle( fontFamily: 'Muli', color: Color(0xff00ffff), fontSize: 14,),
+                              child:Text("Trending 1200", style: TextStyle( fontFamily: 'Muli', color: Color(0xff00ffff), fontSize: 14,),
                               )
                           )*/
                           ],

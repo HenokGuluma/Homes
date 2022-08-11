@@ -96,7 +96,7 @@ class PaymentListingState extends State<PaymentListing> {
           ),
           toolbarHeight: 50,
           backgroundColor: Colors.black,
-          title: SelectableText(
+          title: Text(
             'Finalize Listing',
             style: TextStyle(
                 fontFamily: 'Muli',
@@ -220,7 +220,7 @@ class PaymentListingState extends State<PaymentListing> {
                   Container(
                       width: width * 0.75,
                       child: widget.listingType == 'Other'
-                          ? SelectableText(
+                          ? Text(
                               widget.listingDescription +
                                   ' - ' +
                                   widget.area +
@@ -232,7 +232,7 @@ class PaymentListingState extends State<PaymentListing> {
                                   fontWeight: FontWeight.w400),
                             )
                           : widget.floor != null && widget.floor != 'N/A'
-                              ? SelectableText(
+                              ? Text(
                                   widget.listingType +
                                       ' - ' +
                                       widget.area +
@@ -245,7 +245,7 @@ class PaymentListingState extends State<PaymentListing> {
                                       fontSize: 17,
                                       fontWeight: FontWeight.w400),
                                 )
-                              : SelectableText(
+                              : Text(
                                   widget.listingType +
                                       ' - ' +
                                       widget.area +
@@ -273,7 +273,7 @@ class PaymentListingState extends State<PaymentListing> {
                   ),
                   Container(
                     width: width * 0.75,
-                    child: SelectableText(
+                    child: Text(
                       widget.commonLocation,
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -292,7 +292,7 @@ class PaymentListingState extends State<PaymentListing> {
                       children: [
                         Container(
                             width: width * 0.75,
-                            child: SelectableText(
+                            child: Text(
                               widget.additionalNotes,
                               style: TextStyle(
                                   fontFamily: 'Muli',
@@ -320,7 +320,7 @@ class PaymentListingState extends State<PaymentListing> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SelectableText(
+                              Text(
                                 widget.cost.toString() + ' ETB/',
                                 style: TextStyle(
                                     fontFamily: 'Muli',
@@ -342,7 +342,7 @@ class PaymentListingState extends State<PaymentListing> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Center(
-                                child: SelectableText(
+                                child: Text(
                               'For Sale',
                               style: TextStyle(
                                   fontFamily: 'Muli',
@@ -353,7 +353,7 @@ class PaymentListingState extends State<PaymentListing> {
                         SizedBox(
                           height: height * 0.02,
                         ),
-                        SelectableText(
+                        Text(
                           'Price: ' + widget.cost,
                           style: TextStyle(
                               fontFamily: 'Muli',
@@ -375,7 +375,7 @@ class PaymentListingState extends State<PaymentListing> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SelectableText(
+                          Text(
                             'Is Active: ',
                             style: TextStyle(
                                 fontFamily: 'Muli',
@@ -383,7 +383,7 @@ class PaymentListingState extends State<PaymentListing> {
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold),
                           ),
-                          SelectableText(
+                          Text(
                             widget.isActive ? 'Yes' : 'No',
                             style: TextStyle(
                                 fontFamily: 'Muli',
@@ -498,7 +498,7 @@ class PaymentListingState extends State<PaymentListing> {
                                 SizedBox(
                                   width: 5,
                                 ),
-                                SelectableText('Posting...',
+                                Text('Posting...',
                                     style: TextStyle(
                                         fontFamily: 'Muli',
                                         color: Colors.white,
@@ -553,7 +553,7 @@ class PaymentListingState extends State<PaymentListing> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SelectableText('Extra Details',
+          Text('Extra Details',
               style: TextStyle(
                   fontFamily: 'Muli',
                   color: Colors.black,
@@ -566,7 +566,7 @@ class PaymentListingState extends State<PaymentListing> {
               ? Center()
               : Row(
                   children: [
-                    SelectableText('Owner Name:',
+                    Text('Owner Name:',
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
@@ -575,7 +575,7 @@ class PaymentListingState extends State<PaymentListing> {
                     SizedBox(
                       width: 5,
                     ),
-                    SelectableText(widget.listingOwnerName,
+                    Text(widget.listingOwnerName,
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
@@ -590,7 +590,7 @@ class PaymentListingState extends State<PaymentListing> {
               ? Center()
               : Row(
                   children: [
-                    SelectableText('Address:',
+                    Text('Address:',
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
@@ -599,7 +599,7 @@ class PaymentListingState extends State<PaymentListing> {
                     SizedBox(
                       width: 5,
                     ),
-                    SelectableText(widget.preciseLocation,
+                    Text(widget.preciseLocation,
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
@@ -623,7 +623,7 @@ class PaymentListingState extends State<PaymentListing> {
                 width: 5,
               ),
               widget.forRent == 'For Sale'
-                  ? SelectableText(
+                  ? Text(
                       '0923577987',
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -631,7 +631,7 @@ class PaymentListingState extends State<PaymentListing> {
                           fontSize: 16,
                           fontWeight: FontWeight.w400),
                     )
-                  : SelectableText(
+                  : Text(
                       widget.phoneNumber,
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -656,7 +656,7 @@ class PaymentListingState extends State<PaymentListing> {
                     SizedBox(
                       width: 5,
                     ),
-                    SelectableText(widget.emailAddress,
+                    Text(widget.emailAddress,
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
@@ -683,7 +683,7 @@ class PaymentListingState extends State<PaymentListing> {
     } else if (text == 'Yearly') {
       convertedText = 'year';
     }
-    return SelectableText(
+    return Text(
       convertedText,
       style: TextStyle(
           fontFamily: 'Muli',

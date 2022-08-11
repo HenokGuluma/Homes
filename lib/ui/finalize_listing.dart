@@ -72,7 +72,7 @@ class FinalizeListingState extends State<FinalizeListing> {
           ),
           toolbarHeight: 50,
           backgroundColor: Colors.black,
-          title: SelectableText(
+          title: Text(
             'Preview Listing',
             style: TextStyle(
                 fontFamily: 'Muli',
@@ -190,7 +190,7 @@ class FinalizeListingState extends State<FinalizeListing> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SelectableText(
+                  Text(
                     widget.listingType +
                         ' - ' +
                         widget.area.toString() +
@@ -216,7 +216,7 @@ class FinalizeListingState extends State<FinalizeListing> {
                   SizedBox(
                     width: 5,
                   ),
-                  SelectableText(
+                  Text(
                     widget.commonLocation,
                     style: TextStyle(
                         fontFamily: 'Muli',
@@ -232,7 +232,7 @@ class FinalizeListingState extends State<FinalizeListing> {
               widget.additionalNotes.isNotEmpty
                   ? Column(
                       children: [
-                        SelectableText(
+                        Text(
                           widget.additionalNotes,
                           style: TextStyle(
                               fontFamily: 'Muli',
@@ -258,7 +258,7 @@ class FinalizeListingState extends State<FinalizeListing> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SelectableText(
+                        Text(
                           new String.fromCharCodes(new Runes('\u0024')) +
                               widget.cost.toString() +
                               '/',
@@ -314,7 +314,7 @@ class FinalizeListingState extends State<FinalizeListing> {
                                 SizedBox(
                                   width: 5,
                                 ),
-                                SelectableText('Proceed to Payment',
+                                Text('Proceed to Payment',
                                     style: TextStyle(
                                         fontFamily: 'Muli',
                                         color: Color(0xff00ffff),
@@ -341,7 +341,7 @@ class FinalizeListingState extends State<FinalizeListing> {
     } else if (text == 'Yearly') {
       convertedText = 'year';
     }
-    return SelectableText(
+    return Text(
       convertedText,
       style: TextStyle(
           fontFamily: 'Muli',

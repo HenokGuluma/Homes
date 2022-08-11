@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
               padding: const EdgeInsets.only(top: 0.0, bottom: 10.0),
               child: Center(
-                  child: SelectableText(
+                  child: Text(
                 "Welcome to",
                 style: TextStyle(
                     fontFamily: 'Muli', color: Colors.white, fontSize: 30.0),
@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
               padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
               child: Center(
-                  child: SelectableText(
+                  child: Text(
                 "Find your homes easily",
                 style: TextStyle(
                     fontFamily: 'Muli', color: Colors.white, fontSize: 20.0),
@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         )),
                     Padding(
                       padding: const EdgeInsets.only(left: 20.0),
-                      child: SelectableText('Sign in with Google',
+                      child: Text('Sign in with Google',
                           style: TextStyle(
                               fontFamily: 'Muli',
                               color: Colors.black,

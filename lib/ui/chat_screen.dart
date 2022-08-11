@@ -46,7 +46,7 @@ class _ChatScreenState extends State<ChatScreen> {
             },
           ),
           backgroundColor: Color(0xff1a1a1a),
-          title: SelectableText(
+          title: Text(
             'Direct Message',
             style: TextStyle(fontFamily: 'Muli', color: Colors.white),
           ),
@@ -106,7 +106,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   //usersList[index].photoUrl
 
-                  title: SelectableText(
+                  title: Text(
                     usersList[index].displayName,
                     style: TextStyle(fontFamily: 'Muli', color: Colors.white),
                   ),
@@ -175,7 +175,7 @@ class ChatSearch extends SearchDelegate<String> {
             leading: CircleAvatar(
               backgroundImage: NetworkImage(suggestionsList[index].photoUrl),
             ),
-            title: SelectableText(suggestionsList[index].displayName,
+            title: Text(suggestionsList[index].displayName,
                 style: TextStyle(fontFamily: 'Muli', color: Colors.white)),
           )),
     );

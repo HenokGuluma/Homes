@@ -173,7 +173,7 @@ class _PanZoomImageState extends State<PanZoomImage> {
                   controller.value =
                       _getZoomInfo(widget._width, widget._height, size, 1.0);
                 },
-                child: SelectableText(
+                child: Text(
                   "Reset",
                   style: TextStyle(fontFamily: 'Muli', color: Colors.white),
                 ),
@@ -187,7 +187,7 @@ class _PanZoomImageState extends State<PanZoomImage> {
                   controller.value =
                       _getZoomInfo(widget._width, widget._height, size, zoom);
                 },
-                child: SelectableText(
+                child: Text(
                   "Zoom fill",
                   style: TextStyle(fontFamily: 'Muli', color: Colors.white),
                 ),
@@ -197,7 +197,7 @@ class _PanZoomImageState extends State<PanZoomImage> {
                   controller.value =
                       _getZoomInfo(widget._width, widget._height, size, 2.0);
                 },
-                child: SelectableText(
+                child: Text(
                   "Zoom 2x",
                   style: TextStyle(fontFamily: 'Muli', color: Colors.white),
                 ),
@@ -207,7 +207,7 @@ class _PanZoomImageState extends State<PanZoomImage> {
                   controller.value =
                       _getZoomInfo(widget._width, widget._height, size, 4.0);
                 },
-                child: SelectableText(
+                child: Text(
                   "Zoom 4x",
                   style: TextStyle(fontFamily: 'Muli', color: Colors.white),
                 ),
@@ -270,10 +270,10 @@ class _PanZoomImageState extends State<PanZoomImage> {
                 finalImage = img.encodeJpg(resizedImage, quality: 50);
               });
             },
-            child: SelectableText("Crop"),
+            child: Text("Crop"),
           ),
           finalImage == null
-              ? SelectableText("Crop image to see result")
+              ? Text("Crop image to see result")
               : Center(
                   child: Container(
                       width: 200, height: 200, child: Image.memory(finalImage)),

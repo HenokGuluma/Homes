@@ -14,14 +14,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "220576712103-ftrtda22dmcra9i3pu2mdonrfrjfhgn8.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.homes.app",
-            "certificate_hash": "7e1cdabf92bf79f65b149cbb31300eb7e31a3ad8"
-          }
-        },
-        {
           "client_id": "220576712103-6c9tpn418kgeoute7orod2lqig6lmlcp.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -51,11 +43,72 @@
       },
       "oauth_client": [
         {
+          "client_id": "220576712103-6tu3vusgcv5d083vnsfjpoa7cvp72jvs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.homes.eth",
+            "certificate_hash": "c2793081b7d57dab0506eb805aa16fa4c4cfd906"
+          }
+        },
+        {
+          "client_id": "220576712103-coo0a6qqt913erpgj4sobtmbqgd8psgj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.homes.eth",
+            "certificate_hash": "0f43ef960d338fda29734abdb5065b4d97c41da1"
+          }
+        },
+        {
           "client_id": "220576712103-ubua62f2fopithuggki7ke3b6gtisov1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.homes.eth",
             "certificate_hash": "7e1cdabf92bf79f65b149cbb31300eb7e31a3ad8"
+          }
+        },
+        {
+          "client_id": "220576712103-6c9tpn418kgeoute7orod2lqig6lmlcp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2juN0Nx4rlwNA_Fei47axuuX1ZosPXBE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220576712103-6c9tpn418kgeoute7orod2lqig6lmlcp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220576712103:android:8366959769ec31d78c6282",
+        "android_client_info": {
+          "package_name": "com.homesadmin.eth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220576712103-0bue21hacefodrrs7lhh8ikm2phtvcu6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.homesadmin.eth",
+            "certificate_hash": "7e1cdabf92bf79f65b149cbb31300eb7e31a3ad8"
+          }
+        },
+        {
+          "client_id": "220576712103-4qrca92nkbh6vgfbnatrdqlkntpufpl8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.homesadmin.eth",
+            "certificate_hash": "41ee2b85f14a16c5a3bf0abe4ea38b486a63d3d8"
           }
         },
         {

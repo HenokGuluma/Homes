@@ -51,7 +51,7 @@ class _CommentsScreenState extends State<CommentsScreen>
         elevation: 1,
         toolbarHeight: 40.0,
         backgroundColor: new Color(0xff1a1a1a),
-        title: SelectableText(
+        title: Text(
           'Comments',
           style: TextStyle(fontFamily: 'Muli', color: Colors.white),
         ),
@@ -124,7 +124,7 @@ class _CommentsScreenState extends State<CommentsScreen>
           GestureDetector(
             child: Container(
               margin: const EdgeInsets.only(right: 8.0),
-              child: SelectableText('Post',
+              child: Text('Post',
                   style: TextStyle(
                       fontFamily: 'Muli',
                       color: Color(0xff00ffff),
@@ -166,7 +166,7 @@ class _CommentsScreenState extends State<CommentsScreen>
           } else {
             if (snapshot.data.size == 0) {
               return Center(
-                  child: SelectableText(
+                  child: Text(
                 "No comments yet",
                 style: TextStyle(fontFamily: 'Muli', color: Colors.white),
               ));
@@ -231,7 +231,7 @@ class _CommentsScreenState extends State<CommentsScreen>
             ),
             /*Row(
               children: <Widget>[
-                SelectableText(snapshot.data()['authorId'],
+                Text(snapshot.data()['authorId'],
                     style: TextStyle( fontFamily: 'Muli', 
                       fontWeight: FontWeight.bold,
                       color: Colors.white, fontSize: 16.0
@@ -239,7 +239,7 @@ class _CommentsScreenState extends State<CommentsScreen>
                 Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Expanded(
-                      child: SelectableText(snapshot.data()['content'],
+                      child: Text(snapshot.data()['content'],
                         style: TextStyle( fontFamily: 'Muli', color: Colors.white, fontSize: 16.0),
                         overflow: TextOverflow.clip,
                         textAlign: TextAlign.justify,
@@ -247,7 +247,7 @@ class _CommentsScreenState extends State<CommentsScreen>
                     )),
                 */ /*Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: SelectableText(snapshot.data()['content'], style: TextStyle( fontFamily: 'Muli', color: Colors.white),),
+                  child: Text(snapshot.data()['content'], style: TextStyle( fontFamily: 'Muli', color: Colors.white),),
                 ),*/ /*
               ],
             )*/
@@ -274,7 +274,7 @@ class _CommentsScreenState extends State<CommentsScreen>
                             fontSize: 15.0,
                             fontWeight: FontWeight.w300)),
                   ]),
-                  //SelectableText(snapshot.data()['content'],
+                  //Text(snapshot.data()['content'],
                   overflow: TextOverflow.clip,
                   //textAlign: TextAlign.justify,
                 ),

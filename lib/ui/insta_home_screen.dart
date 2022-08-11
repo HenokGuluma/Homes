@@ -93,7 +93,7 @@ class _InstaHomeScreenState extends State<InstaHomeScreen> {
                     width: 20, height: 20, color: Colors.black)
                 : SvgPicture.asset("assets/home.svg",
                     width: 20, height: 20, color: Colors.black),
-            title: SelectableText(
+            title: Text(
               'Home',
               style: TextStyle(
                   fontFamily: 'Muli',
@@ -109,7 +109,7 @@ class _InstaHomeScreenState extends State<InstaHomeScreen> {
                       width: 22, height: 22, color: Colors.black)
                   : SvgPicture.asset("assets/search.svg",
                       width: 20, height: 20, color: Colors.black),
-              title: SelectableText(
+              title: Text(
                 'Search',
                 style: TextStyle(
                     fontFamily: 'Muli',
@@ -141,7 +141,7 @@ class _InstaHomeScreenState extends State<InstaHomeScreen> {
                     ) */
                   SvgPicture.asset("assets/email.svg",
                       width: 23, height: 23, color: Colors.black),
-              title: SelectableText(
+              title: Text(
                 'Messages',
                 style: TextStyle(
                     fontFamily: 'Muli',
@@ -157,7 +157,7 @@ class _InstaHomeScreenState extends State<InstaHomeScreen> {
                       width: 18, height: 18, color: Colors.black)
                   : SvgPicture.asset("assets/profile.svg",
                       width: 18, height: 18, color: Colors.black),
-              title: SelectableText(
+              title: Text(
                 'Profile',
                 style: TextStyle(
                     fontFamily: 'Muli',

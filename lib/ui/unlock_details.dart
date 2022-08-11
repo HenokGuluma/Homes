@@ -87,7 +87,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
           ),
           toolbarHeight: 50,
           backgroundColor: Colors.black,
-          title: SelectableText(
+          title: Text(
             'Listing Details',
             style: TextStyle(
                 fontFamily: 'Muli',
@@ -101,7 +101,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
             ? Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 SizedBox(height: height * 0.05),
                 Center(
-                    child: SelectableText(
+                    child: Text(
                   'You have no keys in your wallet. Buy more keys to proceed with the unlock.',
                   style: TextStyle(
                       fontFamily: 'Muli',
@@ -133,7 +133,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                     )),
                 SizedBox(height: height * 0.01),
                 Center(
-                    child: SelectableText(
+                    child: Text(
                   'Select the option you want to proceed with.',
                   style: TextStyle(
                       fontFamily: 'Muli',
@@ -149,7 +149,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 20, right: 20),
-                    child: SelectableText(
+                    child: Text(
                       'After unlocking this item you are left with ' +
                           (widget.variables.keys - 1).toString() +
                           ' keys. Are you sure you want to unlock this listing?',
@@ -319,7 +319,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                               context: context,
                               builder: ((context) {
                                 return new AlertDialog(
-                                  title: new SelectableText(
+                                  title: new Text(
                                     'Unlocking item',
                                     style: TextStyle(
                                         color: Colors.black,
@@ -327,7 +327,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  content: new SelectableText(
+                                  content: new Text(
                                     'Unlocking an item normally costs 25 birr. But you are given a limited free access. Would you like to unlock this listing?',
                                     style: TextStyle(
                                         color: Colors.black,
@@ -464,7 +464,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                                 context: context,
                                 builder: ((context) {
                                   return new AlertDialog(
-                                    title: new SelectableText(
+                                    title: new Text(
                                       'Deleting item',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -472,7 +472,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    content: new SelectableText(
+                                    content: new Text(
                                       'Are you sure you want to delete this listing?',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -586,7 +586,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
       dismissDirection: FlushbarDismissDirection.HORIZONTAL,
       forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
       messageText: Center(
-          child: SelectableText(
+          child: Text(
         'You have successfully deleted this listing.',
         style: TextStyle(fontFamily: 'Muli', color: Colors.white),
       )),
@@ -617,7 +617,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                   SizedBox(
                     width: 5,
                   ),
-                  SelectableText(
+                  Text(
                     amount != 1
                         ? amount.toString() + ' keys'
                         : amount.toString() + ' key',
@@ -630,7 +630,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                 SizedBox(
                   height: 10,
                 ),
-                SelectableText(
+                Text(
                   'for ' + price.toString() + ' birr',
                   style: TextStyle(
                       fontFamily: 'Muli', color: Colors.white, fontSize: 18),
@@ -671,7 +671,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                 item.data()['userID'] == widget.variables.currentUser.uid
                     ? Padding(
                         padding: EdgeInsets.only(right: 20),
-                        child: SelectableText(
+                        child: Text(
                           'Your Listing',
                           style: TextStyle(
                               fontFamily: 'Muli',
@@ -781,7 +781,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                               borderRadius: BorderRadius.circular(15),
                               border: Border.all(color: Colors.black)),
                           child: Center(
-                              child: SelectableText(
+                              child: Text(
                             'For Sale',
                             style: TextStyle(
                                 fontFamily: 'Muli',
@@ -812,7 +812,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SelectableText(
+                            Text(
                               item.data()['cost'] + ' ETB/',
                               style: TextStyle(
                                   fontFamily: 'Muli',
@@ -859,7 +859,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Extra Details',
+          SelectableText('Extra Details',
               style: TextStyle(
                   fontFamily: 'Muli',
                   color: Colors.black,
@@ -872,7 +872,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
               ? Center()
               : Row(
                   children: [
-                    SelectableText('Owner Name:',
+                    Text('Owner Name:',
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
@@ -896,7 +896,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
               ? Center()
               : Row(
                   children: [
-                    SelectableText('Address:',
+                    Text('Address:',
                         style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
