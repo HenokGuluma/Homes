@@ -409,7 +409,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                       Container(
                           padding: EdgeInsets.only(
                               left: width * 0.02, right: width * 0.02),
-                          height: height * 0.05,
+                          height: width * 0.08,
                           width: width,
                           child: ListView(
                             scrollDirection: Axis.horizontal,
@@ -429,7 +429,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                           padding: EdgeInsets.only(
                               left: width * 0.02, right: width * 0.02),
                           constraints: BoxConstraints(
-                            maxHeight: height * 0.05,
+                            maxHeight: width*0.08,
                           ),
                           width: width,
                           child: ListView(
@@ -461,7 +461,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                       Container(
                           padding: EdgeInsets.only(
                               left: width * 0.02, right: width * 0.02),
-                          height: height * 0.05,
+                          height: width*0.08,
                           width: width,
                           child: ListView(
                             scrollDirection: Axis.horizontal,
@@ -589,6 +589,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
             style: TextStyle(
               fontFamily: 'Muli',
               color: Colors.black,
+              fontSize: width*0.05
             ),
 
             iconEnabledColor: Colors.black,
@@ -599,7 +600,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                     style: TextStyle(
                         fontFamily: 'Muli',
                         color: Colors.black,
-                        fontSize: 18,
+                        fontSize: width*0.05,
                         fontWeight: FontWeight.w400),
                     textAlign: TextAlign.center),
               );
@@ -609,7 +610,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
               style: TextStyle(
                   fontFamily: 'Muli',
                   color: Color(0xff999999),
-                  fontSize: 18,
+                  fontSize: width*0.05,
                   fontWeight: FontWeight.w400),
             ),
             onChanged: (String value) {
@@ -711,10 +712,10 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
   }
 
   Widget CategoryWidget(String text, var width) {
-    return SizedBox(
-        height: 30,
+    return /* SizedBox(
+        height: width*0.01,
         // constraints: BoxConstraints(maxHeight: 30),
-        child: GestureDetector(
+        child: */ GestureDetector(
             onTap: () {
               if (chosenDropDown == 'Type') {
                 setState(() {
@@ -747,11 +748,11 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
             child: Padding(
                 padding: EdgeInsets.only(left: 2, right: 2),
                 child: Container(
-                    height: 30,
+                    height:  width*0.08,
                     padding: EdgeInsets.only(left: 5, right: 5),
                     decoration: BoxDecoration(
                         color: Color(0xffd1d1d1),
-                        borderRadius: BorderRadius.circular(15)),
+                        borderRadius: BorderRadius.circular(width*0.05)),
                     child: Center(
                       child: Padding(
                         padding: EdgeInsets.only(left: 5, right: 5),
@@ -760,15 +761,19 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                           style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black87,
-                            fontSize: 16,
+                            fontSize: width*0.045,
                           ),
                         ),
                       ),
-                    )))));
+                    )))
+                    // )
+                    );
   }
 
   Widget CategorySearchWidget(String text, var width, String categoryWidget) {
-    return GestureDetector(
+    return Container(
+      height: width*0.08,
+      child: GestureDetector(
       onTap: () {
         if (categoryWidget == 'type') {
           setState(() {
@@ -824,13 +829,13 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
       child: Padding(
           padding: EdgeInsets.only(left: 2, right: 2),
           child: Container(
-              height: 30,
+              height: width*0.08,
               decoration: BoxDecoration(
                   color: Color(0xffd1d1d1),
-                  borderRadius: BorderRadius.circular(15)),
+                  borderRadius: BorderRadius.circular(width*0.05)),
               child: Row(children: [
                 Container(
-                    height: 30,
+                    height: width*0.08,
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -842,7 +847,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                                 style: TextStyle(
                                   fontFamily: 'Muli',
                                   color: Color(0xff008888),
-                                  fontSize: 16,
+                                  fontSize: width*0.045,
                                 ),
                                 // overflow: TextOverflow.ellipsis,
                               ),
@@ -856,7 +861,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                         ])),
                 Center()
               ]))),
-    );
+    ));
   }
 
   String renderSearchQuery() {
@@ -1423,27 +1428,24 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                       borderRadius: BorderRadius.circular(15),
                       border: Border.all(color: Colors.black)),
                   child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SelectableText(
-                          item.data()['cost'] + ' ETB/',
+                    child: 
+                        Text(
+                          item.data()['cost'] + ' ETB/' + rateConverter(item.data()['rentCollection']),
                           style: TextStyle(
                               fontFamily: 'Muli',
                               color: Colors.black,
                               fontSize: 15,
                               fontWeight: FontWeight.bold),
+                              overflow: TextOverflow.ellipsis
                         ),
-                        rateConverter(item.data()['rentCollection'])
-                      ],
-                    ),
+                    
                   ))
         ],
       ),
     );
   }
 
-  Widget rateConverter(String text) {
+  String rateConverter(String text) {
     var convertedText;
     if (text == 'Daily') {
       convertedText = 'day';
@@ -1454,13 +1456,6 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
     } else if (text == 'Yearly') {
       convertedText = 'year';
     }
-    return Text(
-      convertedText,
-      style: TextStyle(
-          fontFamily: 'Muli',
-          color: Colors.black,
-          fontSize: 15,
-          fontWeight: FontWeight.w400),
-    );
+    return convertedText;
   }
 }

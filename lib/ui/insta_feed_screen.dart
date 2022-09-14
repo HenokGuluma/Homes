@@ -886,6 +886,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                   SelectableText(
                     'Price: ' + item.data()['cost'] + ' ETB',
                     style: TextStyle(
+                        
                         fontFamily: 'Muli',
                         color: Colors.black,
                         fontSize: 15,
@@ -900,20 +901,17 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                       borderRadius: BorderRadius.circular(15),
                       border: Border.all(color: Colors.black)),
                   child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                    child: 
                         Text(
-                          item.data()['cost'] + ' ETB/',
+                          item.data()['cost'] + ' ETB/' +  rateConverter(item.data()['rentCollection']),
                           style: TextStyle(
                               fontFamily: 'Muli',
                               color: Colors.black,
                               fontSize: 15,
                               fontWeight: FontWeight.bold),
+                              overflow: TextOverflow.ellipsis
                         ),
-                        rateConverter(item.data()['rentCollection'])
-                      ],
-                    ),
+                   
                   ))
         ],
       ),
@@ -1003,7 +1001,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
     );
   }
 
-  Widget rateConverter(String text) {
+  String rateConverter(String text) {
     var convertedText;
     if (text == 'Daily') {
       convertedText = 'day';
@@ -1014,13 +1012,8 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
     } else if (text == 'Yearly') {
       convertedText = 'year';
     }
-    return Text(
-      convertedText,
-      style: TextStyle(
-          fontFamily: 'Muli',
-          color: Colors.black,
-          fontSize: 15,
-          fontWeight: FontWeight.w400),
-    );
+    return convertedText;
   }
+
+  
 }

@@ -809,20 +809,17 @@ class UnlockDetailsState extends State<UnlockDetails> {
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(color: Colors.black)),
                       child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+                        child: 
                             Text(
-                              item.data()['cost'] + ' ETB/',
+                              item.data()['cost'] + ' ETB/' +  rateConverter(item.data()['rentCollection']),
                               style: TextStyle(
                                   fontFamily: 'Muli',
                                   color: Colors.black,
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold),
+                                  overflow: TextOverflow.ellipsis
                             ),
-                            rateConverter(item.data()['rentCollection'])
-                          ],
-                        ),
+                        
                       ))
             ],
           ),
@@ -830,7 +827,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
         ));
   }
 
-  Widget rateConverter(String text) {
+  String rateConverter(String text) {
     var convertedText;
     if (text == 'Daily') {
       convertedText = 'day';
@@ -841,14 +838,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
     } else if (text == 'Yearly') {
       convertedText = 'year';
     }
-    return SelectableText(
-      convertedText,
-      style: TextStyle(
-          fontFamily: 'Muli',
-          color: Colors.black,
-          fontSize: 15,
-          fontWeight: FontWeight.w400),
-    );
+    return convertedText;
   }
 
   Widget extraDescription(var width, var height, DocumentSnapshot item) {

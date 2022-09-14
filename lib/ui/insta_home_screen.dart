@@ -142,7 +142,7 @@ class _InstaHomeScreenState extends State<InstaHomeScreen> {
                   SvgPicture.asset("assets/email.svg",
                       width: 23, height: 23, color: Colors.black),
               title: Text(
-                'Messages',
+                'Message',
                 style: TextStyle(
                     fontFamily: 'Muli',
                     color: _page == 3 ? Colors.black : Colors.grey,
