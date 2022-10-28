@@ -606,6 +606,10 @@ class FirebaseProvider {
     return phones.docs;
   }
 
+   void addPhone(String phone, String userId) async{
+    await _firestore.collection('phones').doc(phone).set({'phone': phone, 'userId': userId});
+  }
+
   Future<DocumentReference> addVideoPostToDb(
       User currentUser,
       String imgUrl,

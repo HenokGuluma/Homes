@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image/image.dart' as Im;
@@ -45,6 +46,8 @@ class _SetupProfileState extends State<SetupProfile> {
   bool usernameChecked = false;
   bool usernameTooShort = false;
   bool finishingUp = false;
+  bool loadingPhones = true;
+  List<String> phoneList = [];
 
   @override
   void initState() {
@@ -56,6 +59,7 @@ class _SetupProfileState extends State<SetupProfile> {
     if (widget.name != null) {
       _nameController.text = widget.name;
     }
+    getPhones();
   }
 
   File imageFile;
@@ -71,6 +75,20 @@ class _SetupProfileState extends State<SetupProfile> {
     return selectedImage;
   }
 
+  Future<void> getPhones (){
+    _repository.getAllPhones().then((phoneNumbers) {
+      List<String> phones = [];
+      for(int i=0; i<phoneNumbers.length; i++){
+        String phone = phoneNumbers[i].id;
+        phones.add(phone);
+      }
+      setState(() {
+              phoneList = phones;
+              loadingPhones = false;
+            });
+    });
+    return null;
+  }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -273,7 +291,7 @@ class _SetupProfileState extends State<SetupProfile> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
+                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 4.0),
                 child: TextFormField(
                     style: TextStyle(fontFamily: 'Muli', color: Colors.black),
                     controller: _phoneController,
@@ -291,14 +309,26 @@ class _SetupProfileState extends State<SetupProfile> {
                             fontSize: 16.0)),
                     onChanged: changeText),
               ),
+              
+              phoneList.contains(_phoneController.text)
+              ?Center(
+                child: Text('The phone number already exists.',
+                 style: TextStyle(color: Color(0xffff0066), fontFamily: 'Muli', fontSize: 14, fontWeight: FontWeight.w900),),
+              ):
+              _phoneController.text.length>10
+              ?Center(
+                child: Text('Please enter a valid phone number.',
+                 style: TextStyle(color: Color(0xffff0066), fontFamily: 'Muli', fontSize: 14, fontWeight: FontWeight.w900),),
+              )
+              :Center(),
               SizedBox(
-                height: size.height * 0.05,
+                height: size.height * 0.03,
               ),
               finishingUp
                   ? Center(
                       child: Container(
                           width: size.width * 0.4,
-                          height: size.height * 0.08,
+                          height: size.height * 0.07,
                           decoration: BoxDecoration(
                               color: Colors.grey,
                               borderRadius: BorderRadius.circular(20)),
@@ -312,13 +342,14 @@ class _SetupProfileState extends State<SetupProfile> {
                   : _nameController.text.isEmpty ||
                           _bioController.text.isEmpty ||
                           _phoneController.text.isEmpty ||
-                          imageFile == null
+                          imageFile == null||phoneList.contains(_phoneController.text)
+                          ||_phoneController.text.length!=10
                       ? Center(
                           child: Container(
                           width: 150,
                           constraints:
                               BoxConstraints(maxWidth: size.width * 0.5),
-                          height: size.height * 0.08,
+                          height: size.height * 0.05,
                           decoration: BoxDecoration(
                               color: Colors.grey,
                               borderRadius: BorderRadius.circular(20)),
@@ -332,15 +363,15 @@ class _SetupProfileState extends State<SetupProfile> {
                           child: GestureDetector(
                           child: Container(
                             width: size.width * 0.4,
-                            height: size.height * 0.08,
+                            height: size.height * 0.07,
                             decoration: BoxDecoration(
-                                color: Color(0xff00ffff),
+                                color: Color(0xfff2029e),
                                 borderRadius: BorderRadius.circular(20)),
                             child: Center(
                                 child: Text(
                               'Finish',
                               style:
-                                  TextStyle(color: Colors.black, fontSize: 18),
+                                  TextStyle(color: Colors.white, fontSize: 18),
                             )),
                           ),
                           onTap: () {
@@ -353,6 +384,7 @@ class _SetupProfileState extends State<SetupProfile> {
                                 _repository
                                     .updatePhoto(url, widget.userId)
                                     .then((v) {
+                                      _repository.addPhone(_phoneController.text, widget.userId);
                                   _repository
                                       .updateDetails(
                                           widget.userId,
@@ -383,6 +415,7 @@ class _SetupProfileState extends State<SetupProfile> {
 
   changeText(String text) {
     setState(() {});
+    print(phoneList);
   }
 
   changeUserName(String text) {
@@ -417,7 +450,7 @@ class _SetupProfileState extends State<SetupProfile> {
       messageText: Center(
           child: Text(
         'You have successfully updated your profile.',
-        style: TextStyle(fontFamily: 'Muli', color: Color(0xff00ffff)),
+        style: TextStyle(fontFamily: 'Muli', color: Color(0xfff2029e)),
       )),
     )..show(context);
   }

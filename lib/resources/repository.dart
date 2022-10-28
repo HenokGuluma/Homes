@@ -231,6 +231,9 @@ class Repository {
    Future<List<DocumentSnapshot>> getAllPhones() =>
       _firebaseProvider.getAllPhones();
 
+   void addPhone(String phone, String userId) =>
+      _firebaseProvider.addPhone(phone, userId);
+
   Future<DocumentSnapshot> getListingDetails(String reference) =>
       _firebaseProvider.getListingDetails(reference);
 

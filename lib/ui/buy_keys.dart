@@ -26,10 +26,10 @@ class BuyKeysState extends State<BuyKeys> {
   bool like;
   int counter = 0;
   List<Map<String, int>> options = [
-    {'amount': 1, 'price': 25},
-    {'amount': 3, 'price': 50},
-    {'amount': 5, 'price': 75},
-    {'amount': 10, 'price': 100}
+    {'amount': 1, 'price': 40},
+    {'amount': 3, 'price': 90},
+    {'amount': 5, 'price': 150},
+    {'amount': 10, 'price': 200}
   ];
   Map<int, double> optionsMap = {1: 25, 3: 50, 5: 75, 10: 100};
 
@@ -156,6 +156,7 @@ class BuyKeysState extends State<BuyKeys> {
                     style: TextStyle(
                         fontFamily: 'Muli',
                         color: Color(0xff00ffff),
+                        fontWeight: FontWeight.w900,
                         fontSize: 20),
                   ),
                 ]),
@@ -163,7 +164,7 @@ class BuyKeysState extends State<BuyKeys> {
                   height: 10,
                 ),
                 Text(
-                  'for ' + price.toString() + ' birr',
+                  'for ' + price.toString() + ' ETB',
                   style: TextStyle(
                       fontFamily: 'Muli', color: Colors.white, fontSize: 18),
                 ),

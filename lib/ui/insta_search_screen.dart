@@ -1446,7 +1446,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                   child: Center(
                     child: 
                         Text(
-                          item.data()['cost'] + ' ETB / ' +  rateConverter(item.data()['rentCollection']),
+                          item.data()['cost'] + ' ETB/' +  rateConverter(item.data()['rentCollection']),
                           style: TextStyle(
                               fontFamily: 'Muli',
                               color: Colors.black,

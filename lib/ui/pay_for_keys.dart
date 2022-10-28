@@ -101,7 +101,7 @@ class _PayForKeysState extends State<PayForKeys>
           ,style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w900, fontFamily: 'Muli'),
           ),
           SizedBox(height: 5,),
-          SelectableText('Amount: ' + (widget.SubTotal*1.05).toString()
+          SelectableText('Amount: ' + (widget.SubTotal).toString()
           ,style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w900, fontFamily: 'Muli'),
           ),
            SizedBox(height: 5,),
@@ -118,7 +118,7 @@ class _PayForKeysState extends State<PayForKeys>
       borderRadius: 0,
       //flushbarPosition: FlushbarPosition.,
       backgroundGradient: LinearGradient(
-        colors: [Color(0xfff2029e), Color(0xfff2029e)],
+        colors: [Color(0xff00ffff), Color(0xff00ffff)],
         stops: [0.6, 1],
       ),
       duration: Duration(seconds: 2),
@@ -208,8 +208,8 @@ class _PayForKeysState extends State<PayForKeys>
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('    Tax (5%): ', style: TextStyle(color: Color(0xff444444), fontFamily: 'Muli', fontSize: 18),),
-                              Text((widget.SubTotal*0.05).toString() + ' ETB     ', style: TextStyle(color: Color(0xff444444), fontFamily: 'Muli', fontSize: 18),)
+                              Text('    Extra Charges: ', style: TextStyle(color: Color(0xff444444), fontFamily: 'Muli', fontSize: 18),),
+                              Text((widget.SubTotal*0).toString() + ' ETB     ', style: TextStyle(color: Color(0xff444444), fontFamily: 'Muli', fontSize: 18),)
                             
                             ],
                           ),
@@ -217,7 +217,7 @@ class _PayForKeysState extends State<PayForKeys>
                   child: Column(
                     children: [
                       Text('Your Total Checkout Price is ', style: TextStyle(color: Colors.black, fontSize: 18, fontFamily: 'Muli', fontWeight: FontWeight.normal), textAlign: TextAlign.center,),
-                      Text((widget.SubTotal*1.05).toString() +' ETB', style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: 'Muli', fontWeight: FontWeight.w900), textAlign: TextAlign.center,)
+                      Text((widget.SubTotal).toString() +' ETB', style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: 'Muli', fontWeight: FontWeight.w900), textAlign: TextAlign.center,)
                     ],
                   ),
                 ),
@@ -253,8 +253,8 @@ class _PayForKeysState extends State<PayForKeys>
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.CENTER,
                                 timeInSecForIosWeb: 1,
-                                backgroundColor: Color(0xfff2029e),
-                                textColor: Colors.white);
+                                backgroundColor: Color(0xff00ffff),
+                                textColor: Colors.black);
                             
                           });
                         },
@@ -262,11 +262,11 @@ class _PayForKeysState extends State<PayForKeys>
                         width: width*0.6,
                         height: 40,
                         decoration: BoxDecoration(
-                          color: ordering?Color(0xff888888):Color(0xfff2029e),
+                          color: ordering?Color(0xff888888):Colors.black,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Center(
-                          child: Text(ordering?'Placing order...':'Order Now', style: TextStyle(color: Colors.white, fontFamily: 'Muli', fontSize: 18),),
+                          child: Text(ordering?'Placing order...':'Buy Now', style: TextStyle(color: Color(0xff00ffff), fontFamily: 'Muli', fontSize: 18),),
                         ),
                       ),
                       )
@@ -334,7 +334,7 @@ class _PayForKeysState extends State<PayForKeys>
                   SizedBox(width: 5,),
                   Image.asset('assets/delivery.png', width: width*0.08),
                   SizedBox(width: 15,),
-                  Text('Pay at Delivery', style: TextStyle(color: Colors.black, fontSize: 18, fontFamily: 'Muli'),)
+                  Text('Pay via Bank Transfer', style: TextStyle(color: Colors.black, fontSize: 18, fontFamily: 'Muli'),)
                   ],
                 ),
               ],

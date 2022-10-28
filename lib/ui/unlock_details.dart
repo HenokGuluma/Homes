@@ -801,7 +801,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                                 fontFamily: 'Muli',
                                 color: Colors.black,
                                 fontSize: 15,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.w900),
                           ))),
                       SizedBox(
                         height: height * 0.02,
@@ -825,7 +825,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                       child: Center(
                         child: 
                             Text(
-                              item.data()['cost'] + ' ETB / ' +  rateConverter(item.data()['rentCollection']),
+                              item.data()['cost'] + ' ETB/' +  rateConverter(item.data()['rentCollection']),
                               style: TextStyle(
                                   fontFamily: 'Muli',
                                   color: Colors.black,
@@ -881,7 +881,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                             fontFamily: 'Muli',
                             color: Colors.black,
                             fontSize: 16,
-                            fontWeight: FontWeight.w400)),
+                            fontWeight: FontWeight.w900)),
                     SizedBox(
                       width: 5,
                     ),

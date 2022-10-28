@@ -783,7 +783,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                   child: Center(
                     child: 
                         Text(
-                          item.data()['cost'] + ' ETB / ' +  rateConverter(item.data()['rentCollection']),
+                          item.data()['cost'] + ' ETB/' +  rateConverter(item.data()['rentCollection']),
                           style: TextStyle(
                               fontFamily: 'Muli',
                               color: Colors.black,

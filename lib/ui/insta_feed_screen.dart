@@ -937,7 +937,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                   child: Center(
                     child: 
                         Text(
-                          item.data()['cost'] + ' ETB / ' +  rateConverter(item.data()['rentCollection']),
+                          item.data()['cost'] + ' ETB/' +  rateConverter(item.data()['rentCollection']),
                           style: TextStyle(
                               fontFamily: 'Muli',
                               color: Colors.black,
