@@ -213,7 +213,12 @@ class _ActivityScreenState extends State<ActivityScreen>
         },
         child: Column(
           children: [
-            Padding(
+            Row(
+              children: [
+                SizedBox(width: 5,),
+                SvgPicture.asset('assets/homes.svg', color: Colors.black, width: 40, height: 40,),
+                SizedBox(width: 5,),
+                Padding(
               padding: EdgeInsets.only(bottom: 0),
               child: Container(
                   padding: EdgeInsets.only(bottom: 10, top: 10),
@@ -221,17 +226,19 @@ class _ActivityScreenState extends State<ActivityScreen>
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  width: width * 0.9,
+                  width: width * 0.7,
                   child: Center(
                     child: Text(
                       item.data()['message'],
                       style: TextStyle(
                           fontFamily: 'Muli',
-                          color: Colors.black,
+                          color: Color(0xff555555),
                           fontSize: 16,
-                          fontWeight: FontWeight.w400),
+                          fontWeight: FontWeight.w900),
                     ),
                   )),
+            ),
+              ],
             ),
             Align(
               alignment: Alignment.bottomRight,

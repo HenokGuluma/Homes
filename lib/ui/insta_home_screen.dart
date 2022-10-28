@@ -179,12 +179,18 @@ class UserVariables extends ChangeNotifier {
   User currentUser = User();
   List<String> unlockedListings = [];
   Map<String, Image> cachedImages = {};
+  List<String> phoneList = [];
+
   void addkeys(int amount) {
     keys += amount;
   }
 
   void removekeys(int amount) {
     keys -= amount;
+  }
+
+   void updatePhones (List<String> phones){
+    phoneList = phones;
   }
 
   void setCurrentUser(User _user) {
@@ -198,6 +204,7 @@ class UserVariables extends ChangeNotifier {
   void setImages(Map<String, Image> images) {
     cachedImages = images;
   }
+
 
   void reset() {
     keys = 0;

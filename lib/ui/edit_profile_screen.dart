@@ -23,6 +23,7 @@ class EditProfileScreen extends StatefulWidget {
   final String photoUrl, email, bio, name, phone;
   UserVariables variables;
   User currentUser;
+  Function updateState;
 
   EditProfileScreen(
       {this.photoUrl,
@@ -30,6 +31,7 @@ class EditProfileScreen extends StatefulWidget {
       this.email,
       this.bio,
       this.name,
+      this.updateState,
       this.phone,
       this.variables});
 
@@ -92,9 +94,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           },
         ),
         actions: <Widget>[
-          _nameController.text.isEmpty ||
-                  _bioController.text.isEmpty ||
-                  _phoneController.text.isEmpty
+          (_nameController.text == widget.name &&
+                  _bioController.text == widget.bio &&
+                  _phoneController.text == widget.phone)
+                  || (widget.variables.phoneList.contains(_phoneController.text) && widget.phone != _phoneController.text)
+                  || _phoneController.text.length!=10
               ? Padding(
                   padding: const EdgeInsets.only(right: 12.0),
                   child: Icon(Icons.done, color: Color(0xff444444)))
@@ -161,6 +165,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         context,
                         MaterialPageRoute(
                             builder: ((context) => Profile_picture(
+                               pop1: (){
+                              Navigator.pop(context);
+                              widget.updateState();
+                            },
+                                  variables: widget.variables,
                                   currentUser: currentuser,
                                   profileSetup: false,
                                 ))));
@@ -173,14 +182,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           fontFamily: 'Muli',
                           color: Colors.black,
                           fontSize: 20.0,
-                          fontWeight: FontWeight.bold)),
+                          fontWeight: FontWeight.w900)),
                 ),
                 onTap: () {
+                  print(widget.variables.currentUser.displayName);
+                  print(' is the goddamn name');
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: ((context) => Profile_picture(
+                            variables: widget.variables,
                                 profileSetup: false,
+                                pop1: (){
+                                  Navigator.pop(context);
+                                  widget.updateState();
+                                },
                                 original: false,
                                 currentUser: currentuser,
                               ))));
@@ -206,6 +222,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       labelStyle: TextStyle(
                           fontFamily: 'Muli',
                           color: Colors.black,
+                          fontWeight: FontWeight.w900,
                           fontSize: 16.0),
                     ),
                     onChanged: updateText),
@@ -228,6 +245,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         labelStyle: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
+                            fontWeight: FontWeight.w900,
                             fontSize: 16.0)),
                     onChanged: updateText),
               ),
@@ -263,6 +281,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       labelStyle: TextStyle(
                           fontFamily: 'Muli',
                           color: Colors.black,
+                          fontWeight: FontWeight.w900,
                           fontSize: 16.0)),
                 ),
               ),
@@ -283,9 +302,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         labelStyle: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
+                            fontWeight: FontWeight.w900,
                             fontSize: 16.0)),
                     onChanged: updateText),
+              ),
+              SizedBox(height: 5,),
+              widget.variables.phoneList.contains(_phoneController.text) && widget.phone != _phoneController.text
+              ?Center(
+                child: Text('The phone number already exists.',
+                 style: TextStyle(color: Color(0xffff0066), fontFamily: 'Muli', fontSize: 14, fontWeight: FontWeight.w900),)
               )
+              : _phoneController.text.length>10
+              ?Center(
+                child: Text('Please enter a valid phone number.',
+                 style: TextStyle(color: Color(0xffff0066), fontFamily: 'Muli', fontSize: 14, fontWeight: FontWeight.w900),),
+              )
+              :Center(),
+              SizedBox(height: 30,)
             ],
           )
         ],

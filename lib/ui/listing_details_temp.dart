@@ -13,6 +13,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/resources/repository.dart';
 import 'package:instagram_clone/ui/insta_home_screen.dart';
 import 'package:instagram_clone/ui/unlock_details.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 import 'package:provider/provider.dart';
 
 class ListingDetailsTemp extends StatefulWidget {
@@ -51,16 +52,21 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
   final picker = ImagePicker();
   bool like;
   int counter = 0;
-  var _repository = Repository();
-  List<String> properties = [
-    'assets/listing_1.jpg',
-    'assets/listing_2.jpg',
-    'assets/listing_3.jpg',
-    'assets/listing_4.jpg',
-    'assets/listing_5.jpg',
+   DocumentSnapshot listingItem;
+  List<Map<String, int>> options = [
+    {'amount': 1, 'price': 25},
+    {'amount': 3, 'price': 50},
+    {'amount': 5, 'price': 75},
+    {'amount': 10, 'price': 100}
   ];
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  bool unlocked = false;
 
   List<bool> balls = [true, true, true, true, true];
+  var _repository = Repository();
+  bool loading = true;
+
 
   bool approved = false;
   bool declined = false;
@@ -71,6 +77,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
   @override
   void initState() {
     super.initState();
+    getItemForNotification();
     like = widget.like;
     approved = widget.approved;
     declined = widget.declined;
@@ -86,6 +93,25 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
   void dispose() {
     super.dispose();
     like = widget.like;
+  }
+
+  getItemForNotification() async {
+    String itemId = widget.item.data()['reference'];
+    print(itemId); print (' stage 44');
+    if(itemId == null){
+      setState(() {
+          listingItem = widget.item;
+          loading = false;
+        });
+    }
+    else{
+      DocumentSnapshot item = await _firestore.collection('listings').doc(itemId).get();
+    setState(() {
+          listingItem = item;
+          loading = false;
+        });
+    }
+   
   }
 
   @override
@@ -118,10 +144,21 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
           ),
         ),
         backgroundColor: Colors.white,
-        body: Container(
+        body: loading
+          ?Center(
+            child: JumpingDotsProgressIndicator(
+              color: Colors.black,
+              fontSize: 50,
+            ),
+          )
+          : listingDetails(width, height));
+  }
+
+  Widget listingDetails(var width, var height){
+    return Container(
             height: height * 0.9,
             width: width,
-            child: ListView(children: [
+            child:   ListView(children: [
               /* Container(
                 height: width * 0.8,
                 width: width,
@@ -289,7 +326,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                                     fontFamily: 'Muli',
                                     color: Colors.black,
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w400),
+                                    fontWeight: FontWeight.w900),
                               ),
                             ),
                           ),
@@ -313,7 +350,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                                           fontFamily: 'Muli',
                                           color: Colors.white,
                                           fontSize: 16,
-                                          fontWeight: FontWeight.w400),
+                                          fontWeight: FontWeight.w900),
                                     ),
                                   ),
                                 ),
@@ -452,7 +489,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
               SizedBox(
                 height: height * 0.03,
               ),
-            ])));
+            ]));
   }
 
   void showFloatingFlushbar(BuildContext context) {
@@ -565,181 +602,203 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
 
   Widget listingDescription(var width, var height, DocumentSnapshot item) {
     return Container(
-        padding: EdgeInsets.only(left: 20),
-        width: width,
-        child: Row(children: [
-          Container(
-            width: width * 0.9,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+      padding: EdgeInsets.only(left: 20),
+      width: width ,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.star,
-                      size: 12,
-                      color: Colors.pink,
-                    ),
-                    Text(
-                      ' Available',
+                Icon(
+                  Icons.star,
+                  size: 12,
+                  color: Colors.pink,
+                ),
+                SelectableText(
+                  ' Available',
+                  style: TextStyle(
+                      fontFamily: 'Muli',
+                      color: Color(0xff444444),
+                      fontSize: 12),
+                )
+              ],
+            ),
+            Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Text(
+                      'Your Listing',
+                      style: TextStyle(
+                          fontFamily: 'Muli',
+                          color: Colors.black,
+                          fontSize: 16),
+                    ))
+                
+          ]),
+          SizedBox(
+            height: 5,
+          ),
+          Container(
+              width: width * 0.75,
+              child: item.data()['listingType'] == 'Other'
+                  ? SelectableText(
+                      item.data()['listingDescription'] +
+                          ' - ' +
+                          item.data()['area'] +
+                          ' sq.m',
                       style: TextStyle(
                           fontFamily: 'Muli',
                           color: Color(0xff444444),
-                          fontSize: 12),
+                          fontSize: 17,
+                          fontWeight: FontWeight.w900),
                     )
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                    width: width * 0.75,
-                    child: item.data()['listingType'] == 'Other'
-                        ? Text(
-                            item.data()['listingDescription'] +
-                                ' - ' +
-                                item.data()['area'] +
-                                ' sq.m',
-                            style: TextStyle(
-                                fontFamily: 'Muli',
-                                color: Color(0xff444444),
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400),
-                          )
-                        : item.data()['floor'] != null &&
-                                item.data()['floor'] != 'N/A'
-                            ? Text(
-                                item.data()['listingType'] +
-                                    ' - ' +
-                                    item.data()['area'] +
-                                    ' sq.m' +
-                                    ', ' +
-                                    item.data()['floor'],
-                                style: TextStyle(
-                                    fontFamily: 'Muli',
-                                    color: Color(0xff444444),
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w400),
-                              )
-                            : Text(
-                                item.data()['listingType'] +
-                                    ' - ' +
-                                    item.data()['area'] +
-                                    ' sq.m',
-                                style: TextStyle(
-                                    fontFamily: 'Muli',
-                                    color: Color(0xff444444),
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w400),
-                              )),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                    width: width * 0.9,
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.location_pin,
-                          color: Colors.black,
-                          size: 17,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Container(
-                          width: width * 0.75,
-                          child: Text(item.data()['commonLocation'],
-                              style: TextStyle(
-                                fontFamily: 'Muli',
-                                color: Color(0xff444444),
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              overflow: TextOverflow.clip),
+                  : item.data()['floor'] != null &&
+                          item.data()['floor'] != 'N/A'
+                      ? SelectableText(
+                          item.data()['listingType'] +
+                              ' - ' +
+                              item.data()['area'] +
+                              ' sq.m' +
+                              ', ' +
+                              item.data()['floor'],
+                          style: TextStyle(
+                              fontFamily: 'Muli',
+                              color: Color(0xff444444),
+                              fontSize: 17,
+                              fontWeight: FontWeight.w900),
                         )
-                      ],
-                    )),
-                SizedBox(
-                  height: 5,
+                      : SelectableText(
+                          item.data()['listingType'] +
+                              ' - ' +
+                              item.data()['area'] +
+                              ' sq.m',
+                          style: TextStyle(
+                              fontFamily: 'Muli',
+                              color: Color(0xff444444),
+                              fontSize: 17,
+                              fontWeight: FontWeight.w900),
+                        )),
+          SizedBox(
+            height: 5,
+          ),
+          Row(
+            children: [
+              Icon(
+                Icons.location_pin,
+                color: Colors.black,
+                size: 17,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Container(
+                width: width * 0.85,
+                child: Text(
+                  item.data()['commonLocation'],
+                  style: TextStyle(
+                      fontFamily: 'Muli',
+                      color: Color(0xff444444),
+                      fontSize: 17,
+                      fontWeight: FontWeight.w400),
                 ),
-                item.data()['additionalNotes'].toString().isNotEmpty
-                    ? Text(
-                        item.data()['additionalNotes'],
+              )
+            ],
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          item.data()['additionalNotes'].toString().isNotEmpty
+              ? Container(
+                padding: EdgeInsets.only(bottom: 5),
+                  width: width * 0.85,
+                  child: RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                         TextSpan(
+                    text: 'Description: ',
+                    style: TextStyle(
+                        fontFamily: 'Muli',
+                        color: Color(0xff444444),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w900),
+                  ),
+                   TextSpan(
+                    text: item.data()['additionalNotes'],
+                    style: TextStyle(
+                        fontFamily: 'Muli',
+                        color: Color(0xff444444),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400),
+                  ),
+                      ]
+                    ),
+                  )
+                )
+              : Center(),
+          item.data()['additionalNotes'].toString().isNotEmpty
+              ? SizedBox(
+                  height: 5,
+                )
+              : Center(),
+          item.data()['forRent'] == 'For Sale'
+              ? Column(children: [
+                  Container(
+                      height: height * 0.05,
+                      width: width * 0.25,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: Colors.black)),
+                      child: Center(
+                          child: SelectableText(
+                        'For Sale',
                         style: TextStyle(
                             fontFamily: 'Muli',
-                            color: Color(0xff444444),
-                            fontSize: 17,
-                            fontWeight: FontWeight.w400),
-                      )
-                    : Center(),
-                item.data()['additionalNotes'].toString().isNotEmpty
-                    ? SizedBox(
-                        height: 5,
-                      )
-                    : Center(),
-                item.data()['forRent'] == 'For Sale'
-                    ? Column(children: [
-                        Container(
-                            height: height * 0.05,
-                            width: width * 0.25,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(color: Colors.black)),
-                            child: Center(
-                                child: Text(
-                              'For Sale',
-                              style: TextStyle(
-                                  fontFamily: 'Muli',
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold),
-                            ))),
-                        SizedBox(
-                          height: height * 0.02,
-                        ),
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
+                      ))),
+                  SizedBox(
+                    height: height * 0.02,
+                  ),
+                  SelectableText(
+                    'Price: ' + item.data()['cost'] + ' ETB',
+                    style: TextStyle(
+                        
+                        fontFamily: 'Muli',
+                        color: Colors.black,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w900),
+                  ),
+                ])
+              : Container(
+                  height: height * 0.05,
+                  width: width * 0.35,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: Colors.black)),
+                  child: Center(
+                    child: 
                         Text(
-                          'Price: ' + item.data()['cost'] + ' ETB',
+                          item.data()['cost'] + ' ETB / ' +  rateConverter(item.data()['rentCollection']),
                           style: TextStyle(
                               fontFamily: 'Muli',
                               color: Colors.black,
                               fontSize: 15,
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.w900),
+                              overflow: TextOverflow.ellipsis
                         ),
-                      ])
-                    : Container(
-                        height: height * 0.05,
-                        width: width * 0.35,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Colors.black)),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                item.data()['cost'] + ' ETB/',
-                                style: TextStyle(
-                                    fontFamily: 'Muli',
-                                    color: Colors.black,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              rateConverter(item.data()['rentCollection'])
-                            ],
-                          ),
-                        ))
-              ],
-            ),
-          ),
-        ]));
+                   
+                  ))
+        ],
+      ),
+    );
   }
 
-  Widget rateConverter(String text) {
+  String rateConverter(String text) {
     var convertedText;
     if (text == 'Daily') {
       convertedText = 'day';
@@ -750,14 +809,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
     } else if (text == 'Yearly') {
       convertedText = 'year';
     }
-    return Text(
-      convertedText,
-      style: TextStyle(
-          fontFamily: 'Muli',
-          color: Colors.black,
-          fontSize: 15,
-          fontWeight: FontWeight.w400),
-    );
+    return convertedText;
   }
 
   Widget description(width, height) {

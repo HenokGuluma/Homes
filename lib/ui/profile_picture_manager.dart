@@ -7,6 +7,7 @@ import 'package:instagram_clone/ui/camera_cropper.dart';
 //import 'package:image_size_getter/file_input.dart';
 //import 'package:image_size_getter/image_size_getter.dart';
 import 'package:instagram_clone/ui/chat_screen.dart';
+import 'package:instagram_clone/ui/insta_home_screen.dart';
 import 'package:instagram_clone/ui/profile_image_zoomer.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -27,8 +28,10 @@ class Profile_picture extends StatefulWidget {
   bool original;
   DocumentReference reference;
   User currentUser;
+  Function pop1;
+  UserVariables variables;
   Profile_picture(
-      {this.original, this.reference, this.currentUser, this.profileSetup});
+      {this.original, this.reference, this.currentUser, this.profileSetup, this.pop1, this.variables});
 }
 
 // ignore: camel_case_types
@@ -85,10 +88,12 @@ class _Profile_pictureState extends State<Profile_picture> {
         itemCount: assets.length,
         itemBuilder: (_, index) {
           return AssetThumbnail(
+            variables: widget.variables,
             asset: assets[index],
             original: widget.original,
             reference: widget.reference,
             profileSetup: widget.profileSetup,
+            pop1: widget.pop1,
             currentUser: widget
                 .currentUser, /* original: widget.original, reference: widget.reference,*/
           );
@@ -105,6 +110,8 @@ class AssetThumbnail extends StatelessWidget {
       @required this.asset,
       @required this.original,
       @required this.reference,
+      @required this.variables,
+      @required this.pop1,
       @required this.currentUser})
       : super(key: key);
   final AssetEntity asset;
@@ -112,6 +119,8 @@ class AssetThumbnail extends StatelessWidget {
   final bool original;
   final DocumentReference reference;
   final User currentUser;
+  final UserVariables variables;
+  final Function pop1;
 
   /* Future<File>_cropImage(filePath) async {
     File croppedImage = await ImageCropper.cropImage(
@@ -153,38 +162,18 @@ class AssetThumbnail extends StatelessWidget {
           onTap: () {
             print('stage0');
             asset.file.then((images) {
-              /*_cropImage(images.path).then((croppedImage) {
-                getAspectRatio(croppedImage).then((aspect) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      // builder: ((context) => ImageZoomer(imageFile: image, original: widget.original, reference: widget.reference,))
-                      // ignore: missing_return
-                      builder: (_) {
-                        if (asset.type == AssetType.image) {
-                          */ /*getFile(bytes).then((thumbnail) {
-                            return ImageZoomers(imageFile: images, original: original, reference: reference, thumbnailFile: thumbnail);
-                          });*/ /*
-                          return Profile(imageFile: croppedImage.readAsBytesSync(), original: original, reference: reference, thumnailFile: bytes, aspectRatio: aspect, currentUser: currentUser,);
-                          // If this is an image, navigate to ImageScreen
-                          //return ImageScreen(imageFile: asset.file);
-
-                        }
-                        else {
-                          // if it's not, navigate to VideoScreen
-                          return VideoScreen(videoFile: asset.file);
-                        }
-                      },
-                    ),
-                  );
-                });
-
-              });*/
+                  print(variables.currentUser.displayName);
+                  print(' is the goddamn name');
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: ((context) => ProfileCropper(
                             profileSetup: profileSetup,
+                             pop1: (){
+                              Navigator.pop(context);
+                            },
+                            pop2: pop1,
+                            variables: variables,
                             original: original,
                             reference: reference,
                             thumbnail: bytes,

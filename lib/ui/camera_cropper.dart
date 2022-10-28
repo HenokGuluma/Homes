@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_crop/image_crop.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/models/user.dart';
+import 'package:instagram_clone/ui/insta_home_screen.dart';
 import 'package:instagram_clone/ui/profile_image_zoomer.dart';
 import 'dart:math';
 import 'package:path_provider/path_provider.dart';
@@ -20,6 +21,9 @@ class ProfileCropper extends StatefulWidget {
   File sample;
   double aspectRatio;
   bool original;
+  UserVariables variables;
+  Function pop1;
+  Function pop2;
   DocumentReference reference;
   ProfileCropper(
       {this.reference,
@@ -28,6 +32,9 @@ class ProfileCropper extends StatefulWidget {
       this.thumbnail,
       this.aspectRatio,
       this.imageFile,
+      this.pop1,
+      this.pop2,
+      this.variables,
       this.sample,
       this.currentUser});
   @override
@@ -154,6 +161,8 @@ class _ProfileCropperState extends State<ProfileCropper> {
                         });
                         _cropImage().then((value) {
                           getAspectRatio(_lastCropped).then((aspect) {
+                            print(widget.variables.currentUser.displayName);
+                  print(' is the goddamn name');
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -166,6 +175,12 @@ class _ProfileCropperState extends State<ProfileCropper> {
                                     original: widget.original,
                                     reference: widget.reference,
                                     thumnailFile: widget.thumbnail,
+                                    variables: widget.variables,
+                                    pop2: widget.pop1,
+                                    pop3: widget.pop2,
+                                    pop1: (){
+                                      Navigator.pop(context);
+                                    },
                                     aspectRatio: aspect,
                                     currentUser: widget.currentUser,
                                   );

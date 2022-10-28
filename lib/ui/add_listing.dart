@@ -150,7 +150,7 @@ class AddListingState extends State<AddListing>
                           style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w900,
                             fontSize: 18,
                           )),
                     ),
@@ -215,7 +215,7 @@ class AddListingState extends State<AddListing>
                             alignment: WrapAlignment.start,
                             spacing: 8.0, // gap between adjacent chips
                             runSpacing: 8.0, // gap between lines
-                            children: imageFiles.length < 5
+                            children: imageFiles.length < 6
                                 ? [AddPicture(height, width)] +
                                     imageFiles.map((item) {
                                       int index = imageFiles.indexOf(item);

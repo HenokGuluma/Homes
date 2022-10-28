@@ -226,7 +226,7 @@ class UnlockedListingsState extends State<UnlockedListings> {
                         fontFamily: 'Muli',
                         color: Color(0xff444444),
                         fontSize: 15,
-                        fontWeight: FontWeight.w400),
+                        fontWeight: FontWeight.w900),
                   ),
                 ],
               ),

@@ -108,6 +108,7 @@ flutter:
     - assets/icon-01.svg
     - assets/icon-03.svg
     - assets/send.svg
+    - assets/homes.svg
     - assets/heart.svg
     - assets/key.svg
     - assets/key_fill.svg

@@ -404,7 +404,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                                       fontFamily: 'Muli',
                                       color: Color(0xff00ffff),
                                       fontSize: 18,
-                                      fontWeight: FontWeight.w400),
+                                      fontWeight: FontWeight.w900),
                                 ),
                               ]),
                         ),
@@ -697,7 +697,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                                   fontFamily: 'Muli',
                                   color: Color(0xff444444),
                                   fontSize: 17,
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: FontWeight.w900),
                               overflow: TextOverflow.clip,
                             )
                           : Center()
@@ -714,7 +714,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                                   fontFamily: 'Muli',
                                   color: Color(0xff444444),
                                   fontSize: 17,
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: FontWeight.w900),
                             )
                           : SelectableText(
                               item.data()['listingType'] +
@@ -725,7 +725,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                                   fontFamily: 'Muli',
                                   color: Color(0xff444444),
                                   fontSize: 17,
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: FontWeight.w900),
                             )),
               SizedBox(
                 height: 5,
@@ -757,14 +757,28 @@ class UnlockDetailsState extends State<UnlockDetails> {
                 height: 5,
               ),
               item.data()['additionalNotes'].toString().isNotEmpty
-                  ? SelectableText(
-                      item.data()['additionalNotes'],
-                      style: TextStyle(
-                          fontFamily: 'Muli',
-                          color: Color(0xff444444),
-                          fontSize: 17,
-                          fontWeight: FontWeight.w400),
-                    )
+                  ? RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                         TextSpan(
+                    text: 'Description: ',
+                    style: TextStyle(
+                        fontFamily: 'Muli',
+                        color: Color(0xff444444),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w900),
+                  ),
+                   TextSpan(
+                    text: item.data()['additionalNotes'],
+                    style: TextStyle(
+                        fontFamily: 'Muli',
+                        color: Color(0xff444444),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400),
+                  ),
+                      ]
+                    ),
+                  )
                   : Center(),
               item.data()['additionalNotes'].toString().isNotEmpty
                   ? SizedBox(
@@ -811,12 +825,12 @@ class UnlockDetailsState extends State<UnlockDetails> {
                       child: Center(
                         child: 
                             Text(
-                              item.data()['cost'] + ' ETB/' +  rateConverter(item.data()['rentCollection']),
+                              item.data()['cost'] + ' ETB / ' +  rateConverter(item.data()['rentCollection']),
                               style: TextStyle(
                                   fontFamily: 'Muli',
                                   color: Colors.black,
                                   fontSize: 15,
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.w900),
                                   overflow: TextOverflow.ellipsis
                             ),
                         

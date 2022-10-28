@@ -599,6 +599,13 @@ class FirebaseProvider {
     return listing;
   }
 
+  Future<List<DocumentSnapshot>> getAllPhones() async {
+       var phones = await _firestore
+        .collection('phones')
+        .get();
+    return phones.docs;
+  }
+
   Future<DocumentReference> addVideoPostToDb(
       User currentUser,
       String imgUrl,

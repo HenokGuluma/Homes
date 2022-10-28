@@ -1263,10 +1263,10 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
         ]));
   }
 
-  Widget listingDescription(var width, var height, DocumentSnapshot item) {
+ Widget listingDescription(var width, var height, DocumentSnapshot item) {
     return Container(
       padding: EdgeInsets.only(left: 20),
-      width: width * 0.9,
+      width: width ,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1291,8 +1291,8 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
             ),
             item.data()['userID'] == currentUser.uid
                 ? Padding(
-                    padding: EdgeInsets.only(right: 0),
-                    child: SelectableText(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Text(
                       'Your Listing',
                       style: TextStyle(
                           fontFamily: 'Muli',
@@ -1316,7 +1316,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                           fontFamily: 'Muli',
                           color: Color(0xff444444),
                           fontSize: 17,
-                          fontWeight: FontWeight.w400),
+                          fontWeight: FontWeight.w900),
                     )
                   : item.data()['floor'] != null &&
                           item.data()['floor'] != 'N/A'
@@ -1331,7 +1331,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                               fontFamily: 'Muli',
                               color: Color(0xff444444),
                               fontSize: 17,
-                              fontWeight: FontWeight.w400),
+                              fontWeight: FontWeight.w900),
                         )
                       : SelectableText(
                           item.data()['listingType'] +
@@ -1342,7 +1342,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                               fontFamily: 'Muli',
                               color: Color(0xff444444),
                               fontSize: 17,
-                              fontWeight: FontWeight.w400),
+                              fontWeight: FontWeight.w900),
                         )),
           SizedBox(
             height: 5,
@@ -1358,31 +1358,46 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                 width: 5,
               ),
               Container(
-                  width: width * 0.75,
-                  child: Text(
-                    item.data()['commonLocation'],
-                    style: TextStyle(
-                        fontFamily: 'Muli',
-                        color: Color(0xff444444),
-                        fontSize: 17,
-                        fontWeight: FontWeight.w400),
-                  )),
+                width: width * 0.85,
+                child: Text(
+                  item.data()['commonLocation'],
+                  style: TextStyle(
+                      fontFamily: 'Muli',
+                      color: Color(0xff444444),
+                      fontSize: 17,
+                      fontWeight: FontWeight.w400),
+                ),
+              )
             ],
           ),
           SizedBox(
-            height: 5,
+            height: 15,
           ),
           item.data()['additionalNotes'].toString().isNotEmpty
               ? Container(
-                  width: width * 0.75,
-                  child: SelectableText(
-                    item.data()['additionalNotes'],
+                  width: width * 0.85,
+                  child: RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                         TextSpan(
+                    text: 'Description: ',
                     style: TextStyle(
                         fontFamily: 'Muli',
                         color: Color(0xff444444),
-                        fontSize: 17,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w900),
+                  ),
+                   TextSpan(
+                    text: item.data()['additionalNotes'],
+                    style: TextStyle(
+                        fontFamily: 'Muli',
+                        color: Color(0xff444444),
+                        fontSize: 14,
                         fontWeight: FontWeight.w400),
                   ),
+                      ]
+                    ),
+                  )
                 )
               : Center(),
           item.data()['additionalNotes'].toString().isNotEmpty
@@ -1414,10 +1429,11 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                   SelectableText(
                     'Price: ' + item.data()['cost'] + ' ETB',
                     style: TextStyle(
+                        
                         fontFamily: 'Muli',
                         color: Colors.black,
                         fontSize: 15,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.w900),
                   ),
                 ])
               : Container(
@@ -1430,15 +1446,15 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                   child: Center(
                     child: 
                         Text(
-                          item.data()['cost'] + ' ETB/' + rateConverter(item.data()['rentCollection']),
+                          item.data()['cost'] + ' ETB / ' +  rateConverter(item.data()['rentCollection']),
                           style: TextStyle(
                               fontFamily: 'Muli',
                               color: Colors.black,
                               fontSize: 15,
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.w900),
                               overflow: TextOverflow.ellipsis
                         ),
-                    
+                   
                   ))
         ],
       ),

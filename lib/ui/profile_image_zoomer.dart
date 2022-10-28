@@ -14,6 +14,7 @@ import 'package:image_picker/image_picker.dart';
 //import 'package:image_cropper/image_cropper.dart';
 import 'package:instagram_clone/resources/repository.dart';
 import 'package:instagram_clone/ui/edit_profile_screen.dart';
+import 'package:instagram_clone/ui/insta_home_screen.dart';
 import 'package:instagram_clone/ui/insta_upload_photo_screen.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:instagram_clone/models/user.dart';
@@ -28,13 +29,21 @@ class Profile extends StatefulWidget {
   bool original;
   DocumentReference reference;
   User currentUser;
+  Function pop1;
+  Function pop2;
+  Function pop3;
+  UserVariables variables;
   Profile(
       {this.imageFile,
       this.profileSetup,
       this.original,
       this.reference,
+      this.variables,
       this.aspectRatio,
       this.thumnailFile,
+      this.pop1,
+      this.pop2,
+      this.pop3,
       this.currentUser});
 }
 
@@ -126,7 +135,14 @@ class ProfileState extends State<Profile> {
                                                 backgroundColor:
                                                     Color(0xff00ffff),
                                                 textColor: Colors.black);
+                                                 User user = widget.variables.currentUser;
+                                            user.photoUrl = url;
+                                            widget.variables.setCurrentUser(user);
                                             Navigator.pop(context);
+                                            widget.pop1();
+                                            widget.pop2();
+                                            widget.pop3();
+                                            
                                           });
                                         });
                                       });
@@ -140,9 +156,13 @@ class ProfileState extends State<Profile> {
                 : Center(
                     child: Container(
                     width: MediaQuery.of(context).size.width,
-                    child: Image.memory(widget.imageFile, fit: BoxFit.fitHeight
-                        //BoxFit.cover
-                        ),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: MemoryImage(widget.imageFile),
+                          fit: BoxFit.contain
+                        )
+                      ),
                   ))));
   }
 

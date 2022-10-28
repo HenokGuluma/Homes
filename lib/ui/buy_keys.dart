@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/ui/insta_home_screen.dart';
+import 'package:instagram_clone/ui/pay_for_keys.dart';
 import 'package:provider/provider.dart';
 
 class BuyKeys extends StatefulWidget {
@@ -30,6 +31,7 @@ class BuyKeysState extends State<BuyKeys> {
     {'amount': 5, 'price': 75},
     {'amount': 10, 'price': 100}
   ];
+  Map<int, double> optionsMap = {1: 25, 3: 50, 5: 75, 10: 100};
 
   List<bool> balls = [true, true, true, true, true];
 
@@ -81,9 +83,9 @@ class BuyKeysState extends State<BuyKeys> {
                 widget.variables.keys.toString(),
             style: TextStyle(
                 fontFamily: 'Muli',
-                color: Colors.black,
-                fontSize: 18,
-                fontWeight: FontWeight.w400),
+                color: Color(0xff444444),
+                fontSize: 20,
+                fontWeight: FontWeight.w900),
             textAlign: TextAlign.center,
           )),
           SizedBox(height: height * 0.05),
@@ -114,7 +116,7 @@ class BuyKeysState extends State<BuyKeys> {
                 fontFamily: 'Muli',
                 color: Colors.black,
                 fontWeight: FontWeight.w400,
-                fontSize: 16),
+                fontSize: 18),
           ))
         ]));
   }
@@ -123,6 +125,10 @@ class BuyKeysState extends State<BuyKeys> {
     return GestureDetector(
         onTap: () {
           print('The option that you chose is ' + price.toString());
+           Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => PayForKeys(variables: widget.variables, SubTotal: price.toDouble(), keys: amount,))));
         },
         child: Padding(
           padding: EdgeInsets.all(10),

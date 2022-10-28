@@ -228,6 +228,9 @@ class Repository {
   Future<List<DocumentSnapshot>> getSearchListings() =>
       _firebaseProvider.getSearchListings();
 
+   Future<List<DocumentSnapshot>> getAllPhones() =>
+      _firebaseProvider.getAllPhones();
+
   Future<DocumentSnapshot> getListingDetails(String reference) =>
       _firebaseProvider.getListingDetails(reference);
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/resources/repository.dart';
 import 'package:instagram_clone/ui/insta_home_screen.dart';
 import 'package:instagram_clone/ui/setup_profile.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   var _repository = Repository();
+  bool loggingIn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
               child: Center(
                   child: Container(
-                height: 60,
+                height: 50,
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage('assets/homes_black.png'))),
@@ -63,15 +65,46 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
               child: Center(
                   child: Text(
-                "Find your homes easily",
+                "Find your dream homes easily",
                 style: TextStyle(
                     fontFamily: 'Muli', color: Colors.white, fontSize: 20.0),
               ))),
+           loggingIn
+          ?SizedBox(
+            height: height*0.05,
+          )
+          :SizedBox(
+            height: height * 0.1,
+          ),
+          loggingIn
+          ?JumpingDotsProgressIndicator(
+            fontSize: 50,
+            color: Color(0xff00ffff),
+            
+          )
+          :Center(),
           SizedBox(
-            height: height * 0.15,
+            height: height * 0.05,
           ),
           Center(
-            child: GestureDetector(
+            child: loggingIn
+            ?Container(
+                width: width * 0.7,
+                height: height * 0.08,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Center(
+                  child: Text('Logging you in...',
+                          style: TextStyle(
+                              fontFamily: 'Muli',
+                              color: Colors.white,
+                              fontSize: 18.0)),
+                )
+                )
+            :GestureDetector(
               child: Container(
                 width: width * 0.7,
                 height: height * 0.08,
@@ -105,6 +138,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               onTap: () {
+                  setState(() {
+                  loggingIn = true;
+                });
                 _repository.signIn().then((user) {
                   if (user != null) {
                     authenticateUser(user);

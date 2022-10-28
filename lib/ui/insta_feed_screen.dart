@@ -61,6 +61,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
 
   Map<String, int> counters = {};
   Map<String, Image> cachedImages = {};
+  List<String> phoneList = [];
 
   @override
   bool get wantKeepAlive => true;
@@ -84,6 +85,22 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
       )),
     )..show(context);
   }
+
+  Future<void> getPhones (){
+    _repository.getAllPhones().then((phoneNumbers) {
+      List<String> phones = [];
+      for(int i=0; i<phoneNumbers.length; i++){
+        String phone = phoneNumbers[i].id;
+        phones.add(phone);
+      }
+      setState(() {
+              phoneList = phones;
+              // loadingPhones = false;
+            });
+    });
+    return null;
+  }
+
 
   void getListings(int page) async {
     if (page == 0) {
@@ -191,6 +208,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
     super.initState();
     getCurrentUser().then((value) {
       getLikedListings(currentUser.uid);
+      getPhones();
       getlistingItems().then((list) {
         addCounters(list);
         print('the list length is ' + list.length.toString());
@@ -218,6 +236,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
     variables.setCurrentUser(currentUser);
     variables.unlockedListings = unlockedStrings;
     variables.setImages(cachedImages);
+    variables.updatePhones(phoneList);
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -737,7 +756,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
   Widget listingDescription(var width, var height, DocumentSnapshot item) {
     return Container(
       padding: EdgeInsets.only(left: 20),
-      width: width * 0.9,
+      width: width ,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -762,7 +781,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
             ),
             item.data()['userID'] == currentUser.uid
                 ? Padding(
-                    padding: EdgeInsets.only(right: 0),
+                    padding: EdgeInsets.only(right: 20),
                     child: Text(
                       'Your Listing',
                       style: TextStyle(
@@ -787,7 +806,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                           fontFamily: 'Muli',
                           color: Color(0xff444444),
                           fontSize: 17,
-                          fontWeight: FontWeight.w400),
+                          fontWeight: FontWeight.w900),
                     )
                   : item.data()['floor'] != null &&
                           item.data()['floor'] != 'N/A'
@@ -802,7 +821,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                               fontFamily: 'Muli',
                               color: Color(0xff444444),
                               fontSize: 17,
-                              fontWeight: FontWeight.w400),
+                              fontWeight: FontWeight.w900),
                         )
                       : SelectableText(
                           item.data()['listingType'] +
@@ -813,7 +832,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                               fontFamily: 'Muli',
                               color: Color(0xff444444),
                               fontSize: 17,
-                              fontWeight: FontWeight.w400),
+                              fontWeight: FontWeight.w900),
                         )),
           SizedBox(
             height: 5,
@@ -829,7 +848,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                 width: 5,
               ),
               Container(
-                width: width * 0.75,
+                width: width * 0.85,
                 child: Text(
                   item.data()['commonLocation'],
                   style: TextStyle(
@@ -842,19 +861,34 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
             ],
           ),
           SizedBox(
-            height: 5,
+            height: 15,
           ),
           item.data()['additionalNotes'].toString().isNotEmpty
               ? Container(
-                  width: width * 0.75,
-                  child: SelectableText(
-                    item.data()['additionalNotes'],
+                padding: EdgeInsets.only(bottom: 5),
+                  width: width * 0.85,
+                  child: RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                         TextSpan(
+                    text: 'Description: ',
                     style: TextStyle(
                         fontFamily: 'Muli',
                         color: Color(0xff444444),
-                        fontSize: 17,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w900),
+                  ),
+                   TextSpan(
+                    text: item.data()['additionalNotes'],
+                    style: TextStyle(
+                        fontFamily: 'Muli',
+                        color: Color(0xff444444),
+                        fontSize: 14,
                         fontWeight: FontWeight.w400),
                   ),
+                      ]
+                    ),
+                  )
                 )
               : Center(),
           item.data()['additionalNotes'].toString().isNotEmpty
@@ -890,7 +924,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                         fontFamily: 'Muli',
                         color: Colors.black,
                         fontSize: 15,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.w900),
                   ),
                 ])
               : Container(
@@ -903,12 +937,12 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                   child: Center(
                     child: 
                         Text(
-                          item.data()['cost'] + ' ETB/' +  rateConverter(item.data()['rentCollection']),
+                          item.data()['cost'] + ' ETB / ' +  rateConverter(item.data()['rentCollection']),
                           style: TextStyle(
                               fontFamily: 'Muli',
                               color: Colors.black,
                               fontSize: 15,
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.w900),
                               overflow: TextOverflow.ellipsis
                         ),
                    

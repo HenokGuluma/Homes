@@ -47,6 +47,8 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
   bool _isLiked = false;
   List<DocumentSnapshot> list;
   bool loading = true;
+  bool logging_out = false;
+  NavigatorState _navigator;
 
   @override
   bool get wantKeepAlive => true;
@@ -54,6 +56,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
   @override
   void initState() {
     super.initState();
+     _navigator = Navigator.of(context);
     /*  retrieveUserDetails().then((value) {
       setState(() {
         loading = false;
@@ -129,7 +132,9 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                             //thumbnail:NetworkImage(list[index].data()['postOwnerPhotoUrl']),
                             thumbnail: AssetImage('assets/grey.png'),
                             // size: 1.29MB
-                            image: _user != null
+                            image: boltTimer.currentUser!=null
+                            ?CachedNetworkImageProvider(boltTimer.currentUser.photoUrl)
+                            :_user != null
                                 ? CachedNetworkImageProvider(_user.photoUrl)
                                 : AssetImage('assets/grey.png'),
                             //image: NetworkImage(_user.photoUrl),
@@ -150,12 +155,12 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                     style: TextStyle(
                         fontFamily: 'Muli',
                         color: Colors.black,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w900,
                         fontSize: 25.0)),
               ),
               Padding(
                 padding: EdgeInsets.only(
-                    top: height * 0.08,
+                    top: height * 0.03,
                     left: width * 0.03,
                     right: width * 0.03),
                 child: Row(
@@ -210,6 +215,9 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                       context,
                       MaterialPageRoute(
                           builder: ((context) => EditProfileScreen(
+                            updateState: (){
+                              setState(() {});
+                            },
                               variables: boltTimer,
                               currentUser: _user,
                               photoUrl: _user.photoUrl,
@@ -252,7 +260,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                               ))));
                 },
               ),
-              /*  GestureDetector(
+               GestureDetector(
             child: ProfileButtons('Buy Keys', width, height),
             onTap: () {
               Navigator.push(
@@ -260,7 +268,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                   MaterialPageRoute(
                       builder: ((context) => BuyKeys(variables: boltTimer))));
             },
-          ), */
+          ),
               GestureDetector(
                   child: ProfileButtons('Log Out', width, height),
                   onTap: () async {
@@ -295,14 +303,19 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                                       color: Colors.black,
                                       fontSize: 16,
                                       fontFamily: 'Muli',
-                                      fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.w900),
                                 ),
                               ),
                               new TextButton(
                                 onPressed: () {
+                                  Navigator.pop(context);
+                                //  loggingOutDialog();
+                                setState(() {
+                                  logging_out = true;
+                                });
                                   _repository.signOut().then((v) {
                                     boltTimer.reset();
-                                    Navigator.pushReplacement(context,
+                                    _navigator.pushReplacement(
                                         MaterialPageRoute(builder: (context) {
                                       return MyApp();
                                     }));
@@ -316,7 +329,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                                       color: Colors.black,
                                       fontSize: 16,
                                       fontFamily: 'Muli',
-                                      fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.w900),
                                 ),
                               ),
                             ],
@@ -365,7 +378,97 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
               Divider(
                 color: Colors.black38,
                 thickness: 0.5,
+              ), 
+
+              logging_out
+              ?Center()
+              :SizedBox(height: 30,),
+              logging_out?
+              Center(
+                child: Column(
+                                children: [
+                                   JumpingDotsProgressIndicator(color: Colors.black, fontSize: 30,),
+                                  
+                                  SizedBox(height: 10,),
+                                  Text(
+                              'Logging you out...',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Muli',
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w900),
+                            ),
+                            SizedBox(height: 20,)
+                                ],
+                              ),
               )
+              :Center(),
+
+              Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Text(
+                    'Contact us',
+                    style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 22,
+                        fontFamily: 'Muli',
+                        fontWeight: FontWeight.w900, 
+                        decoration: TextDecoration.underline
+                        ),
+                  ),
+                ),
+                  SizedBox(height: 20,),
+              Row(
+                children: [
+                  Row(
+            children: [
+              SizedBox(
+                width: 15,
+              ),
+              Icon(
+                Icons.phone,
+                size: 20,
+                color: Colors.grey,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+               '0923577987',
+                style: TextStyle(
+                    fontFamily: 'Muli',
+                    color: Colors.grey,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400),
+              )
+            ],
+          ),
+
+          SizedBox(width: 15,),
+          Row(
+            children: [
+              Icon(
+                Icons.email,
+                size: 20,
+                color: Colors.grey,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                'henimagne@gmail.com',
+                style: TextStyle(
+                    fontFamily: 'Muli',
+                    color: Colors.grey,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400),
+              )
+            ],
+          ),
+
+                ],
+              ),
+              SizedBox(height: 30,)
             ],
           )),
     );
@@ -395,9 +498,9 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                     child: Text(text,
                         style: TextStyle(
                             fontFamily: 'Muli',
-                            color: Colors.black,
+                            color: Color(0xff666666),
                             fontSize: 18,
-                            fontWeight: FontWeight.w400)),
+                            fontWeight: FontWeight.w900)),
                   ),
                   Padding(
                       padding: EdgeInsets.only(right: 20),

@@ -241,7 +241,7 @@ class UpdateListingState extends State<UpdateListing> {
                                   fontFamily: 'Muli',
                                   color: Color(0xff444444),
                                   fontSize: 17,
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: FontWeight.w900),
                             )
                           : widget.floor != null && widget.floor != 'N/A'
                               ? Text(
@@ -255,7 +255,7 @@ class UpdateListingState extends State<UpdateListing> {
                                       fontFamily: 'Muli',
                                       color: Color(0xff444444),
                                       fontSize: 17,
-                                      fontWeight: FontWeight.w400),
+                                      fontWeight: FontWeight.w900),
                                 )
                               : Text(
                                   widget.listingType +
@@ -266,7 +266,7 @@ class UpdateListingState extends State<UpdateListing> {
                                       fontFamily: 'Muli',
                                       color: Color(0xff444444),
                                       fontSize: 17,
-                                      fontWeight: FontWeight.w400),
+                                      fontWeight: FontWeight.w900),
                                 )),
                 ],
               ),
@@ -304,14 +304,28 @@ class UpdateListingState extends State<UpdateListing> {
                       children: [
                         Container(
                             width: width * 0.75,
-                            child: Text(
-                              widget.additionalNotes,
-                              style: TextStyle(
-                                  fontFamily: 'Muli',
-                                  color: Color(0xff444444),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400),
-                            )),
+                            child: RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                         TextSpan(
+                    text: 'Description: ',
+                    style: TextStyle(
+                        fontFamily: 'Muli',
+                        color: Color(0xff444444),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w900),
+                  ),
+                   TextSpan(
+                    text: widget.additionalNotes,
+                    style: TextStyle(
+                        fontFamily: 'Muli',
+                        color: Color(0xff444444),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400),
+                  ),
+                      ]
+                    ),
+                  )),
                         SizedBox(
                           height: 10,
                         ),
@@ -338,7 +352,7 @@ class UpdateListingState extends State<UpdateListing> {
                                     fontFamily: 'Muli',
                                     color: Colors.black,
                                     fontSize: 15,
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.w900),
                               ),
                               rateConverter(widget.rentCollection)
                             ],
@@ -360,7 +374,7 @@ class UpdateListingState extends State<UpdateListing> {
                                   fontFamily: 'Muli',
                                   color: Colors.black,
                                   fontSize: 15,
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.w900),
                             ))),
                         SizedBox(
                           height: height * 0.02,
@@ -705,7 +719,7 @@ class UpdateListingState extends State<UpdateListing> {
           fontFamily: 'Muli',
           color: Colors.black,
           fontSize: 15,
-          fontWeight: FontWeight.w400),
+          fontWeight: FontWeight.w900),
     );
   }
 }

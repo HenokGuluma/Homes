@@ -209,7 +209,7 @@ class ModifyListingState extends State<ModifyListing>
                           style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w900,
                             fontSize: 18,
                           )),
                     ),
@@ -414,7 +414,7 @@ class ModifyListingState extends State<ModifyListing>
                             alignment: WrapAlignment.start,
                             spacing: 8.0, // gap between adjacent chips
                             runSpacing: 8.0, // gap between lines
-                            children: imageFiles.length < 5
+                            children: imageFiles.length < 6
                                 ? [AddPicture(height)] +
                                     imageFiles.map((item) {
                                       int index = imageFiles.indexOf(item);
