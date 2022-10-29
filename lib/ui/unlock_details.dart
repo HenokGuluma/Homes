@@ -411,7 +411,8 @@ class UnlockDetailsState extends State<UnlockDetails> {
                         ),
                       ),
             SizedBox(height: 20),
-            !widget.notUnlock && !widget.modify && !widget.variables.trial && !unlocked
+            !widget.notUnlock && !widget.modify && !widget.variables.trial && !widget.variables.unlockedListings
+                        .contains(widget.item.id)
             ?Padding(
               padding: EdgeInsets.only(left: 20),
               child: Text(
