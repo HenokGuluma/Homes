@@ -181,7 +181,7 @@ class _PayForKeysState extends State<PayForKeys>
   }
 
   Future<void> addOrder()async{
-    _repository.addOrder(widget.variables.currentUser, widget.keys, widget.SubTotal.toInt(), remark);
+    _repository.addOrder(widget.variables.currentUser, widget.keys, widget.SubTotal.toInt(), remark, telebirr);
    return;
   }
 

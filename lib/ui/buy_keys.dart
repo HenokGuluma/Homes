@@ -41,6 +41,7 @@ class BuyKeysState extends State<BuyKeys> {
 
   List<bool> balls = [true, true, true, true, true];
   List<DocumentSnapshot> keyOrderList = [];
+  List<DocumentSnapshot> pendingOrderList = [];
 
   @override
   void initState() {
@@ -48,6 +49,12 @@ class BuyKeysState extends State<BuyKeys> {
     _repository.getOrderHistory(widget.variables.currentUser.uid).then((keyOrders) {
       setState(() {
               keyOrderList = keyOrders;
+            });
+    });
+
+    _repository.getPendingOrders(widget.variables.currentUser.uid).then((keyOrders) {
+      setState(() {
+              pendingOrderList = keyOrders;
             });
     });
   }
@@ -94,7 +101,7 @@ class BuyKeysState extends State<BuyKeys> {
           Center(
               child: Text(
             'Number of keys in your wallet: ' +
-                widget.variables.keys.toString(),
+                widget.variables.currentUser.keys.toString(),
             style: TextStyle(
                 fontFamily: 'Muli',
                 color: Color(0xff444444),
@@ -132,12 +139,37 @@ class BuyKeysState extends State<BuyKeys> {
                 fontWeight: FontWeight.w400,
                 fontSize: 18),
           )), 
-          keyOrderList.length>0
+          keyOrderList.length>0 || pendingOrderList.length>0
           ?Column(
             children: [
               SizedBox(height: 30,),
               Text(
             'Pending Key Orders',
+            style: TextStyle(
+                fontFamily: 'Muli',
+                color: Colors.black,
+                fontWeight: FontWeight.w900,
+                fontSize: 18),
+          ),
+              SizedBox(height: 5,),
+              Container(
+            width: width,
+            height: height*0.3,
+            child: ListView.builder(
+            //shrinkWrap: true,
+          
+            itemCount: pendingOrderList.length,
+            itemBuilder: ((context, index) => listingItem(
+                list: pendingOrderList,
+                index: index,
+                width: width,
+                height: height,
+                variables: widget.variables))),
+          ),
+
+          SizedBox(height: 30,),
+              Text(
+            'All Key Orders',
             style: TextStyle(
                 fontFamily: 'Muli',
                 color: Colors.black,

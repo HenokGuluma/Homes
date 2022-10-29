@@ -41,6 +41,7 @@ class FirebaseProvider {
         posts: '0',
         phone: '',
         trending: 100,
+        keys: 0,
         dailyTimer: DateTime.now().millisecondsSinceEpoch);
 
     //  Map<String, String> mapdata = Map<String, dynamic>();
@@ -617,7 +618,14 @@ class FirebaseProvider {
     return keys.docs;
   }
 
-  void addOrder(User user, int amount, int price, String remark) async{
+ Future<List<DocumentSnapshot>> getPendingOrders(String userId) async {
+       var keys = await _firestore
+        .collection('users').doc(userId).collection('orders').where('deposited', isEqualTo: false)
+        .get();
+    return keys.docs;
+  }
+
+  void addOrder(User user, int amount, int price, String remark, bool telebirr) async{
     int currentTime = DateTime.now().millisecondsSinceEpoch;
     Map<String, dynamic> orderMap = {};
     orderMap['user'] = user.toMap(user);
@@ -625,11 +633,12 @@ class FirebaseProvider {
     orderMap['amount'] = amount;
     orderMap['price'] = price;
     orderMap['remark'] = remark;
+    orderMap['isTelebirr'] = telebirr;
     await _firestore.collection('orders').doc(currentTime.toString() + user.uid).set(orderMap);
     return _firestore.collection('users').doc(user.uid).collection('orders').doc(currentTime.toString() + user.uid).set(orderMap);
   }
 
-  void modifyOrder(User user, int amount, int price, String remark, String docId) async{
+  void modifyOrder(User user, int amount, int price, String remark, String docId, bool telebirr) async{
     int currentTime = DateTime.now().millisecondsSinceEpoch;
     Map<String, dynamic> orderMap = {};
     orderMap['user'] = user.toMap(user);
@@ -637,6 +646,7 @@ class FirebaseProvider {
     orderMap['amount'] = amount;
     orderMap['price'] = price;
     orderMap['remark'] = remark;
+    orderMap['isTelebirr'] = telebirr;
     await _firestore.collection('orders').doc(docId).update(orderMap);
     return _firestore.collection('users').doc(user.uid).collection('orders').doc(docId).set(orderMap);
 

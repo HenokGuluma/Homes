@@ -42,6 +42,9 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
   TabController _tabController;
   var startAfter = null;
   bool loading = true;
+  int availableKeys = 0;
+  bool trial = false;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final PagingController _pagingController = PagingController(firstPageKey: 0);
 
   List<String> properties = [
@@ -102,6 +105,8 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
   }
 
 
+
+
   void getListings(int page) async {
     if (page == 0) {
       try {
@@ -139,6 +144,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
     return null;
   }
 
+
   Future<List<DocumentSnapshot>> getlistingItems() async {
     List<DocumentSnapshot> onlineListings = await _repository.getListings();
     setState(() {
@@ -173,6 +179,11 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
   }
 
   Future<void> getCurrentUser() async {
+    _firestore.collection('trial').doc('trialPeriod').get().then((trialValue) {
+      setState(() {
+              trial = trialValue.data()['trialActive'];
+            });
+    });
     auth.User currentUser = await _repository.getCurrentUser();
     User user = await _repository.fetchUserDetailsById(currentUser.uid);
     setState(() {
@@ -237,6 +248,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
     variables.unlockedListings = unlockedStrings;
     variables.setImages(cachedImages);
     variables.updatePhones(phoneList);
+    variables.setTrial(trial);
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(

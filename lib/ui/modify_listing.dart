@@ -645,7 +645,7 @@ class ModifyListingState extends State<ModifyListing>
                             padding: EdgeInsets.only(
                                 left: 20, right: 20, top: 10, bottom: 10),
                             child: TextField(
-                              maxLength: 100,
+                              maxLength: 200,
                               autofocus: false,
                               maxLines: 3,
                               style: TextStyle(

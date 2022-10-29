@@ -104,12 +104,39 @@ class _OrderDetailsState extends State<OrderDetails>
           ,style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w900, fontFamily: 'Muli'),
           ),
           SizedBox(height: 5,),
-          SelectableText('Amount: ' + (widget.order.data()['amount']).toString()
+          SelectableText('Amount: ' + (widget.order.data()['price']).toString() + ' ETB'
           ,style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w900, fontFamily: 'Muli'),
           ),
            SizedBox(height: 5,),
           SelectableText('Remark: ' + remark ,style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w900, fontFamily: 'Muli'),
           )
+        ],
+      ),
+    );
+  }
+
+  Widget paidWidget(var width, var height, UserVariables variables){
+    return Container(
+      width: width*0.9,
+      height: height*0.3,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        children: [
+          SizedBox(height: 20,),
+          Container(
+            width: width*0.8,
+            child: Text('You have completed your payment. You will receive the keys you purchased in your wallet soon. If you want to check with us, feel free to call us in the phone number below.'
+          ,style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.normal, fontFamily: 'Muli'),
+          ),
+          ),
+          SizedBox(height: 10,),
+          Text('Mobile Number: 0945710635'
+          ,style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w900, fontFamily: 'Muli'),
+          ),
+         
         ],
       ),
     );
@@ -166,8 +193,7 @@ class _OrderDetailsState extends State<OrderDetails>
               Container(
                 height: height * 0.88,
                 color: Color(0xfff1f1f1),
-                child: item_list.length>0
-                ?ListView.builder(
+                child: ListView.builder(
                                   cacheExtent: 50000000,
                                   itemCount: 3,
                                   controller: _scrollController,
@@ -178,37 +204,7 @@ class _OrderDetailsState extends State<OrderDetails>
                                     //return CircularProgressIndicator();
                                   },
                                 )
-                :Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Stack(
-                      alignment: Alignment.center,
-                      children: [
-                    Container(
-                      width: width*0.4,
-                      height: width*0.4,
-                      decoration: BoxDecoration(
-                        color: Color(0xfff2b2de),
-                        shape: BoxShape.circle,
-                      ), 
-                    ),
-                    SvgPicture.asset("assets/cart.svg",
-                      width: width*0.28, height: width*0.28, color: Colors.black,
-                    )
-                    ]
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text('Your Telsem cart is empty', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Muli',)),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text('Add items to your cart', style: TextStyle(color: Color(0xfff2029e), fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'Muli',)),
-                    
-                  ],
-                ) 
+                
               ),
           )],
           ),
@@ -235,7 +231,8 @@ class _OrderDetailsState extends State<OrderDetails>
                   child: Column(
                     children: [
                       Text('Your Total Checkout Price is ', style: TextStyle(color: Colors.black, fontSize: 18, fontFamily: 'Muli', fontWeight: FontWeight.normal), textAlign: TextAlign.center,),
-                      Text((widget.order.data()['amount']).toString() +' ETB', style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: 'Muli', fontWeight: FontWeight.w900), textAlign: TextAlign.center,)
+                      SizedBox(height: 5,),
+                      Text((widget.order.data()['price']).toString() +' ETB', style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: 'Muli', fontWeight: FontWeight.w900), textAlign: TextAlign.center,)
                     ],
                   ),
                 ),
@@ -245,8 +242,10 @@ class _OrderDetailsState extends State<OrderDetails>
 
                     SizedBox(height: 30,),
 
-                  (widget.order.data()['isTelebirr'] && !(widget.order.data()['payment'] && widget.order.data()['delivered'] ))
+                  (widget.order.data()['isTelebirr'] && !(widget.order.data()['payment'] || widget.order.data()['deposited'] ))
                     ? telebirrWidget(width, height, variables)
+                    :widget.order.data()['payment'] && !widget.order.data()['deposited']
+                    ?paidWidget(width, height, variables)
                     :Center(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,

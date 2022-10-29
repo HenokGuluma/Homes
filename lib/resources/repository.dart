@@ -240,11 +240,11 @@ class Repository {
   Future<List<DocumentSnapshot>> getMoreListings(var startAfter) =>
       _firebaseProvider.getMoreListings(startAfter);
 
-  void addOrder(User user, int amount, int price, String remark) =>
-      _firebaseProvider.addOrder(user, amount, price, remark);
+  void addOrder(User user, int amount, int price, String remark, bool telebirr) =>
+      _firebaseProvider.addOrder(user, amount, price, remark, telebirr);
 
-  void modifyOrder(User user, int amount, int price, String remark, String docId)=>
-      _firebaseProvider.modifyOrder(user, amount, price, remark, docId);
+  void modifyOrder(User user, int amount, int price, String remark, String docId, bool telebirr)=>
+      _firebaseProvider.modifyOrder(user, amount, price, remark, docId, telebirr);
   
   void cancelOrder(User user, String docId) =>
       _firebaseProvider.cancelOrder(user, docId);
@@ -254,6 +254,9 @@ class Repository {
 
    Future<List<DocumentSnapshot>> getOrderHistory(String userId) =>
       _firebaseProvider.getOrderHistory(userId);
+
+  Future<List<DocumentSnapshot>> getPendingOrders(String userId) =>
+      _firebaseProvider.getPendingOrders(userId);
 
   Future<List<DocumentSnapshot>> getOwnListings(String userId) =>
       _firebaseProvider.getOwnListings(userId);

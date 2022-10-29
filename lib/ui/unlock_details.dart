@@ -11,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram_clone/models/user.dart';
 import 'package:instagram_clone/resources/repository.dart';
 import 'package:instagram_clone/ui/insta_home_screen.dart';
 import 'package:instagram_clone/ui/modify_listing.dart';
@@ -45,6 +46,8 @@ class UnlockDetailsState extends State<UnlockDetails> {
   final picker = ImagePicker();
   bool like;
   int counter = 0;
+  String trialMessage = 'Unlocking an item normally costs 40 birr. But you are given a limited free access. Would you like to unlock this listing?';
+  String nonTrialMessage = 'Unlocking an item costs 40 birr or one key. Would you like to use your key to unlock this item?';
   List<Map<String, int>> options = [
     {'amount': 1, 'price': 25},
     {'amount': 3, 'price': 50},
@@ -56,10 +59,13 @@ class UnlockDetailsState extends State<UnlockDetails> {
 
   List<bool> balls = [true, true, true, true, true];
   var _repository = Repository();
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   void initState() {
     super.initState();
+    print(widget.variables.trial); print (' is the trial');
+    print(widget.variables.currentUser.keys);
   }
 
   @override
@@ -97,52 +103,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
           ),
         ),
         backgroundColor: Colors.white,
-        body: widget.variables.keys != 0
-            ? Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                SizedBox(height: height * 0.05),
-                Center(
-                    child: Text(
-                  'You have no keys in your wallet. Buy more keys to proceed with the unlock.',
-                  style: TextStyle(
-                      fontFamily: 'Muli',
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400),
-                  textAlign: TextAlign.center,
-                )),
-                SizedBox(height: height * 0.05),
-                Container(
-                    width: width * 0.8,
-                    height: width * 0.8,
-                    child: Center(
-                      child: GridView.builder(
-                          itemCount: options.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  childAspectRatio: 1.1,
-                                  mainAxisSpacing: 2,
-                                  crossAxisSpacing: 2),
-                          cacheExtent: 5000000,
-
-                          // ignore: missing_return
-                          itemBuilder: ((context, index) {
-                            return UnlockOptions(options[index]['amount'],
-                                options[index]['price'], width);
-                          })),
-                    )),
-                SizedBox(height: height * 0.01),
-                Center(
-                    child: Text(
-                  'Select the option you want to proceed with.',
-                  style: TextStyle(
-                      fontFamily: 'Muli',
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16),
-                ))
-              ])
-            : Column(
+        body: Column(
                 children: [
                   /* SizedBox(
                     height: height * 0.05,
@@ -163,6 +124,41 @@ class UnlockDetailsState extends State<UnlockDetails> {
                   listing(width, height),
                 ],
               ));
+  }
+
+  unlockItem(){
+
+    if(widget.variables.trial){
+       widget.variables
+          .unlockListing(widget.item.id);
+      _repository.unlockListing(
+          widget.item.id,
+          widget.variables.currentUser.uid);
+      
+        setState(() {
+        unlocked = true;
+      });
+      showUnlockedFlushbar(context);
+    }
+    else{
+      _firestore.collection('users').doc(widget.variables.currentUser.uid).update({'keys': widget.variables.currentUser.keys -1}).then((value) {
+         widget.variables
+          .unlockListing(widget.item.id);
+      _repository.unlockListing(
+          widget.item.id,
+          widget.variables.currentUser.uid);
+        User user = widget.variables.currentUser;
+        user.keys = user.keys-1;
+        widget.variables.setCurrentUser(user);
+        setState(() {
+        unlocked = true;
+      });
+      });
+      showUnlockedFlushbar(context);
+    }
+   
+     
+      return print('pressedOK');
   }
 
   Widget imageWidget(var width, var height) {
@@ -315,7 +311,11 @@ class UnlockDetailsState extends State<UnlockDetails> {
                     ? Center()
                     : MaterialButton(
                         onPressed: () async {
-                          showDialog(
+                          if(widget.variables.currentUser.keys<1){
+                            showCannotUnlockFlushbar(context);
+                          }
+                          else{
+                            showDialog(
                               context: context,
                               builder: ((context) {
                                 return new AlertDialog(
@@ -328,7 +328,9 @@ class UnlockDetailsState extends State<UnlockDetails> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   content: new Text(
-                                    'Unlocking an item normally costs 25 birr. But you are given a limited free access. Would you like to unlock this listing?',
+                                    widget.variables.trial
+                                    ?trialMessage
+                                    :nonTrialMessage,
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontFamily: 'Muli',
@@ -346,21 +348,18 @@ class UnlockDetailsState extends State<UnlockDetails> {
                                             color: Colors.black,
                                             fontSize: 16,
                                             fontFamily: 'Muli',
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.w900),
                                       ),
                                     ),
                                     new TextButton(
                                       onPressed: () {
                                         Navigator.pop(context);
-                                        setState(() {
-                                          unlocked = true;
-                                        });
-                                        widget.variables
-                                            .unlockListing(widget.item.id);
-                                        _repository.unlockListing(
-                                            widget.item.id,
-                                            widget.variables.currentUser.uid);
-                                        return print('pressedOK');
+                                        if(!widget.variables.trial && widget.variables.currentUser.keys <1){
+                                          showCannotUnlockFlushbar(context);
+                                        }
+                                        else{
+                                           unlockItem();
+                                        }
                                         // Closes the dialog
                                       },
                                       child: new Text(
@@ -369,13 +368,15 @@ class UnlockDetailsState extends State<UnlockDetails> {
                                             color: Colors.black,
                                             fontSize: 16,
                                             fontFamily: 'Muli',
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.w900),
                                       ),
                                     ),
                                   ],
                                 );
                               }));
-                        },
+                        
+                          }
+                          },
                         child: Container(
                           width: width * 0.5,
                           height: height * 0.07,
@@ -410,6 +411,19 @@ class UnlockDetailsState extends State<UnlockDetails> {
                         ),
                       ),
             SizedBox(height: 20),
+            !widget.notUnlock && !widget.modify && !widget.variables.trial && !unlocked
+            ?Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                                  'Number of keys in Wallet: '+ widget.variables.currentUser.keys.toString(),
+                                  style: TextStyle(
+                                      fontFamily: 'Muli',
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w900),
+                                ),
+            )
+            :Center(),
             widget.notUnlock && widget.modify
                 ? Container(
                     width: width * 0.9,
@@ -588,6 +602,44 @@ class UnlockDetailsState extends State<UnlockDetails> {
       messageText: Center(
           child: Text(
         'You have successfully deleted this listing.',
+        style: TextStyle(fontFamily: 'Muli', color: Colors.white),
+      )),
+    )..show(context);
+  }
+
+  void showCannotUnlockFlushbar(BuildContext context) {
+    Flushbar(
+      padding: EdgeInsets.all(10),
+      //flushbarPosition: FlushbarPosition.,
+      backgroundGradient: LinearGradient(
+        colors: [Colors.black, Colors.black],
+        stops: [0.6, 1],
+      ),
+      duration: Duration(seconds: 2),
+      dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+      forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+      messageText: Center(
+          child: Text(
+        'You do not have any keys in your wallet to unlock this item.',
+        style: TextStyle(fontFamily: 'Muli', color: Colors.white),
+      )),
+    )..show(context);
+  }
+
+   void showUnlockedFlushbar(BuildContext context) {
+    Flushbar(
+      padding: EdgeInsets.all(10),
+      //flushbarPosition: FlushbarPosition.,
+      backgroundGradient: LinearGradient(
+        colors: [Colors.black, Colors.black],
+        stops: [0.6, 1],
+      ),
+      duration: Duration(seconds: 2),
+      dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+      forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+      messageText: Center(
+          child: Text(
+        'You have successfully unlocked this item.',
         style: TextStyle(fontFamily: 'Muli', color: Colors.white),
       )),
     )..show(context);
