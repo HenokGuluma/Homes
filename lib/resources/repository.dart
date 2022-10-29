@@ -240,8 +240,20 @@ class Repository {
   Future<List<DocumentSnapshot>> getMoreListings(var startAfter) =>
       _firebaseProvider.getMoreListings(startAfter);
 
+  void addOrder(User user, int amount, int price, String remark) =>
+      _firebaseProvider.addOrder(user, amount, price, remark);
+
+  void modifyOrder(User user, int amount, int price, String remark, String docId)=>
+      _firebaseProvider.modifyOrder(user, amount, price, remark, docId);
+  
+  void cancelOrder(User user, String docId) =>
+      _firebaseProvider.cancelOrder(user, docId);
+
   Future<DocumentSnapshot> getListingWithId(String id) =>
       _firebaseProvider.getListingWithId(id);
+
+   Future<List<DocumentSnapshot>> getOrderHistory(String userId) =>
+      _firebaseProvider.getOrderHistory(userId);
 
   Future<List<DocumentSnapshot>> getOwnListings(String userId) =>
       _firebaseProvider.getOwnListings(userId);

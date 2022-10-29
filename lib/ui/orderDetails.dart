@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
@@ -21,19 +22,18 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:intl/intl.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class PayForKeys extends StatefulWidget {
+class OrderDetails extends StatefulWidget {
   final String currentUserId;
   final UserVariables variables;
-  int keys;
-  double SubTotal;
+  DocumentSnapshot order;
 
-  PayForKeys({this.currentUserId, this.variables, this.SubTotal, this.keys});
+  OrderDetails({this.currentUserId, this.variables, this.order});
 
   @override
-  _PayForKeysState createState() => _PayForKeysState();
+  _OrderDetailsState createState() => _OrderDetailsState();
 }
 
-class _PayForKeysState extends State<PayForKeys>
+class _OrderDetailsState extends State<OrderDetails>
     with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
   User _currentUser = User();
   bool loading = true;
@@ -43,6 +43,8 @@ class _PayForKeysState extends State<PayForKeys>
   List<DocumentSnapshot> notificationItems = [];
   ScrollController _scrollController = ScrollController();
   bool telebirr = true;
+  List<dynamic> item_list = [];
+  
   List<String> names = [
     'Daniel',
     'Solomon',
@@ -64,6 +66,7 @@ class _PayForKeysState extends State<PayForKeys>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    item_list = widget.order.data()['order'];
     getNotifications();
     remark =  DateTime.now().millisecondsSinceEpoch.toString() + widget.variables.currentUser.uid.substring(0, 4);
   }
@@ -101,7 +104,7 @@ class _PayForKeysState extends State<PayForKeys>
           ,style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w900, fontFamily: 'Muli'),
           ),
           SizedBox(height: 5,),
-          SelectableText('Amount: ' + (widget.SubTotal).toString()
+          SelectableText('Amount: ' + (widget.order.data()['amount']).toString()
           ,style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w900, fontFamily: 'Muli'),
           ),
            SizedBox(height: 5,),
@@ -118,7 +121,7 @@ class _PayForKeysState extends State<PayForKeys>
       borderRadius: 0,
       //flushbarPosition: FlushbarPosition.,
       backgroundGradient: LinearGradient(
-        colors: [Color(0xff00ffff), Color(0xff00ffff)],
+        colors: [Color(0xfff2029e), Color(0xfff2029e)],
         stops: [0.6, 1],
       ),
       duration: Duration(seconds: 2),
@@ -149,7 +152,7 @@ class _PayForKeysState extends State<PayForKeys>
               Navigator.pop(context);
             },
           ),
-          title: Text('Payment Methods', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18, fontFamily: 'Muli'),),
+          title: Text('Order Details', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18, fontFamily: 'Muli'),),
         ),
         body: Container(
           height: height * 0.9,
@@ -163,7 +166,8 @@ class _PayForKeysState extends State<PayForKeys>
               Container(
                 height: height * 0.88,
                 color: Color(0xfff1f1f1),
-                child: ListView.builder(
+                child: item_list.length>0
+                ?ListView.builder(
                                   cacheExtent: 50000000,
                                   itemCount: 3,
                                   controller: _scrollController,
@@ -174,16 +178,43 @@ class _PayForKeysState extends State<PayForKeys>
                                     //return CircularProgressIndicator();
                                   },
                                 )
-                ),
+                :Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                    Container(
+                      width: width*0.4,
+                      height: width*0.4,
+                      decoration: BoxDecoration(
+                        color: Color(0xfff2b2de),
+                        shape: BoxShape.circle,
+                      ), 
+                    ),
+                    SvgPicture.asset("assets/cart.svg",
+                      width: width*0.28, height: width*0.28, color: Colors.black,
+                    )
+                    ]
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text('Your Telsem cart is empty', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Muli',)),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text('Add items to your cart', style: TextStyle(color: Color(0xfff2029e), fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'Muli',)),
+                    
+                  ],
+                ) 
+              ),
           )],
           ),
         ));
   }
 
-  Future<void> addOrder()async{
-    _repository.addOrder(widget.variables.currentUser, widget.keys, widget.SubTotal.toInt(), remark);
-   return;
-  }
 
   Widget checkOut(var variables, var height, var width){
     return Container(
@@ -199,26 +230,12 @@ class _PayForKeysState extends State<PayForKeys>
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('   SubTotal: ', style: TextStyle(color: Color(0xff444444), fontFamily: 'Muli', fontSize: 18),),
-                              Text((widget.SubTotal).toString() + ' ETB     ', style: TextStyle(color: Color(0xff444444), fontFamily: 'Muli', fontSize: 18),)
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('    Extra Charges: ', style: TextStyle(color: Color(0xff444444), fontFamily: 'Muli', fontSize: 18),),
-                              Text((widget.SubTotal*0).toString() + ' ETB     ', style: TextStyle(color: Color(0xff444444), fontFamily: 'Muli', fontSize: 18),)
-                            
-                            ],
-                          ),
+                          
                           Center(
                   child: Column(
                     children: [
                       Text('Your Total Checkout Price is ', style: TextStyle(color: Colors.black, fontSize: 18, fontFamily: 'Muli', fontWeight: FontWeight.normal), textAlign: TextAlign.center,),
-                      Text((widget.SubTotal).toString() +' ETB', style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: 'Muli', fontWeight: FontWeight.w900), textAlign: TextAlign.center,)
+                      Text((widget.order.data()['amount']).toString() +' ETB', style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: 'Muli', fontWeight: FontWeight.w900), textAlign: TextAlign.center,)
                     ],
                   ),
                 ),
@@ -228,51 +245,41 @@ class _PayForKeysState extends State<PayForKeys>
 
                     SizedBox(height: 30,),
 
-                    telebirr? telebirrWidget(width, height, variables):Center(),
+                  (widget.order.data()['isTelebirr'] && !(widget.order.data()['payment'] && widget.order.data()['delivered'] ))
+                    ? telebirrWidget(width, height, variables)
+                    :Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                        width: width*0.5,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Color(0xff12a458),
+                          borderRadius: BorderRadius.circular(20)
+                        ),
+                        child: Center(
+                          child: Text('Delivered', style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Muli', fontWeight: FontWeight.w700),),
+                        ),
+                      ),
+                      Container(
+                        width: width*0.5,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(20)
+                        ),
+                        child: Center(
+                          child: Text('Delivered on '+  DateFormat('MM/dd/yyyy').format(DateTime.fromMicrosecondsSinceEpoch(widget.order.data()['deliveryTime'])), style: TextStyle(color: Colors.black, fontSize: 15, fontFamily: 'Muli', fontWeight: FontWeight.w600),),
+                        ),
+                      ),
+                        ],
+                      )
+                    ),
 
                     SizedBox(height: 30,),
 
-                    Center(
-                      child: MaterialButton(
-                        onPressed: (){
-                          setState(() {
-                            ordering = true;
-                           });
-                          addOrder().then((value) {
-                            setState(() {
-                            ordering = false;
-                           });
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) => InstaHomeScreen())),
-                              (Route<dynamic> route) => false,
-                            );
-                             Fluttertoast.showToast(
-                                msg:
-                                    'You have successfully placed your order.',
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Color(0xff00ffff),
-                                textColor: Colors.black);
-                            
-                          });
-                        },
-                        child: Container(
-                        width: width*0.6,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: ordering?Color(0xff888888):Colors.black,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Center(
-                          child: Text(ordering?'Placing order...':'Buy Now', style: TextStyle(color: Color(0xff00ffff), fontFamily: 'Muli', fontSize: 18),),
-                        ),
-                      ),
-                      )
-                    ),
-                   SizedBox(height: 30,)
+                    SizedBox(height: 30,)
                   ],
                 )
               );
@@ -284,65 +291,8 @@ class _PayForKeysState extends State<PayForKeys>
       child:  Column(
         children: [
           SizedBox(height: 20,),
-          Center(
-                child: Text('Choose your payment method.'
-                , style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'Muli'),),
-              ),
-          SizedBox(height: 20,),
-          Container(
-            width: width*0.9,
-            height: height*0.2,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20)
-            ),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    SizedBox(width: 5,),
-                    Checkbox(
-                    value: telebirr,
-                    onChanged: (value) {
-                      setState(() {
-                        telebirr = value;
-                      });
-                    },
-                    checkColor: Colors.white,
-                    activeColor: Colors.black,
-                    focusColor: Colors.black,
-                  ),
-                  SizedBox(width: 5,),
-                  Image.asset('assets/telebirr.png', width: width*0.08),
-                  SizedBox(width: 15,),
-                  Text('Pay with Telebirr', style: TextStyle(color: Colors.black, fontSize: 18, fontFamily: 'Muli'),)
-                  ],
-                ),
-                Row(
-                  children: [
-                    SizedBox(width: 5,),
-                    Checkbox(
-                    value: !telebirr,
-                    onChanged: (value) {
-                      setState(() {
-                        telebirr = !value;
-                      });
-                    },
-                    checkColor: Colors.white,
-                    activeColor: Colors.black,
-                    focusColor: Colors.black,
-                  ),
-                  SizedBox(width: 5,),
-                  Image.asset('assets/delivery.png', width: width*0.08),
-                  SizedBox(width: 15,),
-                  Text('Pay via Bank Transfer', style: TextStyle(color: Colors.black, fontSize: 18, fontFamily: 'Muli'),)
-                  ],
-                ),
-              ],
-            ),
-          ), 
-          SizedBox(height: 10,),
-          Text('Your items', style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'Muli'),),
+         
+          Text('Ordered items', style: TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.w900, fontFamily: 'Muli'),),
          
         ],
       ));
@@ -389,7 +339,7 @@ class _PayForKeysState extends State<PayForKeys>
                 children: [
                   Container(
                     width: width*0.6,
-                    child: Text(widget.keys.toString() + ' Keys', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16, fontFamily: 'Muli'), overflow: TextOverflow.clip, textAlign: TextAlign.start,),
+                    child: Text(widget.order.data()['amount'].toString() + ' Keys', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16, fontFamily: 'Muli'), overflow: TextOverflow.clip, textAlign: TextAlign.start,),
                   
                   ),
                   ],
@@ -398,7 +348,7 @@ class _PayForKeysState extends State<PayForKeys>
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(widget.SubTotal.toString() + ' ETB', style: TextStyle(color: Colors.black, fontSize: 16, fontFamily: 'Muli', fontWeight: FontWeight.w900),),
+                  Text(widget.order.data()['price'].toString() + ' ETB', style: TextStyle(color: Colors.black, fontSize: 16, fontFamily: 'Muli', fontWeight: FontWeight.w900),),
               
                 ],
               ),
@@ -498,11 +448,11 @@ class _PayForKeysState extends State<PayForKeys>
                                 height: height * 0.75,
                                 child: ListView.builder(
                                   cacheExtent: 50000000,
-                                  itemCount: variables.tempItems.length,
+                                  itemCount: item_list.length,
                                   controller: _scrollController,
                                   itemBuilder:
                                       (BuildContext context, int index) {
-                                    // return shoppingItem(variables.tempItems[index], width, height, variables, index, );
+                                    // return shoppingItem(item_list[index], width, height, variables, index, );
                                     //return CircularProgressIndicator();
                                   },
                                 ),

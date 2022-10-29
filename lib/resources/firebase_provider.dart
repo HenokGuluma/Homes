@@ -610,6 +610,42 @@ class FirebaseProvider {
     await _firestore.collection('phones').doc(phone).set({'phone': phone, 'userId': userId});
   }
 
+   Future<List<DocumentSnapshot>> getOrderHistory(String userId) async {
+       var keys = await _firestore
+        .collection('users').doc(userId).collection('orders')
+        .get();
+    return keys.docs;
+  }
+
+  void addOrder(User user, int amount, int price, String remark) async{
+    int currentTime = DateTime.now().millisecondsSinceEpoch;
+    Map<String, dynamic> orderMap = {};
+    orderMap['user'] = user.toMap(user);
+    orderMap['time'] = currentTime;
+    orderMap['amount'] = amount;
+    orderMap['price'] = price;
+    orderMap['remark'] = remark;
+    await _firestore.collection('orders').doc(currentTime.toString() + user.uid).set(orderMap);
+    return _firestore.collection('users').doc(user.uid).collection('orders').doc(currentTime.toString() + user.uid).set(orderMap);
+  }
+
+  void modifyOrder(User user, int amount, int price, String remark, String docId) async{
+    int currentTime = DateTime.now().millisecondsSinceEpoch;
+    Map<String, dynamic> orderMap = {};
+    orderMap['user'] = user.toMap(user);
+    orderMap['time'] = currentTime;
+    orderMap['amount'] = amount;
+    orderMap['price'] = price;
+    orderMap['remark'] = remark;
+    await _firestore.collection('orders').doc(docId).update(orderMap);
+    return _firestore.collection('users').doc(user.uid).collection('orders').doc(docId).set(orderMap);
+
+  }
+   void cancelOrder(User user, String docId) async{
+    await _firestore.collection('orders').doc(docId).delete();
+    return _firestore.collection('users').doc(user.uid).collection('orders').doc(docId).delete();
+  }
+
   Future<DocumentReference> addVideoPostToDb(
       User currentUser,
       String imgUrl,
