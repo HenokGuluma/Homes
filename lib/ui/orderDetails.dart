@@ -258,7 +258,7 @@ class _OrderDetailsState extends State<OrderDetails>
                           borderRadius: BorderRadius.circular(20)
                         ),
                         child: Center(
-                          child: Text('Delivered', style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Muli', fontWeight: FontWeight.w700),),
+                          child: Text('Deposited', style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Muli', fontWeight: FontWeight.w700),),
                         ),
                       ),
                       Container(
@@ -269,7 +269,7 @@ class _OrderDetailsState extends State<OrderDetails>
                           borderRadius: BorderRadius.circular(20)
                         ),
                         child: Center(
-                          child: Text('Delivered on '+  DateFormat('MM/dd/yyyy').format(DateTime.fromMicrosecondsSinceEpoch(widget.order.data()['deliveryTime'])), style: TextStyle(color: Colors.black, fontSize: 15, fontFamily: 'Muli', fontWeight: FontWeight.w600),),
+                          child: Text('Deposited on '+  DateFormat('MM/dd/yyyy').format(DateTime.fromMicrosecondsSinceEpoch(widget.order.data()['deliveryTime'])), style: TextStyle(color: Colors.black, fontSize: 15, fontFamily: 'Muli', fontWeight: FontWeight.w600),),
                         ),
                       ),
                         ],
