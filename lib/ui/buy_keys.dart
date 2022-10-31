@@ -94,11 +94,42 @@ class BuyKeysState extends State<BuyKeys> {
                 fontSize: 18,
                 fontWeight: FontWeight.w400),
           ),
+          actions: [
+            Row(
+              children: [
+                 SvgPicture.asset('assets/key.svg', color: Colors.yellow, height: 15, width: 15,),
+                Text(
+            ' Wallet: ',
+            style: TextStyle(
+                fontFamily: 'Muli',
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w400),
+          ),
+           Text(
+            widget.variables.currentUser.keys.toString(),
+            style: TextStyle(
+                fontFamily: 'Muli',
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w400),
+          ),
+          SizedBox(width: 15,)
+           
+              ],
+            )
+          ],
         ),
+        
         backgroundColor: Color(0xffe1e1e1),
-        body: ListView(children: [
+        body:  Center(
+            child: Container(
+          width: width*0.8,
+          child: ListView(
+              
+              children: [
           SizedBox(height: height * 0.05),
-          Center(
+         /*  Center(
               child: Text(
             'Number of keys in your wallet: ' +
                 widget.variables.currentUser.keys.toString(),
@@ -109,13 +140,14 @@ class BuyKeysState extends State<BuyKeys> {
                 fontWeight: FontWeight.w900),
             textAlign: TextAlign.center,
           )),
-          SizedBox(height: height * 0.05),
+          SizedBox(height: height * 0.05), */
           Container(
-              width: width * 0.8,
-              height: width,
+              width: width * 0.6,
+              height: width*0.75,
               child: Center(
                 child: GridView.builder(
                     itemCount: options.length,
+                    physics: NeverScrollableScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 1.1,
@@ -132,19 +164,19 @@ class BuyKeysState extends State<BuyKeys> {
           SizedBox(height: height * 0.01),
           Center(
               child: Text(
-            'Select the option you want to proceed with.',
+            'Select the option you want.',
             style: TextStyle(
                 fontFamily: 'Muli',
                 color: Colors.black,
                 fontWeight: FontWeight.w400,
                 fontSize: 18),
           )), 
-          keyOrderList.length>0 || pendingOrderList.length>0
-          ?Column(
+          Column(
             children: [
-              SizedBox(height: 30,),
+              SizedBox(height: 60,),
               Text(
-            'Pending Key Orders',
+            pendingOrderList.length>0
+          ?'Pending Key Orders':'No pending key orders',
             style: TextStyle(
                 fontFamily: 'Muli',
                 color: Colors.black,
@@ -152,9 +184,10 @@ class BuyKeysState extends State<BuyKeys> {
                 fontSize: 18),
           ),
               SizedBox(height: 5,),
-              Container(
+             pendingOrderList.length>0
+          ?Container(
             width: width,
-            height: height*0.3,
+            height: height*0.2,
             child: ListView.builder(
             //shrinkWrap: true,
           
@@ -165,11 +198,14 @@ class BuyKeysState extends State<BuyKeys> {
                 width: width,
                 height: height,
                 variables: widget.variables))),
-          ),
-
+          ):Center(),
+            ]),
           SizedBox(height: 30,),
+          Column(
+            children: [
               Text(
-            'All Key Orders',
+            keyOrderList.length>0
+          ?'All Key Orders':'No key Orders yet.',
             style: TextStyle(
                 fontFamily: 'Muli',
                 color: Colors.black,
@@ -177,9 +213,10 @@ class BuyKeysState extends State<BuyKeys> {
                 fontSize: 18),
           ),
               SizedBox(height: 5,),
-              Container(
+              keyOrderList.length>0
+          ?Container(
             width: width,
-            height: height*0.3,
+            height: height*0.2,
             child: ListView.builder(
             //shrinkWrap: true,
           
@@ -190,11 +227,13 @@ class BuyKeysState extends State<BuyKeys> {
                 width: width,
                 height: height,
                 variables: widget.variables))),
-          )
+          ):Center(),
+          SizedBox(height: 20,)
             ],
           )
-          :Center()
-        ]));
+        ]),
+        
+          )));
   }
 
     Widget listingItem({List<DocumentSnapshot> list, int index, double width, double height, UserVariables variables}){
@@ -236,9 +275,9 @@ class BuyKeysState extends State<BuyKeys> {
                 )
               ),
             ),
-            SizedBox(width: width*0.08,),
+            SizedBox(width: width*0.02,),
             Container(
-              width: width*0.45,
+              width: width*0.35,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -296,8 +335,8 @@ class BuyKeysState extends State<BuyKeys> {
         child: Padding(
           padding: EdgeInsets.all(10),
           child: Container(
-            width: width * 0.25,
-            height: width * 0.25,
+            width: width * 0.2,
+            height: width * 0.2,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               border: Border.all(color: Colors.black),

@@ -242,6 +242,9 @@ class _OrderDetailsState extends State<OrderDetails>
 
                     SizedBox(height: 30,),
 
+                    Text('Ordered on: ' + DateFormat('MM/dd/yyyy').format(DateTime.fromMillisecondsSinceEpoch(widget.order.data()['time'])), style: TextStyle(color: Colors.black, fontSize: 18, fontFamily: 'Muli', fontWeight: FontWeight.normal), textAlign: TextAlign.center,),
+                      
+                    SizedBox(height: 20,),
                   (widget.order.data()['isTelebirr'] && !(widget.order.data()['payment'] || widget.order.data()['deposited'] ))
                     ? telebirrWidget(width, height, variables)
                     :widget.order.data()['payment'] && !widget.order.data()['deposited']
@@ -254,11 +257,11 @@ class _OrderDetailsState extends State<OrderDetails>
                         width: width*0.5,
                         height: 40,
                         decoration: BoxDecoration(
-                          color: Color(0xff12a458),
+                          color: Color(0xff42f458),
                           borderRadius: BorderRadius.circular(20)
                         ),
                         child: Center(
-                          child: Text('Deposited', style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: 'Muli', fontWeight: FontWeight.w700),),
+                          child: Text('Deposited', style: TextStyle(color: Colors.black, fontSize: 18, fontFamily: 'Muli', fontWeight: FontWeight.w700),),
                         ),
                       ),
                       Container(

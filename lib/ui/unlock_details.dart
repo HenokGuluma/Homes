@@ -412,7 +412,9 @@ class UnlockDetailsState extends State<UnlockDetails> {
                       ),
             SizedBox(height: 20),
             !widget.notUnlock && !widget.modify && !widget.variables.trial && !widget.variables.unlockedListings
-                        .contains(widget.item.id)
+                        .contains(widget.item.id) &&  widget.item.data()['userID'] !=
+                        widget.variables.currentUser.uid &&
+                    widget.item.data()['forRent'] != 'For Sale'
             ?Padding(
               padding: EdgeInsets.only(left: 20),
               child: Text(

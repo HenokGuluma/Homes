@@ -624,7 +624,7 @@ class ModifyListingState extends State<ModifyListing>
                 Padding(
                   padding: EdgeInsets.only(left: 20, top: 20),
                   child: Text(
-                    'Additional Notes',
+                    'Additional Description',
                     style: TextStyle(
                         fontFamily: 'Muli',
                         color: Colors.black,
@@ -654,6 +654,7 @@ class ModifyListingState extends State<ModifyListing>
                                   fontSize: 18,
                                   fontWeight: FontWeight.w400),
                               controller: noteController,
+                              onChanged: updateText,
                               cursorColor: Colors.black,
                               cursorHeight: 25,
                               cursorWidth: 0.5,
@@ -672,7 +673,15 @@ class ModifyListingState extends State<ModifyListing>
                                       fontWeight: FontWeight.w400)),
                             ),
                           ))),
+                ),
+                 (noteController.value.text.length<50 && noteController.value.text.length>0)
+                ?Center(
+                  child: Text('Your additional description needs to be at least 50 characters.',
+                  style: TextStyle(color: Color(0xfff13484), fontFamily: 'Muli', fontSize: 14,),
+                  ),
                 )
+                :Center(),
+                SizedBox(height: 15,),
               ],
             ),
             Container(
@@ -689,7 +698,20 @@ class ModifyListingState extends State<ModifyListing>
                             phoneController.value.text.isNotEmpty &&
                             nameController.value.text.isNotEmpty &&
                             locationController.text.length != 0 &&
-                            (imageFiles.length > 1 || !reUpload)
+                            (imageFiles.length > 1 || !reUpload) 
+                            && !(
+                                        costController.value.text == widget.details.data()['cost'] &&
+                                        areaController.value.text == widget.details.data()['area'] &&
+                                        specificController.value.text == widget.details.data()['preciseLocation'] &&
+                                        phoneController.value.text == widget.details.data()['phoneNumber'] &&
+                                        emailController.value.text == widget.details.data()['emailAddress'] &&
+                                        nameController.value.text == widget.details.data()['listingOwnerName'] &&
+                                        noteController.value.text == widget.details.data()['additionalNotes'] &&
+                                        chosenValue[0] == widget.details.data()['listingType'] &&
+                                        chosenValue[1] == widget.details.data()['rentCollection']&&
+                                        chosenValue[2] == widget.details.data()['floor']&&
+                                        isActive == widget.details.data()['isActive'] 
+                                      )
                         ? Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -729,7 +751,20 @@ class ModifyListingState extends State<ModifyListing>
                                   phoneController.value.text.isNotEmpty &&
                                   nameController.value.text.isNotEmpty &&
                                   locationController.text.length != 0 &&
-                                  (imageFiles.length > 1 || !reUpload)
+                                  (imageFiles.length > 1 || !reUpload) && !(
+                                        costController.value.text == widget.details.data()['cost'] &&
+                                        areaController.value.text == widget.details.data()['area'] &&
+                                        specificController.value.text == widget.details.data()['preciseLocation'] &&
+                                        phoneController.value.text == widget.details.data()['phoneNumber'] &&
+                                        emailController.value.text == widget.details.data()['emailAddress'] &&
+                                        nameController.value.text == widget.details.data()['listingOwnerName'] &&
+                                        noteController.value.text == widget.details.data()['additionalNotes']&&
+                                        chosenValue[0] == widget.details.data()['listingType'] &&
+                                        chosenValue[1] == widget.details.data()['rentCollection']&&
+                                        chosenValue[2] == widget.details.data()['floor']&&
+                                        chosenValue[3] == widget.details.data()['forRent']&&
+                                        isActive == widget.details.data()['isActive'] 
+                                      )
                               ? Colors.black
                               : Colors.white,
                           borderRadius: BorderRadius.circular(20),
@@ -744,6 +779,20 @@ class ModifyListingState extends State<ModifyListing>
                                       nameController.value.text.isNotEmpty &&
                                       locationController.text.length != 0 &&
                                       (imageFiles.length > 1 || !reUpload)
+                                      && !(
+                                        costController.value.text == widget.details.data()['cost'] &&
+                                        areaController.value.text == widget.details.data()['area'] &&
+                                        specificController.value.text == widget.details.data()['preciseLocation'] &&
+                                        phoneController.value.text == widget.details.data()['phoneNumber'] &&
+                                        emailController.value.text == widget.details.data()['emailAddress'] &&
+                                        nameController.value.text == widget.details.data()['listingOwnerName'] &&
+                                        noteController.value.text == widget.details.data()['additionalNotes']&&
+                                        chosenValue[0] == widget.details.data()['listingType'] &&
+                                        chosenValue[1] == widget.details.data()['rentCollection']&&
+                                        chosenValue[2] == widget.details.data()['floor']&&
+                                        chosenValue[3] == widget.details.data()['forRent']&&
+                                        isActive == widget.details.data()['isActive'] 
+                                      )
                                   ? Colors.black
                                   : Colors.grey)),
                       child: Center(
@@ -760,7 +809,20 @@ class ModifyListingState extends State<ModifyListing>
                                       phoneController.value.text.isNotEmpty &&
                                       nameController.value.text.isNotEmpty &&
                                       locationController.text.length != 0 &&
-                                      (imageFiles.length > 1 || !reUpload)
+                                      (imageFiles.length > 1 || !reUpload) && !(
+                                        costController.value.text == widget.details.data()['cost'] &&
+                                        areaController.value.text == widget.details.data()['area'] &&
+                                        specificController.value.text == widget.details.data()['preciseLocation'] &&
+                                        phoneController.value.text == widget.details.data()['phoneNumber'] &&
+                                        emailController.value.text == widget.details.data()['emailAddress'] &&
+                                        nameController.value.text == widget.details.data()['listingOwnerName'] &&
+                                        noteController.value.text == widget.details.data()['additionalNotes'] &&
+                                        chosenValue[0] == widget.details.data()['listingType'] &&
+                                        chosenValue[1] == widget.details.data()['rentCollection']&&
+                                        chosenValue[2] == widget.details.data()['floor']&&
+                                        chosenValue[3] == widget.details.data()['forRent']&&
+                                        isActive == widget.details.data()['isActive'] 
+                                      )
                                   ? Color(0xff00ffff)
                                   : Colors.grey,
                               fontSize: 18,
@@ -905,6 +967,7 @@ class ModifyListingState extends State<ModifyListing>
                   cursorHeight: 25,
                   cursorWidth: 0.5,
                   maxLength: maxlength,
+                  onChanged: updateText,
                   onSubmitted: (String) {
                     setState(() {
                       controller.text = controller.text;
@@ -1022,6 +1085,10 @@ class ModifyListingState extends State<ModifyListing>
         style: TextStyle(fontFamily: 'Muli', color: Color(0xff00ffff)),
       )),
     )..show(context);
+  }
+
+   updateText(String text) {
+    setState(() {});
   }
 
   Widget EmptyWidget() {

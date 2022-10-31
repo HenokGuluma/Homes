@@ -668,6 +668,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                             builder: ((context) => UnlockDetails(
                                   modify: false,
                                   notUnlock: false,
+
                                   index: 0,
                                   item: list[index],
                                   images: list[index].data()['images'],
@@ -1161,6 +1162,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                   context,
                   MaterialPageRoute(
                       builder: ((context) => UnlockDetails(
+                          modify: false,
                           notUnlock: false,
                           index: 0,
                           item: list[index],

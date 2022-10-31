@@ -112,6 +112,39 @@ class _PayForKeysState extends State<PayForKeys>
     );
   }
 
+  Widget bankTransferWidget(var width, var height, UserVariables variables){
+    return Container(
+      width: width*0.9,
+      height: height*0.3,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        children: [
+          SizedBox(height: 20,),
+          Container(
+            width: width*0.8,
+            child: Text('Complete your payment by transferring the following amount along with the remark given below to the bank account indicated'
+          ,style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.normal, fontFamily: 'Muli'),
+          ),
+          ),
+          SizedBox(height: 10,),
+          Text('Bank Account: 1000109485725'
+          ,style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w900, fontFamily: 'Muli'),
+          ),
+          SizedBox(height: 5,),
+          SelectableText('Amount: ' + (widget.SubTotal).toString()
+          ,style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w900, fontFamily: 'Muli'),
+          ),
+           SizedBox(height: 5,),
+          SelectableText('Remark: ' + remark ,style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w900, fontFamily: 'Muli'),
+          )
+        ],
+      ),
+    );
+  }
+
   void showFloatingFlushbar(BuildContext context) {
     Flushbar(
       padding: EdgeInsets.all(10),
@@ -228,14 +261,52 @@ class _PayForKeysState extends State<PayForKeys>
 
                     SizedBox(height: 30,),
 
-                    telebirr? telebirrWidget(width, height, variables):Center(),
+                    telebirr? telebirrWidget(width, height, variables):bankTransferWidget(width, height, variables),
 
                     SizedBox(height: 30,),
 
                     Center(
                       child: MaterialButton(
                         onPressed: (){
-                          setState(() {
+                          showDialog(
+                        context: context,
+                        builder: ((context) {
+                          return new AlertDialog(
+                            title: new Text(
+                              'Placing Order',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Muli',
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            content: new Text(
+                              'Are you sure you want to place your order?',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Muli',
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal),
+                            ),
+                            actions: <Widget>[
+                              new TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }, // Closes the dialog
+                                child: new Text(
+                                  'No',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontFamily: 'Muli',
+                                      fontWeight: FontWeight.w900),
+                                ),
+                              ),
+                              new TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                //  loggingOutDialog();
+                                 setState(() {
                             ordering = true;
                            });
                           addOrder().then((value) {
@@ -258,6 +329,21 @@ class _PayForKeysState extends State<PayForKeys>
                                 textColor: Colors.black);
                             
                           });
+                                },
+                                child: new Text(
+                                  'Yes',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontFamily: 'Muli',
+                                      fontWeight: FontWeight.w900),
+                                ),
+                              ),
+                            ],
+                          );
+                        }));
+
+                         
                         },
                         child: Container(
                         width: width*0.6,

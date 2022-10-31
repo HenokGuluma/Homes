@@ -427,7 +427,7 @@ class AddListingState extends State<AddListing>
                 Padding(
                   padding: EdgeInsets.only(left: 20, top: 20),
                   child: Text(
-                    'Additional Notes',
+                    'Additional Description',
                     style: TextStyle(
                         fontFamily: 'Muli',
                         color: Colors.black,
@@ -460,6 +460,7 @@ class AddListingState extends State<AddListing>
                               cursorColor: Colors.black,
                               cursorHeight: 25,
                               cursorWidth: 0.5,
+                              onChanged: updateText,
                               decoration: InputDecoration(
                                   hintText: '',
                                   // contentPadding: EdgeInsets.only(bottom: 20),
@@ -475,7 +476,15 @@ class AddListingState extends State<AddListing>
                                       fontWeight: FontWeight.w400)),
                             ),
                           ))),
+                ),
+                (noteController.value.text.length<50 && noteController.value.text.length>0)
+                ?Center(
+                  child: Text('Your additional description needs to be at least 50 characters.',
+                  style: TextStyle(color: Color(0xfff13484), fontFamily: 'Muli', fontSize: 14,),
+                  ),
                 )
+                :Center(),
+                SizedBox(height: 15,),
               ],
             ),
             Container(
@@ -491,6 +500,7 @@ class AddListingState extends State<AddListing>
                             specificController.value.text.isNotEmpty &&
                             phoneController.value.text.isNotEmpty &&
                             nameController.value.text.isNotEmpty &&
+                            noteController.value.text.length>=50 &&
                             common_location.length != 0
                         ? Navigator.push(
                             context,
@@ -523,6 +533,7 @@ class AddListingState extends State<AddListing>
                                   areaController.value.text.isNotEmpty &&
                                   specificController.value.text.isNotEmpty &&
                                   phoneController.value.text.isNotEmpty &&
+                                  noteController.value.text.length>=50 &&
                                   nameController.value.text.isNotEmpty &&
                                   common_location.length != 0
                               ? Colors.black
@@ -536,6 +547,7 @@ class AddListingState extends State<AddListing>
                                           .value.text.isNotEmpty &&
                                       phoneController.value.text.isNotEmpty &&
                                       nameController.value.text.isNotEmpty &&
+                                      noteController.value.text.length>=50 &&
                                       common_location.length != 0
                                   ? Colors.black
                                   : Colors.grey)),
@@ -551,6 +563,7 @@ class AddListingState extends State<AddListing>
                                           .value.text.isNotEmpty &&
                                       phoneController.value.text.isNotEmpty &&
                                       nameController.value.text.isNotEmpty &&
+                                      noteController.value.text.length>=50 &&
                                       common_location.length != 0
                                   ? Color(0xff00ffff)
                                   : Colors.grey,

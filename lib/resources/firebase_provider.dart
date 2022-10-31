@@ -634,6 +634,7 @@ class FirebaseProvider {
     orderMap['price'] = price;
     orderMap['remark'] = remark;
     orderMap['isTelebirr'] = telebirr;
+    orderMap['deposited'] = false;
     await _firestore.collection('orders').doc(currentTime.toString() + user.uid).set(orderMap);
     return _firestore.collection('users').doc(user.uid).collection('orders').doc(currentTime.toString() + user.uid).set(orderMap);
   }
