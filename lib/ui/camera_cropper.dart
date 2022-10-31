@@ -125,23 +125,7 @@ class _ProfileCropperState extends State<ProfileCropper> {
                               fontFamily: 'Muli', color: Colors.black)),
                     ),
                   )),
-              loading
-                  ? TextButton(
-                      onPressed: null,
-                      child: Container(
-                        width: 90.0,
-                        height: 30.0,
-                        decoration: BoxDecoration(
-                            color: Color(0xff009999),
-                            borderRadius: BorderRadius.circular(4.0),
-                            border: Border.all(color: Color(0xff009999))),
-                        child: Center(
-                          child: Text('Next',
-                              style: TextStyle(
-                                  fontFamily: 'Muli', color: Colors.black)),
-                        ),
-                      ))
-                  : TextButton(
+               TextButton(
                       child: Container(
                         width: 90.0,
                         height: 30.0,

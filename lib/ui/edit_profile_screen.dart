@@ -53,10 +53,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void initState() {
     super.initState();
     _nameController = TextEditingController(text: 'Name');
-    _nameController.text = widget.name;
-    _bioController.text = widget.bio;
-    _emailController.text = widget.email;
-    _phoneController.text = widget.phone;
+    _nameController.text = widget.variables.currentUser.displayName;
+    _bioController.text = widget.variables.currentUser.bio;
+    _emailController.text = widget.variables.currentUser.email;
+    _phoneController.text = widget.variables.currentUser.phone;
     currentuser = widget.currentUser;
   }
 
@@ -94,20 +94,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           },
         ),
         actions: <Widget>[
-          (_nameController.text == widget.name &&
-                  _bioController.text == widget.bio &&
-                  _phoneController.text == widget.phone)
-                  || (widget.variables.phoneList.contains(_phoneController.text) && widget.phone != _phoneController.text)
+          (_nameController.text == widget.variables.currentUser.displayName &&
+                  _bioController.text == widget.variables.currentUser.bio &&
+                  _phoneController.text == widget.variables.currentUser.phone)
+                  || (widget.variables.phoneList.contains(_phoneController.text) && widget.variables.currentUser.phone != _phoneController.text)
                   || _phoneController.text.length!=10
               ? Padding(
                   padding: const EdgeInsets.only(right: 12.0),
                   child: Icon(Icons.done, color: Color(0xff444444)))
-              : GestureDetector(
-                  child: Padding(
+              : IconButton(
+                  icon: Padding(
                     padding: const EdgeInsets.only(right: 12.0),
                     child: Icon(Icons.done, color: Color(0xff00ffff)),
                   ),
-                  onTap: () {
+                  onPressed: () {
                     _repository
                         .updateDetails(
                             currentuser.uid,
@@ -120,7 +120,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                       FocusScope.of(context).unfocus();
                       Navigator.pop(context);
+                       User user = widget.variables.currentUser;
+                    user.bio = _bioController.text;
+                    user.displayName = _nameController.text;
+                    user.phone = _phoneController.text;
+                    widget.variables.setCurrentUser(user);
                       showFloatingFlushbar(context);
+                      widget.updateState();
                       // Navigator.push(context, MaterialPageRoute(
                       //   builder: ((context) => InstaHomeScreen())
                       // ));
@@ -148,7 +154,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             thumbnail: AssetImage('assets/grey.png'),
                             // size: 1.29MB
                             // image: AssetImage('assets/listing_1.jpg'),
-                            image: CachedNetworkImageProvider(widget.photoUrl),
+                            image:  widget.variables.currentUser.photoUrl != null
+                                ? CachedNetworkImageProvider(widget.variables.currentUser.photoUrl)
+                                : AssetImage('assets/grey.png'),
                             fit: BoxFit.cover,
                             width: 130,
                             height: 130,

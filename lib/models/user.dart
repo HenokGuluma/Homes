@@ -11,7 +11,7 @@ class User {
    String displayName;
    String followers;
    String following;
-   String posts;
+   int posts;
    int trending;
    String bio;
    String phone;

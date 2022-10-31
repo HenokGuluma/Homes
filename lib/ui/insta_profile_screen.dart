@@ -190,12 +190,12 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                         : Container(
                             width: width * 0.8,
                             child: Text(
-                                _user.bio.isNotEmpty
-                                    ? _user.bio
+                                boltTimer.currentUser.bio.isNotEmpty
+                                    ? boltTimer.currentUser.bio
                                     : 'Add your bio by clicking on Edit Profile.',
                                 style: TextStyle(
                                   fontFamily: 'Muli',
-                                  color: _user.bio.isNotEmpty
+                                  color: boltTimer.currentUser.bio.isNotEmpty
                                       ? Colors.black
                                       : Colors.grey,
                                   fontSize: 18,

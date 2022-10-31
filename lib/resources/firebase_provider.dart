@@ -38,7 +38,7 @@ class FirebaseProvider {
         followers: '0',
         following: '0',
         bio: '',
-        posts: '0',
+        posts: 0,
         phone: '',
         trending: 100,
         keys: 0,
@@ -294,6 +294,8 @@ class FirebaseProvider {
   }
 
   Future<void> unlockListing(String listing, String userId) {
+    var increment = FieldValue.increment(1);
+    _firestore.collection('users').doc(userId).update({'posts': increment});
     return _firestore
         .collection('users')
         .doc(userId)
@@ -635,6 +637,7 @@ class FirebaseProvider {
     orderMap['remark'] = remark;
     orderMap['isTelebirr'] = telebirr;
     orderMap['deposited'] = false;
+    orderMap['payment'] = false;
     await _firestore.collection('orders').doc(currentTime.toString() + user.uid).set(orderMap);
     return _firestore.collection('users').doc(user.uid).collection('orders').doc(currentTime.toString() + user.uid).set(orderMap);
   }

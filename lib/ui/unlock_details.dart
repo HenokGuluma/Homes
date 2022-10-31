@@ -60,6 +60,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
   List<bool> balls = [true, true, true, true, true];
   var _repository = Repository();
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  int numberOfKeys = 0;
 
   @override
   void initState() {
@@ -128,12 +129,52 @@ class UnlockDetailsState extends State<UnlockDetails> {
 
   unlockItem(){
 
-    if(widget.variables.trial){
+    print(' the difference is ');
+    print(DateTime.now().millisecondsSinceEpoch - widget.variables.currentUser.recentActivity);
+    print(widget.variables.trial);
+    print(widget.variables.currentUser.posts);
+
+    if(widget.variables.trial && widget.variables.currentUser.posts>1 && (DateTime.now().millisecondsSinceEpoch - widget.variables.currentUser.recentActivity)>86400000){
+        _firestore.collection('users').doc(widget.variables.currentUser.uid).update({'recentActivity': DateTime.now().millisecondsSinceEpoch, 'posts': 1});
+      
        widget.variables
           .unlockListing(widget.item.id);
       _repository.unlockListing(
+
           widget.item.id,
           widget.variables.currentUser.uid);
+
+      print('trial unlock');
+
+       User user = widget.variables.currentUser;
+        
+        user.recentActivity = DateTime.now().millisecondsSinceEpoch;
+        user.posts = 1;
+
+        widget.variables.setCurrentUser(user);
+
+      
+        setState(() {
+        unlocked = true;
+      });
+      showUnlockedFlushbar(context);
+    }
+    else if(widget.variables.trial && widget.variables.keys<1){
+       widget.variables
+          .unlockListing(widget.item.id);
+      _repository.unlockListing(
+
+          widget.item.id,
+          widget.variables.currentUser.uid);
+
+      print('trial unlock');
+
+       User user = widget.variables.currentUser;
+        
+        user.posts = user.posts+1;
+
+        widget.variables.setCurrentUser(user);
+
       
         setState(() {
         unlocked = true;
@@ -148,7 +189,9 @@ class UnlockDetailsState extends State<UnlockDetails> {
           widget.item.id,
           widget.variables.currentUser.uid);
         User user = widget.variables.currentUser;
+        
         user.keys = user.keys-1;
+        user.posts = user.posts+1;
         widget.variables.setCurrentUser(user);
         setState(() {
         unlocked = true;
@@ -311,9 +354,12 @@ class UnlockDetailsState extends State<UnlockDetails> {
                     ? Center()
                     : MaterialButton(
                         onPressed: () async {
-                          if(widget.variables.currentUser.keys<1){
-                            showCannotUnlockFlushbar(context);
-                          }
+                         if(!widget.variables.trial && widget.variables.currentUser.keys <1){
+                                          showCannotUnlockFlushbar(context);
+                                        }
+                          else if(widget.variables.trial && widget.variables.currentUser.keys <1 && widget.variables.currentUser.posts>1 && (DateTime.now().millisecondsSinceEpoch - widget.variables.currentUser.recentActivity)<86400000){
+                                          showTrialCannotUnlockFlushbar(context);
+                                        }
                           else{
                             showDialog(
                               context: context,
@@ -354,12 +400,9 @@ class UnlockDetailsState extends State<UnlockDetails> {
                                     new TextButton(
                                       onPressed: () {
                                         Navigator.pop(context);
-                                        if(!widget.variables.trial && widget.variables.currentUser.keys <1){
-                                          showCannotUnlockFlushbar(context);
-                                        }
-                                        else{
+                                        
                                            unlockItem();
-                                        }
+                                        
                                         // Closes the dialog
                                       },
                                       child: new Text(
@@ -411,7 +454,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                         ),
                       ),
             SizedBox(height: 20),
-            !widget.notUnlock && !widget.modify && !widget.variables.trial && !widget.variables.unlockedListings
+            !widget.notUnlock && !widget.modify  && !widget.variables.unlockedListings
                         .contains(widget.item.id) &&  widget.item.data()['userID'] !=
                         widget.variables.currentUser.uid &&
                     widget.item.data()['forRent'] != 'For Sale'
@@ -625,6 +668,26 @@ class UnlockDetailsState extends State<UnlockDetails> {
           child: Text(
         'You do not have any keys in your wallet to unlock this item.',
         style: TextStyle(fontFamily: 'Muli', color: Colors.white),
+      )),
+    )..show(context);
+  }
+
+   void showTrialCannotUnlockFlushbar(BuildContext context) {
+    Flushbar(
+      padding: EdgeInsets.all(10),
+      //flushbarPosition: FlushbarPosition.,
+      backgroundGradient: LinearGradient(
+        colors: [Colors.black, Colors.black],
+        stops: [0.6, 1],
+      ),
+      duration: Duration(seconds: 2),
+      dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+      forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+      messageText: Center(
+          child: Text(
+        'You do not have any keys in your wallet and you have already used your two daily free keys.',
+        style: TextStyle(fontFamily: 'Muli', color: Colors.white),
+        textAlign: TextAlign.center
       )),
     )..show(context);
   }
