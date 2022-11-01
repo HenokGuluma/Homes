@@ -33,6 +33,7 @@
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation = "portrait"
+            android:exported="true"
             >
             <!-- This keeps the window background of the activity showing
                  until Flutter renders its first frame. It can be removed if

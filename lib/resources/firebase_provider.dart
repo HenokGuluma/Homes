@@ -313,6 +313,8 @@ class FirebaseProvider {
     return snapshot.docs;
   }
 
+
+
   Future<DocumentReference> addPicturePostToDb(
       User currentUser,
       String imgUrl,
@@ -1462,6 +1464,7 @@ class FirebaseProvider {
     map['bio'] = bio;
     map['email'] = email;
     map['phone'] = phone;
+    _firestore.collection('phones').doc(phone).set({'phone': phone, 'userId': uid});
     return _firestore.collection("users").doc(uid).update(map);
   }
 

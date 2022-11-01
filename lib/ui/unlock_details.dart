@@ -13,6 +13,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/models/user.dart';
 import 'package:instagram_clone/resources/repository.dart';
+import 'package:instagram_clone/ui/buy_keys.dart';
 import 'package:instagram_clone/ui/insta_home_screen.dart';
 import 'package:instagram_clone/ui/modify_listing.dart';
 import 'package:provider/provider.dart';
@@ -453,21 +454,59 @@ class UnlockDetailsState extends State<UnlockDetails> {
                               ]),
                         ),
                       ),
-            SizedBox(height: 20),
+            
             !widget.notUnlock && !widget.modify  && !widget.variables.unlockedListings
                         .contains(widget.item.id) &&  widget.item.data()['userID'] !=
                         widget.variables.currentUser.uid &&
                     widget.item.data()['forRent'] != 'For Sale'
             ?Padding(
-              padding: EdgeInsets.only(left: 20),
-              child: Text(
-                                  'Number of keys in Wallet: '+ widget.variables.currentUser.keys.toString(),
+              padding: EdgeInsets.only(left: 20, right: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      SvgPicture.asset('assets/key_fill.svg', color: Colors.black, width: 15, height: 15,),
+                  SizedBox(width: 5,),
+                  Text(
+                                  'Wallet: '+ widget.variables.currentUser.keys.toString(),
                                   style: TextStyle(
                                       fontFamily: 'Muli',
                                       color: Colors.black,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w900),
                                 ),
+                    ],
+                  ),
+                  MaterialButton(
+                    onPressed: (){
+                      Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => BuyKeys(variables: widget.variables))));
+                  },
+                  child: Container(
+                    width: width*0.25,
+                    height: 35,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(20),
+
+                    ),
+                    child: Center(
+                      child: Text(
+                                  'Buy Keys',
+                                  style: TextStyle(
+                                      fontFamily: 'Muli',
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w900),
+                                ),
+                    ),
+                  ),
+                  )
+                ],
+              )
             )
             :Center(),
             widget.notUnlock && widget.modify
@@ -551,7 +590,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                                               color: Colors.black,
                                               fontSize: 16,
                                               fontFamily: 'Muli',
-                                              fontWeight: FontWeight.bold),
+                                              fontWeight: FontWeight.w900),
                                         ),
                                       ),
                                       new TextButton(
@@ -575,7 +614,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                                               color: Colors.black,
                                               fontSize: 16,
                                               fontFamily: 'Muli',
-                                              fontWeight: FontWeight.bold),
+                                              fontWeight: FontWeight.w900),
                                         ),
                                       ),
                                     ],

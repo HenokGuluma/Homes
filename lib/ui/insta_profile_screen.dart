@@ -186,7 +186,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                                   fontSize: 18,
                                   fontWeight: FontWeight.w400,
                                 ),
-                                textAlign: TextAlign.center))
+                                textAlign: TextAlign.start))
                         : Container(
                             width: width * 0.8,
                             child: Text(
@@ -201,7 +201,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                                   fontSize: 18,
                                   fontWeight: FontWeight.w400,
                                 ),
-                                textAlign: TextAlign.center))
+                                textAlign: TextAlign.start))
                   ],
                 ),
               ),

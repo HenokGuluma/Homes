@@ -44,19 +44,15 @@ dependencies:
   animator: 2.0.0
   flutter_svg: 0.19.3
   preload_page_view: 0.1.4
-  permission_handler: 5.0.1+1
+  # permission_handler: 5.0.1+1
   path_provider: 1.6.24
   image_gallery: 1.2.0
   image_crop: 0.3.4
   media_gallery: 0.1.5
   auto_size_text_field: 0.1.7
   video_player: 1.0.1
-  camera: 0.5.8+17
+  # camera: 0.5.8+17
   fluttertoast: 7.1.5
-  cached_video_player: 1.0.0
-  flutter_video_info: 1.1.0
-  flutter_video_compress: 0.3.7+8
-  video_compress: 2.1.0
   flutter_image_compress: ^0.7.0
   flushbar: 1.10.4
   http: 0.12.2
@@ -96,6 +92,7 @@ flutter:
   assets:
 #    - assets/insta_logo.png
 #    - assets/insta_logo.png
+    - assets/terms_of_service.docx
     - assets/google_icon.jpg
     - assets/no_image.jpg
     - assets/homes_text.png

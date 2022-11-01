@@ -86,9 +86,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           'Edit Profile',
           style: TextStyle(fontFamily: 'Muli', color: Colors.white),
         ),
-        leading: GestureDetector(
-          child: Icon(Icons.close, color: Colors.white),
-          onTap: () {
+        leading: IconButton(
+          icon: Icon(Icons.close, color: Colors.white),
+          onPressed: () {
             FocusScope.of(context).unfocus();
             Navigator.pop(context);
           },

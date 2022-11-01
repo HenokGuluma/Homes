@@ -349,14 +349,14 @@ class _SetupProfileState extends State<SetupProfile> {
                           width: 150,
                           constraints:
                               BoxConstraints(maxWidth: size.width * 0.5),
-                          height: size.height * 0.05,
+                          height: size.height * 0.07,
                           decoration: BoxDecoration(
                               color: Colors.grey,
                               borderRadius: BorderRadius.circular(20)),
                           child: Center(
                               child: Text(
                             'Finish',
-                            style: TextStyle(color: Colors.white, fontSize: 18),
+                            style: TextStyle(color: Colors.black, fontSize: 18),
                           )),
                         ))
                       : Center(
@@ -365,13 +365,13 @@ class _SetupProfileState extends State<SetupProfile> {
                             width: size.width * 0.4,
                             height: size.height * 0.07,
                             decoration: BoxDecoration(
-                                color: Color(0xfff2029e),
+                                color: Color(0xff00ffff),
                                 borderRadius: BorderRadius.circular(20)),
                             child: Center(
                                 child: Text(
                               'Finish',
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
+                                  TextStyle(color: Colors.black, fontSize: 18),
                             )),
                           ),
                           onTap: () {
