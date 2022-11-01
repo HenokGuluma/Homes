@@ -68,7 +68,7 @@ class _TermsOfServiceState extends State<TermsOfService> {
   File imageFile;
 
   readFilesFromAssets() async {
-  String assetContent = await rootBundle.loadString('assets/terms_of_service.docx');
+  String assetContent = await rootBundle.loadString('assets/terms.txt');
   setState(() {
       terms = assetContent;
     });
@@ -117,8 +117,22 @@ class _TermsOfServiceState extends State<TermsOfService> {
        
       ),
       body: Container(
-        width: size.width*0.9,
-        child: Text(terms, style: TextStyle(color: Colors.black, fontFamily: 'Muli', fontSize: 16, fontWeight: FontWeight.normal),
+        padding: EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
+        width: size.width,
+        child: Center(
+          child: Column(
+            children: [
+              Text('Our Terms...', style: TextStyle(color: Color(0xff444444), fontFamily: 'Muli', fontSize: 22, fontWeight: FontWeight.w900),
+ ),
+              SizedBox(height: 20,),
+              Expanded(
+            flex: 1,
+            child: new SingleChildScrollView(
+              scrollDirection: Axis.vertical,//.horizontal
+              child: Text(terms, style: TextStyle(color: Colors.black, fontFamily: 'Muli', fontSize: 18, fontWeight: FontWeight.normal),
+        ))),
+            ],
+          )
         ),
       )   );
   }

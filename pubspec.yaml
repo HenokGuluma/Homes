@@ -93,6 +93,7 @@ flutter:
 #    - assets/insta_logo.png
 #    - assets/insta_logo.png
     - assets/terms_of_service.docx
+    - assets/terms.txt
     - assets/google_icon.jpg
     - assets/no_image.jpg
     - assets/homes_text.png

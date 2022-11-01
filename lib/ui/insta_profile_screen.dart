@@ -20,6 +20,7 @@ import 'package:instagram_clone/ui/insta_home_screen.dart';
 
 import 'package:instagram_clone/ui/edit_profile_screen.dart';
 import 'package:instagram_clone/ui/liked_listings.dart';
+import 'package:instagram_clone/ui/termsOfService.dart';
 import 'package:instagram_clone/ui/unlocked_listings.dart';
 import 'package:instagram_clone/ui/view_listings.dart';
 import 'package:progress_indicators/progress_indicators.dart';
@@ -267,6 +268,16 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                   context,
                   MaterialPageRoute(
                       builder: ((context) => BuyKeys(variables: boltTimer))));
+            },
+          ),
+
+           GestureDetector(
+            child: ProfileButtons('Terms Of Service', width, height),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => TermsOfService())));
             },
           ),
               GestureDetector(
