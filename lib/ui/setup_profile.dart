@@ -276,6 +276,7 @@ class _SetupProfileState extends State<SetupProfile> {
                 child: TextFormField(
                     style: TextStyle(fontFamily: 'Muli', color: Colors.black),
                     controller: _emailController,
+                    enabled: false,
                     decoration: InputDecoration(
                         hintText: 'Email address',
                         hintStyle: TextStyle(

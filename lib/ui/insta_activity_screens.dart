@@ -194,6 +194,7 @@ class _ActivityScreenState extends State<ActivityScreen>
           DocumentSnapshot listingItem =
               await _repository.getListingWithId(listingReference);
           if (listingItem.data() != null) {
+          
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -207,7 +208,11 @@ class _ActivityScreenState extends State<ActivityScreen>
                           approved: listingItem.data()['approved'],
                           declined: !listingItem.data()['approved'],
                         ))));
-          } else {
+          } 
+          else  if(item.data()['from'] == 'Homes'){
+              print('From Homes');
+            }
+          else {
             showFloatingFlushbar(context);
           }
         },

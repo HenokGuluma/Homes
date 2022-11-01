@@ -47,22 +47,24 @@ class FirebaseProvider {
     //  Map<String, String> mapdata = Map<String, dynamic>();
 
     //  mapdata = user.toMap(user);
-    String userExists = await fetchUidBySearchedName(currentUser.displayName);
+    String userExists = await fetchUidBySearchedEmail(currentUser.email);
     if (userExists != null) {
       DocumentSnapshot users =
           await _firestore.collection("users").doc(userExists).get();
-      if (users['displayName'] == user.displayName) {
+      if (users['email'] == user.email) {
         return;
       }
     }
-    _firestore
-        .collection("display_names")
-        .doc(currentUser.displayName)
-        .set({'displayName': currentUser.displayName, 'uid': currentUser.uid});
+   
     _firestore
         .collection("users")
         .doc(currentUser.uid)
         .set({'displayName': currentUser.displayName});
+
+    _firestore
+        .collection("email")
+        .doc(currentUser.email)
+        .set({'email': currentUser.email, 'userId': currentUser.uid});
 
     _firestore
         .collection("users")
@@ -1352,7 +1354,7 @@ class FirebaseProvider {
 
   Future<String> fetchUidBySearchedEmail(String email) async {
     DocumentSnapshot snapshot =
-        await _firestore.collection("display_names").doc(email).get();
+        await _firestore.collection("emails").doc(email).get();
     if (snapshot.data() != null) {
       return snapshot.data()['uid'];
     }
