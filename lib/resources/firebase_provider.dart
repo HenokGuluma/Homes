@@ -64,10 +64,21 @@ class FirebaseProvider {
         .doc(currentUser.uid)
         .set({'displayName': currentUser.displayName});
 
-    return _firestore
+    _firestore
         .collection("users")
         .doc(currentUser.uid)
         .set(user.toMap(user));
+
+    return _firestore
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("notifications").doc().set({
+          'from': 'Homes',
+          'message': 'Welcome to Homes. Browse around to find listings you want to rent.',
+          'userId': user.uid,
+          'time': DateTime.now().millisecondsSinceEpoch
+
+        });
   }
 
   Future<bool> authenticateUser(auth.User user) async {
