@@ -311,7 +311,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                     padding: EdgeInsets.only(top: 5.0),
                     child: Container(
                       width: width * 0.8,
-                      height: 35,
+                      height: height*0.06,
                       decoration: BoxDecoration(
                           color: Color(0xfff1f1f1),
                           // border: Border.all(color: Colors.grey, width: 0.5),
@@ -400,7 +400,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
             },
           ),
           Container(
-            height: height * 0.8,
+            height: height * 0.82,
             child: isSearching
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -450,7 +450,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                           )),
                       SizedBox(height: height * 0.02),
                       Container(
-                          height: height * 0.6,
+                          height: height * 0.65,
                           child: Center(
                               child: resultWidget(height, width, variables)))
                     ],
@@ -488,7 +488,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                           backgroundColor: Colors.black,
                           color: Color(0xff00ffff),
                           child: Container(
-                              height: height * 0.7,
+                              height: height * 0.75,
                               child: listings.length > 0
                                   ? GridView.builder(
                                       itemCount: listings.length,

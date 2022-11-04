@@ -36,11 +36,8 @@ class MyAppState extends State<MyApp> {
             primaryColor: Colors.white,
             primaryIconTheme: IconThemeData(color: Colors.white),
             primaryTextTheme: TextTheme(
-                title: TextStyle(
-              fontFamily: 'Muli',
-              color: Colors.white,
-            )),
-            textTheme: TextTheme(title: TextStyle(color: Colors.white))),
+               ),
+            textTheme: TextTheme()),
         home: FutureBuilder(
           future: _repository.getCurrentUser(),
           builder: (context, AsyncSnapshot<auth.User> snapshot) {
