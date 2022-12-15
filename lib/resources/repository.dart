@@ -228,8 +228,19 @@ class Repository {
   Future<List<DocumentSnapshot>> getSearchListings() =>
       _firebaseProvider.getSearchListings();
 
+  Future<List<DocumentSnapshot>> getMoreSearchListings(var startAfter) =>
+      _firebaseProvider.getMoreSearchListings(startAfter);
+
+  Future<List<DocumentSnapshot>> getSearchFieldListings(String field, dynamic value) =>
+      _firebaseProvider.getSearchFieldListings(field, value);
+
+  Future<List<DocumentSnapshot>> getMoreSearchFieldListings(String field, dynamic value, var startAfter) =>
+      _firebaseProvider.getMoreSearchFieldListings(field, value, startAfter);
+
    Future<List<DocumentSnapshot>> getAllPhones() =>
       _firebaseProvider.getAllPhones();
+
+  Future<int> appVersion() => _firebaseProvider.appVersion();
 
    void addPhone(String phone, String userId) =>
       _firebaseProvider.addPhone(phone, userId);

@@ -7,6 +7,7 @@ import 'package:instagram_clone/resources/repository.dart';
 import 'package:instagram_clone/ui/insta_home_screen.dart';
 import 'package:instagram_clone/ui/login_screen.dart';
 import 'package:instagram_clone/ui/setup_profile.dart';
+import 'package:instagram_clone/ui/upgrade_app.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -49,7 +50,22 @@ class MyAppState extends State<MyApp> {
                     emailAddress: snapshot.data.email,
                     name: snapshot.data.displayName);
               } else {
+                return FutureBuilder(
+          future: _repository.appVersion(),
+          builder: (context, AsyncSnapshot<int> snapshot) {
+            if (snapshot.hasData) {
+              if (snapshot.data > 1) {
+                return UpgradeApp();
+              } else {
                 return InstaHomeScreen();
+              }
+            } else {
+              return LoginScreen();
+              // return InstaHomeScreen();
+            }
+          },
+        );
+                // InstaHomeScreen();
               }
             } else {
               return LoginScreen();

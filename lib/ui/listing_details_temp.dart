@@ -210,8 +210,7 @@ class ListingDetailsTempState extends State<ListingDetailsTemp> {
                                                         .variables
                                                         .cachedImages[item]
                                                         .image
-                                                    : AssetImage(
-                                                        'assets/grey.png'),
+                                                    : CachedNetworkImageProvider(item),
                                             fit: BoxFit.cover),
                                         // borderRadius: BorderRadius.circular(width * 0.05),
                                       ),

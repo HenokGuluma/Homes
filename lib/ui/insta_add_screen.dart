@@ -118,7 +118,7 @@ class _InstaAddScreenState extends State<InstaAddScreen>
             height: height * 0.9,
             padding: EdgeInsets.only(top: 0),
             child: TabBarView(
-              children: [AddListing(), ModifyWidget(width, height, variables)],
+              children: [AddListing(variables: variables,), ModifyWidget(width, height, variables)],
               controller: _tabController,
             )));
   }

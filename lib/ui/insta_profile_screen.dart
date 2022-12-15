@@ -261,7 +261,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                               ))));
                 },
               ),
-               GestureDetector(
+              /*  GestureDetector(
             child: ProfileButtons('Buy Keys', width, height),
             onTap: () {
               Navigator.push(
@@ -269,7 +269,7 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
                   MaterialPageRoute(
                       builder: ((context) => BuyKeys(variables: boltTimer))));
             },
-          ),
+          ), */
 
            GestureDetector(
             child: ProfileButtons('Terms Of Service', width, height),

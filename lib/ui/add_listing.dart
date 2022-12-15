@@ -11,6 +11,7 @@ import 'package:instagram_clone/models/user.dart';
 import 'package:instagram_clone/resources/repository.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_clone/ui/finalize_listing.dart';
+import 'package:instagram_clone/ui/insta_home_screen.dart';
 import 'package:instagram_clone/ui/listing_details.dart';
 import 'package:instagram_clone/ui/payment_listing.dart';
 import 'package:progressive_image/progressive_image.dart';
@@ -18,10 +19,15 @@ import 'package:google_api_headers/google_api_headers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_webservice/places.dart';
+import 'package:provider/provider.dart';
 
 const kGoogleApiKey = "AIzaSyDj5hP1P4PKxOBSjk7zznpJnLG_KJRuLbE";
 
 class AddListing extends StatefulWidget {
+
+  UserVariables variables;
+
+  AddListing({this.variables});
   @override
   AddListingState createState() => AddListingState();
 }
@@ -135,8 +141,7 @@ class AddListingState extends State<AddListing>
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-
-    // print("INSIDE BUILD");
+   
     return Scaffold(
         backgroundColor: Colors.white,
         body: ListView(
@@ -506,6 +511,7 @@ class AddListingState extends State<AddListing>
                             context,
                             MaterialPageRoute(
                                 builder: ((context) => PaymentListing(
+                                  variables: widget.variables,
                                     user: currentUser,
                                     imageFiles: imageFiles,
                                     cost: costController.text,

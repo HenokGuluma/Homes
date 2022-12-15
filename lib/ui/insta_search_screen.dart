@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
@@ -237,8 +238,15 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
   List<DocumentSnapshot> filteredListings = [];
   bool isRent = true;
   ScrollController _scrollController = ScrollController();
+   ScrollController _searchscrollController = ScrollController();
   bool loading = true;
   Map<int, int> counters = {};
+  DocumentSnapshot lastListing = null;
+  DocumentSnapshot lastFieldListing = null;
+  String searchField = null;
+  dynamic searchValue = null;
+  bool _gettingmorefeed = false;
+  bool _morefeedavailable = true;
 
   List<String> properties = [
     'assets/listing_1.jpg',
@@ -259,7 +267,28 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
     });
     controller.selection = TextSelection.fromPosition(
         TextPosition(offset: controller.text.length));
+
+    _scrollController.addListener(() {
+      double maxScroll = _scrollController.position.maxScrollExtent;
+      double currentScroll = _scrollController.position.pixels;
+      double delta = MediaQuery.of(context).size.height*0.25;
+      if (maxScroll - currentScroll < delta){
+        getMorelistingItems();
+        //fetchMorePosts();
+      }
+    });
+
+     _searchscrollController.addListener(() {
+      double maxScroll = _searchscrollController.position.maxScrollExtent;
+      double currentScroll = _searchscrollController.position.pixels;
+      double delta = MediaQuery.of(context).size.height*0.25;
+      if (maxScroll - currentScroll < delta){
+        getMoreSearchlistingItems();
+        //fetchMorePosts();
+      }
+    });
   }
+
 
   @override
   void dispose() {
@@ -273,16 +302,110 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
     }
   }
 
+
+
   getlistingItems() async {
     List<DocumentSnapshot> onlineListings =
         await _repository.getSearchListings();
     setState(() {
       listings = onlineListings;
       loading = false;
+      lastListing = onlineListings[onlineListings.length-1];
     });
     print(onlineListings[0].data());
     print('............................');
     addCounters();
+  }
+
+   getMorelistingItems() async {
+     if (_morefeedavailable ==false){
+      return;
+    }
+    if (_gettingmorefeed == true){
+      return;
+    }
+    setState(() {
+      _gettingmorefeed = true;
+    });
+    List<DocumentSnapshot> onlineListings = await _repository.getMoreSearchListings([lastListing['images']]);
+    List<dynamic> newListings = listings;
+    print(lastListing['commonLocation']);
+    print(lastListing['likeCount']);
+    if(onlineListings.length<1){
+      setState(() {
+        _morefeedavailable = false;
+      });
+      print('muamuwawawa');
+    }
+    else{
+       for(int i = 0; i<onlineListings.length; i++){
+      newListings.add(onlineListings[i]);
+    }
+       setState(() {
+      listings = newListings;
+      loading = false;
+      lastListing = onlineListings[onlineListings.length -1];
+      _gettingmorefeed = false;
+    });
+    
+    addCounters();
+    }
+   
+    return;
+  }
+
+  getSearchlistingItems() async {
+    setState(() {
+      loading = true;
+      isSearching = true;
+    });
+    List<DocumentSnapshot> onlineListings =
+        await _repository.getSearchFieldListings(searchField, searchValue);
+    setState(() {
+      filteredListings = onlineListings;
+      loading = false;
+      lastListing = onlineListings[onlineListings.length-1];
+    });
+    print(onlineListings[0].data());
+    print('............................');
+    addCounters();
+  }
+
+   getMoreSearchlistingItems() async {
+     if (_morefeedavailable ==false){
+      return;
+    }
+    if (_gettingmorefeed == true){
+      return;
+    }
+    setState(() {
+      _gettingmorefeed = true;
+    });
+    List<DocumentSnapshot> onlineListings = await _repository.getMoreSearchListings([lastListing['images']]);
+    List<dynamic> newListings = listings;
+    print(lastListing['commonLocation']);
+    print(lastListing['likeCount']);
+    if(onlineListings.length<1){
+      setState(() {
+        _morefeedavailable = false;
+      });
+      print('muamuwawawa');
+    }
+    else{
+       for(int i = 0; i<onlineListings.length; i++){
+      newListings.add(onlineListings[i]);
+    }
+       setState(() {
+      filteredListings = newListings;
+      loading = false;
+      lastListing = onlineListings[onlineListings.length -1];
+      _gettingmorefeed = false;
+    });
+    
+    addCounters();
+    }
+   
+    return;
   }
 
   Future<void> getCurrentUser() async {
@@ -491,6 +614,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                               height: height * 0.75,
                               child: listings.length > 0
                                   ? GridView.builder(
+                                    controller: _scrollController,
                                       itemCount: listings.length,
                                       gridDelegate:
                                           SliverGridDelegateWithFixedCrossAxisCount(
@@ -683,7 +807,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                             image: variables.cachedImages[imageList[0]] != null
                                 ? variables
                                     .cachedImages[imageList[0].toString()].image
-                                : AssetImage('assets/grey.png'),
+                                : CachedNetworkImageProvider(imageList[0]),
                             fit: BoxFit.cover),
                         borderRadius: BorderRadius.circular(width * 0.05),
                         // border: Border.all(color: Colors.black, width: 0.5)
@@ -722,29 +846,55 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                 setState(() {
                   typeWidget = CategorySearchWidget(text, width, 'type');
                   typeQuery = text;
+                  searchField = 'listingType';
+                  searchValue = text;
                 });
+                if(!isSearching){
+                  getSearchlistingItems();
+                }
+                else{
+                  clickQuery(text);
+                }
               } else if (chosenDropDown == 'Floor') {
                 setState(() {
                   floorWidget = CategorySearchWidget(text, width, 'floor');
                   floorQuery = text;
+                  searchField = 'floor';
+                  searchValue = text;
                 });
+                if(!isSearching){
+                  getSearchlistingItems();
+                }
+                else{
+                  clickQuery(text);
+                }
               } else if (chosenDropDown == 'Offer') {
                 setState(() {
                   rentWidget = CategorySearchWidget(text, width, 'rent');
                   rentQuery = text;
+                  searchField = 'forRent';
+                  searchValue = text;
                 });
+                if(!isSearching){
+                  getSearchlistingItems();
+                }
+                else{
+                  clickQuery(text);
+                }
               } else if (chosenDropDown == 'Price') {
                 setState(() {
                   priceWidget = CategorySearchWidget(text, width, 'price');
                   priceQuery = text;
                 });
+                clickQuery(text);
               } else if (chosenDropDown == 'Area') {
                 setState(() {
                   areaWidget = CategorySearchWidget(text, width, 'area');
                   areaQuery = text;
                 });
+                clickQuery(text);
               }
-              clickQuery(text);
+              
             },
             child: Padding(
                 padding: EdgeInsets.only(left: 2, right: 2),
@@ -891,7 +1041,14 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
   Widget resultWidget(var height, var width, var variables) {
     return Container(
         height: height * 0.7,
-        child: filteredListings.length == 0
+        child: loading
+        ?Center(
+            child: JumpingDotsProgressIndicator(
+              fontSize: 50.0,
+              color: Colors.black,
+            ),
+          )
+        :filteredListings.length == 0
             ? Center(
                 child: Container(
                     width: width * 0.8,
@@ -1190,7 +1347,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: variables.cachedImages[item] == null
-                                      ? AssetImage('assets/grey.png')
+                                      ? CachedNetworkImageProvider(item)
                                       : variables.cachedImages[item].image,
                                   fit: BoxFit.cover),
                               borderRadius: BorderRadius.circular(width * 0.05),

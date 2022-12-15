@@ -44,6 +44,10 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
   bool loading = true;
   int availableKeys = 0;
   bool trial = false;
+  bool uploadTrial = false;
+  DocumentSnapshot lastListing = null;
+  bool _gettingmorefeed = false;
+  bool _morefeedavailable = true;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final PagingController _pagingController = PagingController(firstPageKey: 0);
 
@@ -114,7 +118,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
         final nextPageKey = page + newItems.length;
         _pagingController.appendPage(newItems, nextPageKey);
         setState(() {
-          startAfter = newItems[newItems.length - 1].data()['likeCount'];
+          startAfter = newItems[newItems.length - 1].data()['time'];
         });
       } catch (error) {
         _pagingController.error = 'No more listings at the moment';
@@ -125,7 +129,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
         final nextPageKey = page + newItems.length;
         _pagingController.appendPage(newItems, nextPageKey);
         setState(() {
-          startAfter = newItems[newItems.length - 1].data()['likeCount'];
+          startAfter = newItems[newItems.length - 1].data()['time'];
         });
       } catch (error) {
         _pagingController.error = 'No more listings at the moment';
@@ -150,38 +154,69 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
     setState(() {
       listings = onlineListings;
       loading = false;
+      lastListing = onlineListings[onlineListings.length -1];
     });
     await Future.forEach(onlineListings, (listing) async {
       List<dynamic> imageList = listing.data()['images'];
-      /* imageList.map((image) {
-        print(image);
-        print(' image url');
-        cacheImage(context, image);
-      }); */
       for (int i = 0; i < imageList.length; i++) {
         cacheImage(context, imageList[i]);
-        print(imageList[i]);
       }
-      print(cachedImages.keys);
-      print(' are the keys ');
+      return true;
+    });
+    return onlineListings;
+  }
+
+    getMorelistingItems() async {
+     if (_morefeedavailable ==false){
+      return;
+    }
+    if (_gettingmorefeed == true){
+      return;
+    }
+    setState(() {
+      _gettingmorefeed = true;
+    });
+    List<DocumentSnapshot> onlineListings = await _repository.getMoreListings([lastListing['time']]);
+    List<dynamic> newListings = listings;
+    print(lastListing['commonLocation']);
+    print(lastListing['likeCount']);
+    if(onlineListings.length<1){
+      setState(() {
+        _morefeedavailable = false;
+      });
+      print('muamuwawawa');
+    }
+    else{
+       for(int i = 0; i<onlineListings.length; i++){
+      newListings.add(onlineListings[i]);
+    }
+       setState(() {
+      listings = newListings;
+      loading = false;
+      lastListing = onlineListings[onlineListings.length -1];
+      _gettingmorefeed = false;
+    });
+    await Future.forEach(onlineListings, (listing) async {
+      List<dynamic> imageList = listing.data()['images'];
+      for (int i = 0; i < imageList.length; i++) {
+        cacheImage(context, imageList[i]);
+      }
       return true;
     });
 
-    /* for (int i = 0; i < onlineListings.length; i++) {
-      List<dynamic> imageList = onlineListings[i].data()['images'];
-      imageList.map((image) {
-        cacheImage(context, image);
-      });
-    } */
-    print(onlineListings[0].data());
-    print('............................');
-    return onlineListings;
+    
+
+    addCounters(onlineListings);
+    }
+   
+    return;
   }
 
   Future<void> getCurrentUser() async {
     _firestore.collection('trial').doc('trialPeriod').get().then((trialValue) {
       setState(() {
               trial = trialValue.data()['trialActive'];
+              uploadTrial = trialValue.data()['addTrialActive'];
             });
     });
     auth.User currentUser = await _repository.getCurrentUser();
@@ -227,6 +262,15 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
       getUnlockedListings(currentUser.uid);
     });
     _tabController = TabController(length: 2, vsync: this);
+    _scrollController.addListener(() {
+      double maxScroll = _scrollController.position.maxScrollExtent;
+      double currentScroll = _scrollController.position.pixels;
+      double delta = MediaQuery.of(context).size.height*0.25;
+      if (maxScroll - currentScroll < delta){
+        getMorelistingItems();
+        //fetchMorePosts();
+      }
+    });
 
     //fetchFeed();
     // _scrollController.addListener(_scrollListener);
@@ -249,6 +293,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
     variables.setImages(cachedImages);
     variables.updatePhones(phoneList);
     variables.setTrial(trial);
+    variables.setUploadTrial(uploadTrial);
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -305,7 +350,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
         ),
         body: RefreshIndicator(
             onRefresh: () {
-              getlistingItems();
+              // getlistingItems();
               return Future.delayed(Duration(seconds: 2));
             },
             backgroundColor: Colors.black,

@@ -432,6 +432,17 @@ class UpdateListingState extends State<UpdateListing> {
                 child: !posting
                     ? GestureDetector(
                         onTap: () async {
+                          if(!widget.variables.trial){
+                             Fluttertoast.showToast(
+                                msg:
+                                    'No Internet or Trial has ended. Connect to Internet and make sure to update app to the latest version.',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Color(0xff00ffff),
+                                textColor: Colors.black);
+                            return;
+                          }
                           setState(() {
                             posting = true;
                           });

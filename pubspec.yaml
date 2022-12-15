@@ -115,6 +115,8 @@ flutter:
     - assets/comment.svg
     - assets/comment_empty.svg
     - assets/heart_fill.svg
+    - assets/telebirr.png
+    - assets/delivery.png
     - assets/icon-06.svg
     - assets/u-turn.svg
     - assets/screw.svg

@@ -181,6 +181,7 @@ class UserVariables extends ChangeNotifier {
   Map<String, Image> cachedImages = {};
   List<String> phoneList = [];
   bool trial = false;
+  bool uploadTrial = false;
 
   void addkeys(int amount) {
     keys += amount;
@@ -200,6 +201,10 @@ class UserVariables extends ChangeNotifier {
 
   void setTrial(bool trialPeriod){
     trial = trialPeriod;
+  }
+
+   void setUploadTrial(bool trialPeriod){
+    uploadTrial = trialPeriod;
   }
 
   void unlockListing(String listing) {

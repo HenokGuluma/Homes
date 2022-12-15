@@ -795,7 +795,9 @@ class FirebaseProvider {
         .collection('listings')
         .where('approved', isEqualTo: true)
         .where('isActive', isEqualTo: true)
+        .orderBy('time', descending: false)
         .orderBy('likeCount', descending: true)
+        .limit(10)
         .get();
     return snapshot.docs;
   }
@@ -805,7 +807,43 @@ class FirebaseProvider {
         .collection('listings')
         .where('approved', isEqualTo: true)
         .where('isActive', isEqualTo: true)
-        .orderBy('time', descending: true)
+        .orderBy('images', descending: true)
+        .limit(50)
+        .get();
+    return snapshot.docs;
+  }
+
+   Future<List<DocumentSnapshot>> getMoreSearchListings(var startAfter) async {
+    QuerySnapshot snapshot = await _firestore
+        .collection('listings')
+        .where('approved', isEqualTo: true)
+        .where('isActive', isEqualTo: true)
+        .orderBy('images', descending: true)
+        .startAfter(startAfter)
+        .limit(20)
+        .get();
+    return snapshot.docs;
+  }
+
+  Future<List<DocumentSnapshot>> getSearchFieldListings(String field, dynamic value) async {
+    QuerySnapshot snapshot = await _firestore
+        .collection('listings')
+        .where('approved', isEqualTo: true)
+        .where(field, isEqualTo: value)
+        .orderBy('images', descending: true)
+        .limit(50)
+        .get();
+    return snapshot.docs;
+  }
+
+  Future<List<DocumentSnapshot>> getMoreSearchFieldListings(String field, dynamic value, var startAfter) async {
+    QuerySnapshot snapshot = await _firestore
+        .collection('listings')
+        .where('approved', isEqualTo: true)
+        .where(field, isEqualTo: value)
+        .orderBy('images', descending: true)
+        .startAfter(startAfter)
+        .limit(20)
         .get();
     return snapshot.docs;
   }
@@ -823,9 +861,12 @@ class FirebaseProvider {
   Future<List<DocumentSnapshot>> getMoreListings(var startAfter) async {
     QuerySnapshot snapshot = await _firestore
         .collection('listings')
+        .where('approved', isEqualTo: true)
+        .where('isActive', isEqualTo: true)
+        .orderBy('time', descending: false)
         .orderBy('likeCount', descending: true)
         .startAfter(startAfter)
-        .limit(20)
+        .limit(2)
         .get();
     return snapshot.docs;
   }
@@ -857,6 +898,12 @@ class FirebaseProvider {
     var increment = FieldValue.increment(1);
     item.reference.update({'likeCount': increment});
     _userRef.doc(item.id).set({'listing': item.id});
+  }
+
+  Future<int> appVersion() async{
+    DocumentSnapshot snapshot = await _firestore.collection('version').doc('version').get();
+    int version = snapshot.data()['version'];
+    return version;
   }
 
   void unlikeListing(DocumentSnapshot item, String userId) async {
