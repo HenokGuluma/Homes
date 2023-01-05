@@ -247,6 +247,9 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
   dynamic searchValue = null;
   bool _gettingmorefeed = false;
   bool _morefeedavailable = true;
+   bool _gettingmoreSearchfeed = false;
+  bool _moreSearchfeedavailable = true;
+  
 
   List<String> properties = [
     'assets/listing_1.jpg',
@@ -293,6 +296,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
   @override
   void dispose() {
     _scrollController.dispose();
+    _searchscrollController.dispose();
     super.dispose();
   }
 
@@ -364,42 +368,48 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
     setState(() {
       filteredListings = onlineListings;
       loading = false;
-      lastListing = onlineListings[onlineListings.length-1];
+      lastFieldListing = onlineListings[onlineListings.length-1];
     });
     print(onlineListings[0].data());
     print('............................');
+    print(lastFieldListing.data());
+    print(searchField); print(searchValue);
     addCounters();
   }
 
    getMoreSearchlistingItems() async {
-     if (_morefeedavailable ==false){
+    // print('shyaat');
+    print(_gettingmoreSearchfeed);
+     if (_moreSearchfeedavailable ==false){
       return;
     }
-    if (_gettingmorefeed == true){
+    if (_gettingmoreSearchfeed == true){
       return;
     }
     setState(() {
-      _gettingmorefeed = true;
+      _gettingmoreSearchfeed = true;
     });
-    List<DocumentSnapshot> onlineListings = await _repository.getMoreSearchListings([lastListing['images']]);
-    List<dynamic> newListings = listings;
-    print(lastListing['commonLocation']);
-    print(lastListing['likeCount']);
-    if(onlineListings.length<1){
+    DocumentSnapshot snap;
+    List<DocumentSnapshot> onlineFieldListings = await _repository.getMoreSearchFieldListings(searchField, searchValue, [lastFieldListing['time']]);
+    List<dynamic> newListings = filteredListings;
+    print(lastFieldListing['commonLocation']);
+    print(lastFieldListing['likeCount']);
+    print(lastFieldListing['time']);
+    if(onlineFieldListings.length<1){
       setState(() {
-        _morefeedavailable = false;
+        _moreSearchfeedavailable = false;
       });
       print('muamuwawawa');
     }
     else{
-       for(int i = 0; i<onlineListings.length; i++){
-      newListings.add(onlineListings[i]);
+       for(int i = 0; i<onlineFieldListings.length; i++){
+      newListings.add(onlineFieldListings[i]);
     }
        setState(() {
       filteredListings = newListings;
       loading = false;
-      lastListing = onlineListings[onlineListings.length -1];
-      _gettingmorefeed = false;
+      lastFieldListing = onlineFieldListings[onlineFieldListings.length -1];
+      _gettingmoreSearchfeed = false;
     });
     
     addCounters();
@@ -974,6 +984,10 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
             query == '') {
           setState(() {
             isSearching = false;
+            _moreSearchfeedavailable = true;
+            _morefeedavailable = true;
+            _gettingmoreSearchfeed = false;
+            _gettingmorefeed = false;
           });
         }
       },
@@ -1064,7 +1078,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
               )
             : ListView.builder(
                 //shrinkWrap: true,
-                controller: _scrollController,
+                controller: _searchscrollController,
                 itemCount: filteredListings.length,
                 itemBuilder: ((context, index) => listingItem(
                     list: filteredListings,
@@ -1431,7 +1445,25 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Row(
+            item.data()['test']
+            ?Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.star,
+                  size: 12,
+                  color: Color(0xff000000),
+                ),SelectableText(
+                  ' Test Listing',
+                  style: TextStyle(
+                      fontFamily: 'Muli',
+                      color: Color(0xff23aa21),
+                      fontWeight: FontWeight.w900,
+                      fontStyle: FontStyle.italic,
+                      fontSize: 18),
+                )
+                ])
+            :Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Icon(

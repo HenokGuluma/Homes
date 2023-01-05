@@ -419,7 +419,7 @@ class _PayForKeysState extends State<PayForKeys>
                     focusColor: Colors.black,
                   ),
                   SizedBox(width: 5,),
-                  Image.asset('assets/delivery.png', width: width*0.08),
+                  Image.asset('assets/bank.png', width: width*0.08),
                   SizedBox(width: 15,),
                   Text('Pay via Bank Transfer', style: TextStyle(color: Colors.black, fontSize: 18, fontFamily: 'Muli'),)
                   ],

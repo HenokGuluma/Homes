@@ -155,6 +155,7 @@ flutter:
     - assets/listing_3.jpg
     - assets/listing_4.jpg
     - assets/listing_5.jpg
+    - assets/bank.png
 
 
   fonts:

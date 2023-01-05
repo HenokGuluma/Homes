@@ -808,7 +808,25 @@ class UnlockDetailsState extends State<UnlockDetails> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Row(
+                item.data()['test']
+            ?Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.star,
+                  size: 12,
+                  color: Color(0xff000000),
+                ),SelectableText(
+                  ' Test Listing',
+                  style: TextStyle(
+                      fontFamily: 'Muli',
+                      color: Color(0xff23aa21),
+                      fontWeight: FontWeight.w900,
+                      fontStyle: FontStyle.italic,
+                      fontSize: 18),
+                )
+                ])
+            :Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(

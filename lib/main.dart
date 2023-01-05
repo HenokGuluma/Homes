@@ -60,7 +60,7 @@ class MyAppState extends State<MyApp> {
                 return InstaHomeScreen();
               }
             } else {
-              return LoginScreen();
+              return Center();
               // return InstaHomeScreen();
             }
           },

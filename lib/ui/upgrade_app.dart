@@ -53,9 +53,9 @@ class _UpgradeAppState extends State<UpgradeApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-             SvgPicture.asset('assets/homes.svg', color: Colors.black, width: 60, height: 60,),
+             SvgPicture.asset('assets/homes.svg', color: Colors.black, width: 100, height: 100,),
               SizedBox(height: 20,),
-              Text('Your app is out of date. Upgrade the app to the latest version', style: TextStyle(color: Colors.black, fontFamily: 'Muli', fontSize: 18, fontWeight: FontWeight.normal),
+              Text('Your app is out of date. Upgrade the app to the latest version', style: TextStyle(color: Colors.black, fontFamily: 'Muli', fontSize: 20, fontWeight: FontWeight.w900), textAlign: TextAlign.center,
         )
             ],
           )

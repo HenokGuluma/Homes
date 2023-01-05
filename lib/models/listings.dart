@@ -26,6 +26,7 @@ class Listing {
   bool isReviewed;
   bool approved;
   String forRent;
+  bool test;
 
   Listing(
       {this.userID,
@@ -42,6 +43,7 @@ class Listing {
       this.listingType,
       this.likeCount,
       this.reviewCount,
+      this.test,
       this.rentCollection,
       this.cost,
       this.floor,
@@ -57,6 +59,7 @@ class Listing {
   Map toMap(Listing listing) {
     var data = Map<String, dynamic>();
     data['userID'] = listing.userID;
+    data['test'] == listing.test;
     data['images'] = listing.images;
     data['listingID'] = listing.listingID;
     data['additionalNotes'] = listing.additionalNotes;

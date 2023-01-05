@@ -196,6 +196,7 @@ class FirebaseProvider {
       emailAddress: listingOwnerEmail,
       cost: cost,
       floor: floor,
+      test: false,
       forRent: forRent,
       commonLocation: commonLocation,
       preciseLocation: preciseLocation,
@@ -830,20 +831,21 @@ class FirebaseProvider {
         .collection('listings')
         .where('approved', isEqualTo: true)
         .where(field, isEqualTo: value)
-        .orderBy('images', descending: true)
-        .limit(50)
+        .orderBy('time', descending: true)
+        .limit(40)
         .get();
     return snapshot.docs;
   }
 
   Future<List<DocumentSnapshot>> getMoreSearchFieldListings(String field, dynamic value, var startAfter) async {
+    // print('shakloos'); print(value); print(field); print(startAfter);
     QuerySnapshot snapshot = await _firestore
         .collection('listings')
         .where('approved', isEqualTo: true)
         .where(field, isEqualTo: value)
-        .orderBy('images', descending: true)
+        .orderBy('time', descending: true)
         .startAfter(startAfter)
-        .limit(20)
+        .limit(40)
         .get();
     return snapshot.docs;
   }
@@ -866,7 +868,7 @@ class FirebaseProvider {
         .orderBy('time', descending: false)
         .orderBy('likeCount', descending: true)
         .startAfter(startAfter)
-        .limit(2)
+        .limit(10)
         .get();
     return snapshot.docs;
   }
