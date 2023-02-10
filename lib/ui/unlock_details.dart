@@ -423,7 +423,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                           },
                         child: Container(
                           width: width * 0.5,
-                          height: height * 0.07,
+                          height: width*0.1,
                           decoration: BoxDecoration(
                             color: Colors.black,
                             border: Border.all(color: Colors.black),
@@ -509,6 +509,9 @@ class UnlockDetailsState extends State<UnlockDetails> {
               )
             )
             :Center(),
+            SizedBox(
+              height: height*0.03,
+            ),
             widget.notUnlock && widget.modify
                 ? Container(
                     width: width * 0.9,
@@ -526,7 +529,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                           },
                           child: Container(
                             width: width * 0.45,
-                            height: height * 0.07,
+                            height: width*0.1,
                             decoration: BoxDecoration(
                               color: Colors.black,
                               border: Border.all(color: Colors.black),
@@ -536,7 +539,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   SizedBox(
-                                    width: width * 0.05,
+                                    width: width * 0.02,
                                   ),
                                   Icon(
                                     Icons.edit,
@@ -623,7 +626,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                           },
                           child: Container(
                             width: width * 0.45,
-                            height: height * 0.07,
+                            height: width*0.1,
                             decoration: BoxDecoration(
                               color: Colors.red,
                               border: Border.all(color: Colors.red),
@@ -633,7 +636,7 @@ class UnlockDetailsState extends State<UnlockDetails> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   SizedBox(
-                                    width: width * 0.05,
+                                    width: width * 0.02,
                                   ),
                                   Icon(
                                     Icons.delete,

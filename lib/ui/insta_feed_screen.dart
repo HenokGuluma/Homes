@@ -432,7 +432,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
     return Container(
       decoration: BoxDecoration(
           color: Colors.black, borderRadius: BorderRadius.circular(10)),
-      height: height * 0.05,
+      height: height*0.05,
       width: 100,
       child: Center(
           child: Text(
@@ -883,7 +883,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                       style: TextStyle(
                           fontFamily: 'Muli',
                           color: Color(0xff444444),
-                          fontSize: 17,
+                          fontSize: width*0.045,
                           fontWeight: FontWeight.w900),
                     )
                   : item.data()['floor'] != null &&
@@ -898,7 +898,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                           style: TextStyle(
                               fontFamily: 'Muli',
                               color: Color(0xff444444),
-                              fontSize: 17,
+                              fontSize: width*0.045,
                               fontWeight: FontWeight.w900),
                         )
                       : SelectableText(
@@ -909,7 +909,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                           style: TextStyle(
                               fontFamily: 'Muli',
                               color: Color(0xff444444),
-                              fontSize: 17,
+                              fontSize: width*0.045,
                               fontWeight: FontWeight.w900),
                         )),
           SizedBox(
@@ -932,7 +932,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                   style: TextStyle(
                       fontFamily: 'Muli',
                       color: Color(0xff444444),
-                      fontSize: 17,
+                      fontSize: width*0.04,
                       fontWeight: FontWeight.w400),
                 ),
               )
@@ -953,7 +953,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                     style: TextStyle(
                         fontFamily: 'Muli',
                         color: Color(0xff444444),
-                        fontSize: 14,
+                        fontSize: width*0.04,
                         fontWeight: FontWeight.w900),
                   ),
                    TextSpan(
@@ -961,7 +961,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                     style: TextStyle(
                         fontFamily: 'Muli',
                         color: Color(0xff444444),
-                        fontSize: 14,
+                        fontSize: width*0.04,
                         fontWeight: FontWeight.w400),
                   ),
                       ]
@@ -977,7 +977,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
           item.data()['forRent'] == 'For Sale'
               ? Column(children: [
                   Container(
-                      height: height * 0.05,
+                      height: width*0.1,
                       width: width * 0.25,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -1006,7 +1006,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
                   ),
                 ])
               : Container(
-                  height: height * 0.05,
+                  height: width*0.09,
                   width: width * 0.35,
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -1061,7 +1061,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
             style: TextStyle(
                 fontFamily: 'Muli',
                 color: Color(0xff444444),
-                fontSize: 17,
+                fontSize: width*0.045,
                 fontWeight: FontWeight.w400),
           ),
           SizedBox(
@@ -1072,14 +1072,14 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
             style: TextStyle(
                 fontFamily: 'Muli',
                 color: Color(0xff444444),
-                fontSize: 17,
+                fontSize: width*0.045,
                 fontWeight: FontWeight.w400),
           ),
           SizedBox(
             height: 5,
           ),
           Container(
-              height: height * 0.05,
+              height: width*0.09,
               width: 110,
               decoration: BoxDecoration(
                   color: Colors.white,

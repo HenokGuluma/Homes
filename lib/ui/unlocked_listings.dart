@@ -171,7 +171,7 @@ class UnlockedListingsState extends State<UnlockedListings> {
           children: [
             Container(
               width: width * 0.45,
-              height: width * 0.35,
+              height: width * 0.32,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: widget.variables.cachedImages[

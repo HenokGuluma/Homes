@@ -122,7 +122,7 @@ class UpdateListingState extends State<UpdateListing> {
             CarouselSlider(
               options: CarouselOptions(
                   initialPage: 0,
-                  height: width * 0.8,
+                  height: width * 0.7,
                   viewportFraction: 1.0,
                   enlargeCenterPage: false,
                   onPageChanged: (index1, reason) {
@@ -133,7 +133,7 @@ class UpdateListingState extends State<UpdateListing> {
               items: widget.imageFiles
                   .map((item) => Stack(children: [
                         Container(
-                          height: width * 0.8,
+                          height: width * 0.7,
                           width: width,
                           decoration: BoxDecoration(
                             image: DecorationImage(
@@ -149,7 +149,7 @@ class UpdateListingState extends State<UpdateListing> {
                           ),
                         ),
                         Container(
-                          height: width * 0.8,
+                          height: width * 0.7,
                           width: width,
                           decoration: BoxDecoration(
                             // borderRadius: BorderRadius.circular(width * 0.05),
@@ -290,7 +290,7 @@ class UpdateListingState extends State<UpdateListing> {
                       style: TextStyle(
                           fontFamily: 'Muli',
                           color: Color(0xff444444),
-                          fontSize: 18,
+                          fontSize: width*0.045,
                           fontWeight: FontWeight.w400),
                     ),
                   )
@@ -312,7 +312,7 @@ class UpdateListingState extends State<UpdateListing> {
                     style: TextStyle(
                         fontFamily: 'Muli',
                         color: Color(0xff444444),
-                        fontSize: 14,
+                        fontSize: width*0.04,
                         fontWeight: FontWeight.w900),
                   ),
                    TextSpan(
@@ -320,7 +320,7 @@ class UpdateListingState extends State<UpdateListing> {
                     style: TextStyle(
                         fontFamily: 'Muli',
                         color: Color(0xff444444),
-                        fontSize: 14,
+                        fontSize: width*0.04,
                         fontWeight: FontWeight.w400),
                   ),
                       ]

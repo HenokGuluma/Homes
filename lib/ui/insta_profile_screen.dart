@@ -488,13 +488,14 @@ class _InstaProfileScreenState extends State<InstaProfileScreen>
   Widget ProfileButtons(String text, var width, var height) {
     return Container(
         width: width,
-        height: height * 0.08,
+        height: width*0.14,
         decoration: BoxDecoration(
           color: Colors.white,
           // borderRadius: BorderRadius.circular(15.0),
           // border: Border.all(color: Colors.black)
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Divider(
               color: Colors.black38,

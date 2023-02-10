@@ -237,7 +237,7 @@ class ModifyListingState extends State<ModifyListing>
                               }
                             },
                             child: Container(
-                                width: width * 0.2,
+                                width: width * 0.22,
                                 height: 30,
                                 decoration: BoxDecoration(
                                     color: !previewMode
@@ -250,7 +250,7 @@ class ModifyListingState extends State<ModifyListing>
                                     previewMode ? 'Back' : 'Preview',
                                     style: TextStyle(
                                       fontFamily: 'Muli',
-                                      fontSize: 17,
+                                      fontSize: width*0.04,
                                       fontWeight: FontWeight.w400,
                                       color: !previewMode
                                           ? Color(0xff00ffff)
@@ -275,7 +275,7 @@ class ModifyListingState extends State<ModifyListing>
                         }
                       },
                       child: Container(
-                          width: width * 0.22,
+                          width: width * 0.24,
                           height: 30,
                           decoration: BoxDecoration(
                               color: !reUpload ? Colors.black : Colors.white,
@@ -286,7 +286,7 @@ class ModifyListingState extends State<ModifyListing>
                               reUpload ? 'Cancel' : 'Re-Upload',
                               style: TextStyle(
                                 fontFamily: 'Muli',
-                                fontSize: 17,
+                                fontSize: width*0.04,
                                 fontWeight: FontWeight.w400,
                                 color: !reUpload
                                     ? Color(0xff00ffff)
@@ -865,9 +865,9 @@ class ModifyListingState extends State<ModifyListing>
               child: Text(text,
                   style: TextStyle(
                     fontFamily: 'Muli',
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
+                    color: Color(0xff666666),
+                    fontSize: width*0.045,
+                    fontWeight: FontWeight.w900,
                   )),
             )),
         Container(
@@ -887,7 +887,7 @@ class ModifyListingState extends State<ModifyListing>
                   style: TextStyle(
                       fontFamily: 'Muli',
                       color: Colors.black,
-                      fontSize: 18,
+                      fontSize: width*0.045,
                       fontWeight: FontWeight.w400),
                 ),
               );
@@ -925,9 +925,9 @@ class ModifyListingState extends State<ModifyListing>
             child: Text(text,
                 style: TextStyle(
                   fontFamily: 'Muli',
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
+                  color: Color(0xff666666),
+                  fontSize: width*0.045,
+                  fontWeight: FontWeight.w900,
                 )),
           ),
         ),

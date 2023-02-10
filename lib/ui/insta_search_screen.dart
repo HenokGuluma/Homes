@@ -444,7 +444,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                     padding: EdgeInsets.only(top: 5.0),
                     child: Container(
                       width: width * 0.8,
-                      height: height*0.06,
+                      height: width*0.1,
                       decoration: BoxDecoration(
                           color: Color(0xfff1f1f1),
                           // border: Border.all(color: Colors.grey, width: 0.5),
@@ -453,15 +453,15 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                         children: <Widget>[
                           Center(
                             child: IconButton(
-                              alignment: Alignment.topRight,
+                              alignment: Alignment.centerRight,
                               icon: SvgPicture.asset("assets/search.svg",
-                                  width: 15, height: 15, color: Colors.black),
+                                  width: width*0.045, height: width*0.045, color: Colors.black),
                             ),
                           ),
                           Center(
                               child: Container(
                             width: width * 0.5,
-                            height: 30,
+                            height: width*0.1,
                             padding: EdgeInsets.only(left: 5, top: 0),
                             child: TextField(
                               style: TextStyle(
@@ -723,7 +723,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
             style: TextStyle(
               fontFamily: 'Muli',
               color: Colors.black,
-              fontSize: width*0.05
+              fontSize: width*0.045
             ),
 
             iconEnabledColor: Colors.black,
@@ -734,7 +734,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                     style: TextStyle(
                         fontFamily: 'Muli',
                         color: Colors.black,
-                        fontSize: width*0.05,
+                        fontSize: width*0.045,
                         fontWeight: FontWeight.w400),
                     textAlign: TextAlign.center),
               );
@@ -922,7 +922,7 @@ class _InstaSearchScreenState extends State<InstaSearchScreen>
                           style: TextStyle(
                             fontFamily: 'Muli',
                             color: Colors.black87,
-                            fontSize: width*0.045,
+                            fontSize: width*0.04,
                           ),
                         ),
                       ),

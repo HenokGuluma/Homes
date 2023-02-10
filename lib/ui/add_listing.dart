@@ -486,6 +486,7 @@ class AddListingState extends State<AddListing>
                 ?Center(
                   child: Text('Your additional description needs to be at least 50 characters.',
                   style: TextStyle(color: Color(0xfff13484), fontFamily: 'Muli', fontSize: 14,),
+                  textAlign: TextAlign.center
                   ),
                 )
                 :Center(),
@@ -613,9 +614,9 @@ class AddListingState extends State<AddListing>
               child: Text(text,
                   style: TextStyle(
                     fontFamily: 'Muli',
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
+                    color: Color(0xff666666),
+                    fontSize: width*0.045,
+                    fontWeight: FontWeight.w900,
                   )),
             )),
         Container(
@@ -635,7 +636,7 @@ class AddListingState extends State<AddListing>
                   style: TextStyle(
                       fontFamily: 'Muli',
                       color: Colors.black,
-                      fontSize: 18,
+                      fontSize: width*0.045,
                       fontWeight: FontWeight.w400),
                 ),
               );
@@ -673,9 +674,9 @@ class AddListingState extends State<AddListing>
             child: Text(text,
                 style: TextStyle(
                   fontFamily: 'Muli',
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
+                  color: Color(0xff666666),
+                  fontSize: width*0.045,
+                  fontWeight: FontWeight.w900,
                 )),
           ),
         ),
@@ -693,7 +694,7 @@ class AddListingState extends State<AddListing>
                               style: TextStyle(
                                 fontFamily: 'Muli',
                                 color: Colors.grey,
-                                fontSize: 18,
+                                fontSize: width*0.04,
                                 fontWeight: FontWeight.w400,
                               ))
                           : Text(common_location,

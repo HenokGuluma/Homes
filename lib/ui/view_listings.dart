@@ -180,7 +180,7 @@ class ViewListingsState extends State<ViewListings> {
               children: [
                 Container(
                   width: width * 0.45,
-                  height: width * 0.35,
+                  height: width * 0.32,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: widget.variables.cachedImages[
