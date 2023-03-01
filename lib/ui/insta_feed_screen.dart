@@ -97,7 +97,7 @@ class _InstaFeedScreenState extends State<InstaFeedScreen>
     _repository.getAllPhones().then((phoneNumbers) {
       List<String> phones = [];
       for(int i=0; i<phoneNumbers.length; i++){
-        String phone = phoneNumbers[i].id;
+        String phone = phoneNumbers[i];
         phones.add(phone);
       }
       setState(() {

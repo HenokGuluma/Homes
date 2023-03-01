@@ -79,13 +79,14 @@ class _SetupProfileState extends State<SetupProfile> {
     _repository.getAllPhones().then((phoneNumbers) {
       List<String> phones = [];
       for(int i=0; i<phoneNumbers.length; i++){
-        String phone = phoneNumbers[i].id;
+        String phone = phoneNumbers[i];
         phones.add(phone);
       }
       setState(() {
               phoneList = phones;
               loadingPhones = false;
             });
+            print(phoneList); print(' is the damn list');
     });
     return null;
   }
@@ -341,15 +342,14 @@ class _SetupProfileState extends State<SetupProfile> {
                             ),
                           )))
                   : _nameController.text.isEmpty ||
-                          _bioController.text.isEmpty ||
-                          _phoneController.text.isEmpty ||
-                          imageFile == null||phoneList.contains(_phoneController.text)
+                        _phoneController.text.isEmpty ||
+                         phoneList.contains(_phoneController.text)
                           ||_phoneController.text.length!=10
                       ? Center(
-                          child: Container(
+                          child: GestureDetector(
+                            child: Container(
                           width: 150,
-                          constraints:
-                              BoxConstraints(maxWidth: size.width * 0.5),
+                          constraints: BoxConstraints(maxWidth: size.width * 0.5),
                           height: size.height * 0.07,
                           decoration: BoxDecoration(
                               color: Colors.grey,
@@ -359,6 +359,10 @@ class _SetupProfileState extends State<SetupProfile> {
                             'Finish',
                             style: TextStyle(color: Colors.black, fontSize: 18),
                           )),
+                        ),
+                         onTap: (){
+                          showFloatingFlushbar(context);
+                        },
                         ))
                       : Center(
                           child: GestureDetector(
@@ -379,7 +383,8 @@ class _SetupProfileState extends State<SetupProfile> {
                             setState(() {
                               finishingUp = true;
                             });
-                            compressImage().then((compressedImage) {
+                            if(imageFile!=null){
+                              compressImage().then((compressedImage) {
                               uploadImagesToStorage(compressedImage)
                                   .then((url) {
                                 _repository
@@ -402,6 +407,23 @@ class _SetupProfileState extends State<SetupProfile> {
                                 });
                               });
                             });
+                            }
+                            else{
+                              _repository.addPhone(_phoneController.text, widget.userId);
+                                  _repository
+                                      .updateDetails(
+                                          widget.userId,
+                                          _nameController.text,
+                                          _bioController.text,
+                                          _emailController.text,
+                                          _phoneController.text)
+                                      .then((value) {
+                                    Navigator.pushReplacement(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return InstaHomeScreen();
+                                    }));
+                                  });
+                            }
                           },
                         )),
               SizedBox(
@@ -417,6 +439,26 @@ class _SetupProfileState extends State<SetupProfile> {
   changeText(String text) {
     setState(() {});
     print(phoneList);
+  }
+
+   void showFloatingFlushbar(BuildContext context) {
+    Flushbar(
+      padding: EdgeInsets.all(10),
+      borderRadius: 0,
+      //flushbarPosition: FlushbarPosition.,
+      backgroundGradient: LinearGradient(
+        colors: [Color(0xff00ffff), Color(0xff00ffff)],
+        stops: [0.6, 1],
+      ),
+      duration: Duration(seconds: 2),
+      dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+      forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+      messageText: Center(
+          child: Text(
+        'Make sure you have entered available username and phone number.',
+        style: TextStyle(fontFamily: 'Muli', color: Colors.black, fontWeight: FontWeight.w900), textAlign: TextAlign.center,
+      )),
+    )..show(context);
   }
 
   changeUserName(String text) {
@@ -436,7 +478,7 @@ class _SetupProfileState extends State<SetupProfile> {
 
   checkUserName(String text) async {}
 
-  void showFloatingFlushbar(BuildContext context) {
+  void showFloatingFlushbar2(BuildContext context) {
     Flushbar(
       padding: EdgeInsets.all(10),
       borderRadius: 0,

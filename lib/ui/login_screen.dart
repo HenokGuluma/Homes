@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: loggingIn
             ?Container(
                 width: width * 0.7,
-                height: height * 0.08,
+                height: width*0.12,
                 decoration: BoxDecoration(
                   color: Colors.grey,
                   border: Border.all(color: Colors.grey),
@@ -107,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
             :GestureDetector(
               child: Container(
                 width: width * 0.7,
-                height: height * 0.08,
+                height: width*0.12,
                 decoration: BoxDecoration(
                   color: Color(0xff00ffff),
                   border: Border.all(color: Color(0xff00ffff)),
@@ -123,8 +123,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               image: DecorationImage(
                                 image: AssetImage('assets/google_icon.jpg'),
                               )),
-                          width: height * 0.06,
-                          height: height * 0.06,
+                          width: width*0.1,
+                          height: width*0.1,
                         )),
                     Padding(
                       padding: const EdgeInsets.only(left: 20.0),
@@ -145,12 +145,39 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (user != null) {
                     authenticateUser(user);
                   } else {
-                    print("Error");
+                    print("Error, I mean major error.");
                   }
                 });
               },
             ),
           ),
+          SizedBox(
+            height: height*0.04,
+          ),
+          loggingIn
+          ?MaterialButton(
+            onPressed: (){
+              setState(() {
+                loggingIn = false;
+              });
+            },
+            child: Container(
+                width: width * 0.4,
+                height: width*0.12,
+                decoration: BoxDecoration(
+                  color: Color(0xffff234f),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Center(
+                  child: Text('Cancel',
+                          style: TextStyle(
+                              fontFamily: 'Muli',
+                              color: Colors.white,
+                              fontSize: 18.0)),
+                )
+                ),
+          )
+          :Center()
         ]));
   }
 
@@ -170,7 +197,8 @@ class _LoginScreenState extends State<LoginScreen> {
             );
           }));
         });
-      } else {
+      }
+      else {
         print("INSIDE ELSE");
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {

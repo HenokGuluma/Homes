@@ -90,12 +90,26 @@ class FirebaseProvider {
         .get();
 
     final List<DocumentSnapshot> docs = result.docs;
-
-    if (docs.length == 0) {
+    if(result.docs.isEmpty){
+      return true;
+    }
+    else if (docs.length == 0) {
       return true;
     } else {
+      print(docs[0].data()); print(' is the user');
       return false;
     }
+  }
+
+    Future<bool> checkifUserIsSet(String uid) async{
+     DocumentSnapshot snap = await _firestore.collection('users').doc(uid).get();
+     if(snap.exists){
+      if (snap.data()['phone'] == "" || snap.data()['phone'] == null){
+      return false;
+     }
+     return true;
+     }
+     return false;
   }
 
   Future<String> fetchUidbyEmail(String email) async {
@@ -618,11 +632,12 @@ class FirebaseProvider {
     return listing;
   }
 
-  Future<List<DocumentSnapshot>> getAllPhones() async {
-       var phones = await _firestore
-        .collection('phones')
+  Future<List<dynamic>> getAllPhones() async {
+       DocumentSnapshot phones = await _firestore
+        .collection('phones').doc('phoneNumbers')
         .get();
-    return phones.docs;
+      List<dynamic> phoneNumbers = phones.data()['phoneList'];
+      return phoneNumbers;
   }
 
    void addPhone(String phone, String userId) async{

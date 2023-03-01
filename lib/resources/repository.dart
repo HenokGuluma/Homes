@@ -237,7 +237,7 @@ class Repository {
   Future<List<DocumentSnapshot>> getMoreSearchFieldListings(String field, dynamic value, var startAfter) =>
       _firebaseProvider.getMoreSearchFieldListings(field, value, startAfter);
 
-   Future<List<DocumentSnapshot>> getAllPhones() =>
+   Future<List<dynamic>> getAllPhones() =>
       _firebaseProvider.getAllPhones();
 
   Future<int> appVersion() => _firebaseProvider.appVersion();
