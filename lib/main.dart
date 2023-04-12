@@ -68,7 +68,8 @@ class MyAppState extends State<MyApp> {
           builder: (context, AsyncSnapshot<auth.User> snapshot) {
             if (snapshot.hasData) {
               print(snapshot.data.phoneNumber);
-              if (snapshot.data.phoneNumber==null || snapshot.data.phoneNumber == '') {
+              print( ' is the phone number initially');
+              if (snapshot.data.phoneNumber==null) {
                 return SetupProfile(
                     userId: snapshot.data.uid,
                     emailAddress: snapshot.data.email,
