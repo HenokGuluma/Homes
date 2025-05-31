@@ -1,4 +1,4 @@
-#Homes 🏡
+# Homes 🏡
 
 ## Seamless Rental Matching Platform
 Homes is a modern rental marketplace built using Flutter and Firebase, designed to effortlessly connect rent seekers with property owners. Whether you're looking for a place to call home or listing a property for rent, Homes simplifies the entire process with a user-friendly interface and smart matchmaking algorithms.
